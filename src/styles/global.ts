@@ -7,7 +7,16 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  
   body {
     font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    background-color: ${props => props.theme.colors.background};
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 `;

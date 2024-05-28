@@ -1,12 +1,58 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
+import Header from '../components/Header'
+import { LayoutContainer, Wrapper } from './layout'
+import Aside from '../components/Aside'
 
 export default function AppRoutes() {
-
   const routes = [
     {
       path: '/',
       component: <Home />
+    },
+    {
+      path: '/topics/explore',
+      component: <h1>Explore</h1>
+    },
+    {
+      path: '/topics/search',
+      component: <h1>Search</h1>
+    },
+    {
+      path: '/topics/my-topics',
+      component: <h1>My Topics</h1>
+    },
+    {
+      path: '/topics/my-answers',
+      component: <h1>My Answers</h1>
+    },
+    {
+      path: '/topics/topic/:id',
+      component: <h1>Topic</h1>
+    },
+    {
+      path: '/topics/new-topic',
+      component: <h1>New Topic</h1>
+    },
+    {
+      path: '/users/:id',
+      component: <h1>User</h1>
+    },
+    {
+      path: '/profile',
+      component: <h1>Profile</h1>
+    },
+    {
+      path: '/about',
+      component: <h1>About</h1>
+    },
+    {
+      path: '/help',
+      component: <h1>Help</h1>
+    },
+    {
+      path: '/terms',
+      component: <h1>Terms</h1>
     },
     {
       path: '/*',
@@ -16,11 +62,18 @@ export default function AppRoutes() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.component} />
-        ))}
-      </Routes>
+      <Header />
+      <Wrapper>
+        <LayoutContainer>
+          <Aside />
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.component} />
+            ))}
+          </Routes>
+          <Aside />
+        </LayoutContainer>
+      </Wrapper>
     </BrowserRouter>
   )
 }

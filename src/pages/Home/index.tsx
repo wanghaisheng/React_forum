@@ -1,7 +1,9 @@
+import { Container } from './styles'
+
 export default function Home() {
   return (
-    <div>
+    <Container>
       <h1>Home</h1>
-    </div>
+    </Container>
   )
 }
