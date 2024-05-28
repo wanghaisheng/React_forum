@@ -1,9 +1,13 @@
 import { AsideContainer } from "./styles";
 
-function Aside() {
+interface AsideProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
+}
+
+function Aside({ children, ...rest }: AsideProps) {
   return (
-    <AsideContainer>
-      Aside
+    <AsideContainer {...rest}>
+      {children}
     </AsideContainer>
   )
 }

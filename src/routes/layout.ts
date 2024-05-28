@@ -8,15 +8,26 @@ export const Wrapper = styled.div`
 
 export const LayoutContainer = styled.div`
   display: flex;
-  max-width: 1400px;
+  max-width: 1500px;
   width: 100%;
   height: 100%;
   gap: 4rem;
   justify-content: center;
+  padding: 0 2rem;
 
   main {
     display: flex;
     flex-direction: column;
     background-color: ${props => props.theme.colors.primary};
+  }
+
+  @media screen and (max-width: 1200px) {
+    .asideLeft {
+      width: fit-content;
+    }
+    
+    .asideRight {
+      display: none;
+    }
   }
 `;

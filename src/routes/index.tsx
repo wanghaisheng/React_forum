@@ -65,13 +65,17 @@ export default function AppRoutes() {
       <Header />
       <Wrapper>
         <LayoutContainer>
-          <Aside />
+          <Aside className='asideLeft'>
+            <h1>Aside</h1>
+          </Aside>
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.component} />
             ))}
           </Routes>
-          <Aside />
+          <Aside className='asideRight'>
+            <h1>Aside</h1>
+          </Aside>
         </LayoutContainer>
       </Wrapper>
     </BrowserRouter>
