@@ -73,9 +73,7 @@ export default function AppRoutes() {
               <Route key={index} path={route.path} element={route.component} />
             ))}
           </Routes>
-          <Aside className='asideRight'>
-            <h1>Aside</h1>
-          </Aside>
+          <Aside />
 
           <BottomMenu>
             <h1>Bottom menu</h1>

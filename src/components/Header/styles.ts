@@ -81,6 +81,12 @@ export const HeaderContainer = styled.header`
       opacity: 0.6;
     }
   }
+
+  @media screen and (max-width: 600px) {
+    > div .logo h2 {
+      display: none;
+    }
+  }
 `;
 
 export const StyledLogo = styled(Logo)`

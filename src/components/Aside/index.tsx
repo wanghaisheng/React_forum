@@ -1,13 +1,18 @@
+import Button from "../Button";
+import TopUsers from "./TopUsers";
+import AsideLinks from "./AsideLinks";
 import { AsideContainer } from "./styles";
 
-interface AsideProps extends React.HTMLAttributes<HTMLElement> {
-  children: React.ReactNode;
-}
+import { FaPlus } from 'react-icons/fa'
 
-function Aside({ children, ...rest }: AsideProps) {
+function Aside() {
   return (
-    <AsideContainer {...rest}>
-      {children}
+    <AsideContainer>
+      <Button variant="neutral" icon={<FaPlus size={14} />}>Create new topic</Button>
+
+      <TopUsers />
+
+      <AsideLinks />
     </AsideContainer>
   )
 }

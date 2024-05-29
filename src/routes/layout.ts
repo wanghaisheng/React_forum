@@ -20,18 +20,10 @@ export const LayoutContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: ${props => props.theme.colors.primary};
-    height: 12000px;
+    height: 1200px;
   }
 
   @media screen and (max-width: 1200px) {
     gap: 2rem;
-
-    .asideLeft {
-      width: fit-content;
-    }
-    
-    .asideRight {
-      display: none;
-    }
   }
 `;
