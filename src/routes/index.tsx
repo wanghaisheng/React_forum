@@ -3,6 +3,8 @@ import Home from '../pages/Home'
 import Header from '../components/Header'
 import { LayoutContainer, Wrapper } from './layout'
 import Aside from '../components/Aside'
+import SideMenu from '../components/SideMenu'
+import BottomMenu from '../components/BottomMenu'
 
 export default function AppRoutes() {
   const routes = [
@@ -65,9 +67,7 @@ export default function AppRoutes() {
       <Header />
       <Wrapper>
         <LayoutContainer>
-          <Aside className='asideLeft'>
-            <h1>Aside</h1>
-          </Aside>
+          <SideMenu />
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.component} />
@@ -76,6 +76,10 @@ export default function AppRoutes() {
           <Aside className='asideRight'>
             <h1>Aside</h1>
           </Aside>
+
+          <BottomMenu>
+            <h1>Bottom menu</h1>
+          </BottomMenu>
         </LayoutContainer>
       </Wrapper>
     </BrowserRouter>

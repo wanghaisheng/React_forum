@@ -1,15 +1,21 @@
-import { HeaderContainer, SearchButton, SearchInput } from "./styles";
-
-import logoImg from '../../assets/logo.svg';
+import { HeaderContainer, StyledLogo, SearchButton, SearchInput } from "./styles";
 import { FaBell, FaSearch } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+
+import { useState } from 'react';
 
 function Header() {
+  const [activeSearch, setActiveSearch] = useState(false);
+
   return (
     <HeaderContainer>
       <div>
-        <img className="logo-image" src={logoImg} alt="Forum | Home" />
+        <Link to={"/"} className="logo">
+          <StyledLogo />
+          <h2>Forum.<span>pb</span></h2>
+        </Link>
 
-        <div className="search-container">
+        <div className={activeSearch === true ? 'search-container active' : 'search-container'} onClick={() => setActiveSearch(true)} onBlur={() => setActiveSearch(false)}>
           <SearchButton>
             <FaSearch size={16} />
           </SearchButton>
