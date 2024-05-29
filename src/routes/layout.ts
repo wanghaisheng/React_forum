@@ -19,8 +19,7 @@ export const LayoutContainer = styled.div`
   main {
     display: flex;
     flex-direction: column;
-    background-color: ${props => props.theme.colors.primary};
-    height: 1200px;
+    margin-bottom: 4rem;
   }
 
   @media screen and (max-width: 1200px) {

@@ -1,9 +1,17 @@
+import Post from '../../components/Post'
 import { Container } from './styles'
 
 export default function Home() {
   return (
     <Container>
-      <h1>Home</h1>
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </Container>
   )
 }

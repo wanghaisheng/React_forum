@@ -22,6 +22,7 @@ export const AsideLinksContainer = styled.nav`
 
     &:hover {
       color: ${props => props.theme.colors.secondary};
+      text-decoration: underline;
     }
   }
 `

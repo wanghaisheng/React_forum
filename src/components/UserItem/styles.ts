@@ -11,6 +11,11 @@ export const TopUserContainer = styled.div`
     gap: 0.5rem;
 
     p {
+      font-size: 0.9rem;
+      color: ${props => props.theme.colors.text};
+    }
+
+    span {
       font-weight: 600;
       color: ${props => props.theme.colors.secondary};
     }
@@ -30,12 +35,12 @@ export const TopUserContainer = styled.div`
 
     span {
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: ${props => props.theme.colors.text};
     }
 
     svg {
-      color: #00a2ff;
+      color: ${props => props.theme.colors.secondary};
     }
   }
 `;

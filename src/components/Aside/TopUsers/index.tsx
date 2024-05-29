@@ -1,4 +1,4 @@
-import TopUser from "./TopUser";
+import User from "../../UserItem";
 import { TopUsersContainer } from "./styles";
 
 function TopUsers() {
@@ -15,13 +15,13 @@ function TopUsers() {
       <ul className="users-list">
         {users.map((user, index) => (
           <li key={index}>
-            <TopUser userName={user.userName} followers={user.followers} />
+            <User userName={user.userName} followers={user.followers} />
           </li>
         ))}
 
         <div className="separator"></div>
 
-        <TopUser userName="You" followers={500} />
+        <User userName="You" followers={500} />
       </ul>
     </TopUsersContainer>
   )

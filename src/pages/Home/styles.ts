@@ -3,8 +3,8 @@ import { styled } from 'styled-components';
 export const Container = styled.main`
   display: flex;
   align-items: center;
-  background-color: ${props => props.theme.colors.background};
   width: 100%;
+  gap: 2rem;
 
   h1 {
     color: ${props => props.theme.colors.title};
