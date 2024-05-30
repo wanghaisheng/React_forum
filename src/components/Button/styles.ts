@@ -5,7 +5,6 @@ export const ButtonContainer = styled.button`
     width: 100%;
     padding: 0.8rem;
     color: white;
-    border: none;
     border-radius: 4px;
     font-family: "Roboto", sans-serif;
     font-weight: 700;
@@ -27,6 +26,15 @@ export const ButtonContainer = styled.button`
         return theme.colors.secondary;
       default:
         return 'transparent';
+    }
+  }};
+
+    border: ${({ theme, className }) => {
+    switch (className) {
+      case 'transparent':
+        return `1px solid ${theme.colors.text}`;
+      default:
+        return 'none';
     }
   }};
 

@@ -19,7 +19,8 @@ export const LayoutContainer = styled.div`
   main {
     display: flex;
     flex-direction: column;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
+    width: 100%;
   }
 
   @media screen and (max-width: 1200px) {

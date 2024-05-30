@@ -2,7 +2,7 @@ import { ButtonContainer } from "./styles";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant: 'confirm' | 'cancel' | 'neutral';
+  variant: 'confirm' | 'cancel' | 'neutral' | 'transparent';
   icon?: React.ReactNode;
 }
 

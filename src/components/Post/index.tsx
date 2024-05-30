@@ -1,10 +1,18 @@
+import { useState } from "react"
+import Button from "../Button"
 import UserItem from "../UserItem"
-import { PostContainer, PostContent, PostFooter, PostMetaData, PostVotes } from "./styles"
+import { AnswerContainer, PostActions, PostContainer, PostContent, PostFooter, PostHeader, PostMetaData, PostVotes } from "./styles"
 
-import { FaArrowUp, FaArrowDown } from "react-icons/fa"
+import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa"
 import { FaMessage } from 'react-icons/fa6'
 
-function Post() {
+interface PostProps {
+  actions?: React.ReactNode;
+}
+
+function Post({ actions }: PostProps) {
+  const [isAnswering, setIsAnswering] = useState(false);
+
   return (
     <PostContainer>
       <PostVotes>
@@ -20,6 +28,11 @@ function Post() {
       </PostVotes>
 
       <div className="post">
+        <PostHeader>
+          <UserItem label="Posted by" userName="John Doe" />
+          <span>12h ago</span>
+        </PostHeader>
+
         <h1>Post 1</h1>
 
         <PostContent>
@@ -29,16 +42,43 @@ function Post() {
         <div className="separator"></div>
 
         <PostFooter>
-          <UserItem label="Posted by" userName="John Doe" />
+          <div className={actions ? '' : 'no-actions'}>
+            {actions && (
+              <PostActions>
+                <Button variant="transparent" onClick={() => setIsAnswering(true)}>
+                  <FaPlus size={14} />
+                  Add answer
+                </Button>
 
-          <PostMetaData>
-            <span>12h ago</span>
+                <Button variant="transparent">
+                  <FaShare size={14} />
+                  Share
+                </Button>
+              </PostActions>
+            )}
 
-            <div>
-              <FaMessage size={14} />
-              <span>10+</span>
-            </div>
-          </PostMetaData>
+            <PostMetaData>
+              <div>
+                <FaMessage size={14} />
+                <span>10+</span>
+              </div>
+            </PostMetaData>
+          </div>
+
+          {isAnswering && (
+            <AnswerContainer>
+              <textarea placeholder="Type your answer here..." className={isAnswering ? 'active' : ''} />
+              <div className="answer-actions">
+                <Button variant="transparent" onClick={() => setIsAnswering(false)}>
+                  Cancel
+                </Button>
+
+                <Button variant="confirm">
+                  Answer
+                </Button>
+              </div>
+            </AnswerContainer>
+          )}
         </PostFooter>
       </div>
     </PostContainer>

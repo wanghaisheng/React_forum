@@ -76,6 +76,22 @@ export const PostVotes = styled.div`
   }
 `;
 
+export const PostHeader = styled.header`
+  display: flex;
+  align-items: center;
+
+  > span {
+    color: ${props => props.theme.colors.text};
+    font-size: 0.9rem;
+  }
+
+  > span::before {
+    content: '•';
+    margin: 0 0.5rem;
+    color: ${props => props.theme.colors.text};
+  }
+`;
+
 export const PostContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -89,7 +105,32 @@ export const PostContent = styled.div`
 
 export const PostFooter = styled.footer`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    &.no-actions {
+      justify-content: flex-end;
+    }
+  }
+`
+
+export const PostActions = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  button {
+    min-width: fit-content;
+
+    &:first-child {
+      color: ${props => props.theme.colors.secondary};
+      border-color: ${props => props.theme.colors.secondary};
+    }
+  }
 `
 
 export const PostMetaData = styled.div`
@@ -108,3 +149,39 @@ export const PostMetaData = styled.div`
   }
 `
 
+export const AnswerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  textarea {
+    width: 100%;
+    min-height: 5rem;
+    flex: 1;
+    padding: 0.7rem;
+    border-radius: 4px;
+    border: 1px solid ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.input};
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    resize: none;
+
+    &.active:focus {
+      border: 1px solid ${(props) => props.theme.colors.input};
+    }
+  }
+
+  .answer-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+  
+    button {
+      max-width: 8rem;
+    }
+  }
+`;

@@ -6,14 +6,14 @@ function AsideLinks() {
     <AsideLinksContainer>
       <div className='column'>
         <Link to='/topics/explore'>Explore topics</Link>
-        <Link to='/topics/search'>Help</Link>
-        <Link to='/topics/my-topics'>Privacy</Link>
+        <Link to='/help'>Help</Link>
+        <Link to='/privacy'>Privacy</Link>
       </div>
 
       <div className='column'>
-        <Link to='/topics/explore'>About</Link>
-        <Link to='/topics/search'>Terms</Link>
-        <Link to='/topics/my-topics'>Compass</Link>
+        <Link to='/about'>About</Link>
+        <Link to='/terms'>Terms</Link>
+        <Link to='/'>Compass</Link>
       </div>
     </AsideLinksContainer>
   )

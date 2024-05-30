@@ -16,4 +16,8 @@ export default createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
+
+  h1 {
+    color: ${props => props.theme.colors.title};
+  }
 `;

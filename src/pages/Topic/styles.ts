@@ -9,8 +9,11 @@ export const Container = styled.main`
     color: ${props => props.theme.colors.title};
     font-size: ${props => props.theme.fontSizes['2xl']};
   }
+`;
 
-  a {
-    text-decoration: none;
-  }
+export const Answers = styled.section`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
 `;
