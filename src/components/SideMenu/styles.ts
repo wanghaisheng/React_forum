@@ -16,6 +16,10 @@ export const SideMenuContainer = styled.aside`
     flex-direction: column;
     gap: 1rem;
 
+    a {
+      text-decoration: none;
+    }
+
     li {
       display: flex;
       align-items: center;

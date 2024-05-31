@@ -13,7 +13,7 @@ function AsideLinks() {
       <div className='column'>
         <Link to='/about'>About</Link>
         <Link to='/terms'>Terms</Link>
-        <Link to='/'>Compass</Link>
+        <Link to='https://compass.uol/pt/home/' target='_blank'>Compass UOL</Link>
       </div>
     </AsideLinksContainer>
   )

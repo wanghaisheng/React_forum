@@ -1,7 +1,15 @@
 import Button from "../../components/Button";
-import { Container, NewTopicForm } from "./styles";
+import { Container, FormActions, NewTopicForm } from "./styles";
+
+import { useNavigate } from 'react-router-dom'
 
 function NewTopicPage() {
+  const navigate = useNavigate();
+
+  function handleNavigate(path: string) {
+    navigate(path);
+  }
+
   return (
     <Container>
       <h1>New topic</h1>
@@ -27,7 +35,10 @@ function NewTopicPage() {
           <textarea id="content" name="content" />
         </div>
 
-        <Button variant="confirm">Create topic</Button>
+        <FormActions>
+          <Button variant="transparent" onClick={() => handleNavigate('/')}>Cancel</Button>
+          <Button variant="confirm" onClick={() => handleNavigate('/')}>Create topic</Button>
+        </FormActions>
       </NewTopicForm>
     </Container>
   )

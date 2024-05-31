@@ -18,7 +18,7 @@ export const NewTopicForm = styled.form`
   padding: 0 2rem 2rem;
   gap: 1rem;
 
-  div {
+  div:not(:last-child) {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -57,4 +57,10 @@ export const NewTopicForm = styled.form`
   button {
     margin-top: 1rem;
   }
+`;
+
+export const FormActions = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 `;

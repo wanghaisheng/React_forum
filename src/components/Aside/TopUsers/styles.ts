@@ -14,6 +14,12 @@ export const TopUsersContainer = styled.section`
     color: ${props => props.theme.colors.title};
   }
 
+  a:hover {
+    span:first-child {
+      text-decoration: underline;
+    }
+  }
+
   .users-list {
     list-style: none;
     display: flex;

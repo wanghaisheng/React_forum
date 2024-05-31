@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import User from "../../UserItem";
 import { TopUsersContainer } from "./styles";
 
@@ -14,14 +15,18 @@ function TopUsers() {
       <h3>Top Users</h3>
       <ul className="users-list">
         {users.map((user, index) => (
-          <li key={index}>
-            <User userName={user.userName} followers={user.followers} />
-          </li>
+          <Link to={`/profile/${index}`} key={index}>
+            <li key={index}>
+              <User userName={user.userName} followers={user.followers} />
+            </li>
+          </Link>
         ))}
 
         <div className="separator"></div>
 
-        <User userName="You" followers={500} />
+        <Link to="/profile/1">
+          <User userName="You" followers={500} />
+        </Link>
       </ul>
     </TopUsersContainer>
   )

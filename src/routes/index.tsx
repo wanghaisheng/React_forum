@@ -8,6 +8,7 @@ import BottomMenu from '../components/BottomMenu'
 import TopicPage from '../pages/Topic/[id]'
 import ProfilePage from '../pages/Profile/[id]'
 import NewTopicPage from '../pages/NewTopic'
+import AboutPage from '../pages/About'
 
 export default function AppRoutes() {
   const routes = [
@@ -59,9 +60,7 @@ export default function AppRoutes() {
     },
     {
       path: '/about',
-      component: <main>
-        <h1>About</h1>
-      </main>
+      component: <AboutPage />
     },
     {
       path: '/help',
