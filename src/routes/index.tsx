@@ -9,6 +9,7 @@ import TopicPage from '../pages/Topic/[id]'
 import ProfilePage from '../pages/Profile/[id]'
 import NewTopicPage from '../pages/NewTopic'
 import AboutPage from '../pages/About'
+import TermsPage from '../pages/Terms'
 
 export default function AppRoutes() {
   const routes = [
@@ -76,10 +77,7 @@ export default function AppRoutes() {
     },
     {
       path: '/terms',
-      component:
-        <main>
-          <h1>Terms</h1>
-        </main>
+      component: <TermsPage />
     },
     {
       path: '/*',
