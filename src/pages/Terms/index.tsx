@@ -9,7 +9,7 @@ function TermsPage() {
           This is an open source project for public use and is under the MIT license.
           For more information, visit:
         </p>
-        <a href="/about">About</a>
+        <a href="https://github.com/VitorHugoAntunes/React_forum/blob/development/LICENSE" target="_blank">License</a>
       </TermsInfo>
     </Container>
   )
