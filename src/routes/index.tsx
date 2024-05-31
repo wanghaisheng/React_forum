@@ -6,6 +6,7 @@ import Aside from '../components/Aside'
 import SideMenu from '../components/SideMenu'
 import BottomMenu from '../components/BottomMenu'
 import TopicPage from '../pages/Topic/[id]'
+import ProfilePage from '../pages/Profile/[id]'
 
 export default function AppRoutes() {
   const routes = [
@@ -54,10 +55,8 @@ export default function AppRoutes() {
       </main>
     },
     {
-      path: '/profile',
-      component: <main>
-        <h1>Profile</h1>
-      </main>
+      path: '/profile/:id',
+      component: <ProfilePage />
     },
     {
       path: '/about',

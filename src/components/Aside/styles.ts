@@ -12,6 +12,10 @@ export const AsideContainer = styled.aside`
   position: sticky;
   top: 8.5rem;
 
+  a {
+    text-decoration: none;
+  }
+
   @media screen and (max-width: 900px) {
     display: none;
   }

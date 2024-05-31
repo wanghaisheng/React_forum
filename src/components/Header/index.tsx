@@ -24,9 +24,11 @@ function Header() {
 
         <div className="actions-container">
           <FaBell size={16} />
-          <div className="user-photo">
+          <Link to={"/profile/1"}>
+            <div className="user-photo">
 
-          </div>
+            </div>
+          </Link>
         </div>
       </div>
     </HeaderContainer>
