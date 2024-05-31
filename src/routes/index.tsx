@@ -7,6 +7,7 @@ import SideMenu from '../components/SideMenu'
 import BottomMenu from '../components/BottomMenu'
 import TopicPage from '../pages/Topic/[id]'
 import ProfilePage from '../pages/Profile/[id]'
+import NewTopicPage from '../pages/NewTopic'
 
 export default function AppRoutes() {
   const routes = [
@@ -44,9 +45,7 @@ export default function AppRoutes() {
     },
     {
       path: '/topics/new-topic',
-      component: <main>
-        <h1>New topic</h1>
-      </main>
+      component: <NewTopicPage />
     },
     {
       path: '/users/:id',
