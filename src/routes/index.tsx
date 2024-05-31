@@ -11,6 +11,7 @@ import NewTopicPage from '../pages/NewTopic'
 import AboutPage from '../pages/About'
 import TermsPage from '../pages/Terms'
 import PrivacyPage from '../pages/Privacy'
+import HelpPage from '../pages/Help'
 
 export default function AppRoutes() {
   const routes = [
@@ -66,9 +67,7 @@ export default function AppRoutes() {
     },
     {
       path: '/help',
-      component: <main>
-        <h1>Help</h1>
-      </main>
+      component: <HelpPage />
     },
     {
       path: '/privacy',
