@@ -10,6 +10,7 @@ import ProfilePage from '../pages/Profile/[id]'
 import NewTopicPage from '../pages/NewTopic'
 import AboutPage from '../pages/About'
 import TermsPage from '../pages/Terms'
+import PrivacyPage from '../pages/Privacy'
 
 export default function AppRoutes() {
   const routes = [
@@ -71,9 +72,7 @@ export default function AppRoutes() {
     },
     {
       path: '/privacy',
-      component: <main>
-        <h1>Privacy</h1>
-      </main>
+      component: <PrivacyPage />
     },
     {
       path: '/terms',
