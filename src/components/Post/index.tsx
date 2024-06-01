@@ -5,12 +5,23 @@ import { AnswerContainer, PostActions, PostContainer, PostContent, PostFooter, P
 
 import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa"
 import { FaMessage } from 'react-icons/fa6'
+import { Link } from "react-router-dom"
 
 interface PostProps {
+  id: number;
+  author: string;
+  authorId: number;
+  date: string;
+  week: number;
+  title: string;
+  content: string;
+  upvotes: number;
+  downvotes: number;
+  answerCount: number;
   actions?: React.ReactNode;
 }
 
-function Post({ actions }: PostProps) {
+function Post({ id, author, authorId, date, week, title, content, upvotes, downvotes, answerCount, actions }: PostProps) {
   const [isAnswering, setIsAnswering] = useState(false);
 
   return (
@@ -20,7 +31,7 @@ function Post({ actions }: PostProps) {
           <FaArrowUp className="up-vote" size={16} />
         </button>
 
-        <span>10</span>
+        <span>{upvotes - downvotes}</span>
 
         <button>
           <FaArrowDown className="down-vote" size={16} />
@@ -29,14 +40,22 @@ function Post({ actions }: PostProps) {
 
       <div className="post">
         <PostHeader>
-          <UserItem label="Posted by" userName="John Doe" />
-          <span>12h ago</span>
+          <div>
+            <Link to={`/profile/${authorId}`}>
+              <UserItem label="Posted by" userName={author} />
+            </Link>
+            <span>12h ago</span>
+          </div>
+
+          <Link to={`/topics/explore/week/${week}`}>
+            <span className="week-tag">Week {week}</span>
+          </Link>
         </PostHeader>
 
-        <h1>Post 1</h1>
+        <h1>{title}</h1>
 
         <PostContent>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum odio quidem quisquam ex recusandae rerum quam? Corporis quos, quo adipisci quae, explicabo laborum cumque aliquam, placeat voluptatum architecto odio ab.</p>
+          <p>{content}.</p>
         </PostContent>
 
         <div className="separator"></div>
@@ -60,7 +79,7 @@ function Post({ actions }: PostProps) {
             <PostMetaData>
               <div>
                 <FaMessage size={14} />
-                <span>10+</span>
+                <span>{answerCount}+</span>
               </div>
             </PostMetaData>
           </div>

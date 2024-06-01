@@ -1,0 +1,176 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "bio": "I am a web developer.",
+      "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": [
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "bio": "I am a web developer.",
+      "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": [
+        {
+          "id": 4
+        },
+        {
+          "id": 5
+        },
+        {
+          "id": 6
+        }
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "author": "John Doe",
+      "authorId": 1,
+      "date": "2020-01-01",
+      "week": 1,
+      "title": "What is HTML?",
+      "content": "I have doubts about what HTML is. Can someone help me? Thanks! :)",
+      "upvotes": 20,
+      "downvotes": 10,
+      "answers": [
+        {
+          "id": 1,
+          "author": "Jane Doe",
+          "authorId": 2,
+          "content": "HTML stands for HyperText Markup Language. It is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.",
+          "date": "2020-01-02",
+          "upvotes": 15,
+          "downvotes": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "author": "John Doe",
+      "authorId": 1,
+      "date": "2020-01-01",
+      "week": 1,
+      "title": "What is CSS?",
+      "content": "I have doubts about what CSS is. Can someone help me? Thanks! :)",
+      "upvotes": 20,
+      "downvotes": 10,
+      "answers": [
+        {
+          "id": 1,
+          "author": "John Doe",
+          "authorId": 1,
+          "content": "CSS stands for Cascading Style Sheets. It is a style sheet language used for describing the presentation of a document written in a markup language such as HTML.",
+          "date": "2020-01-02",
+          "upvotes": 15,
+          "downvotes": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "author": "John Doe",
+      "authorId": 1,
+      "date": "2020-01-01",
+      "week": 2,
+      "title": "What is JavaScript?",
+      "content": "I have doubts about what JavaScript is. Can someone help me? Thanks! :)",
+      "upvotes": 20,
+      "downvotes": 10,
+      "answers": [
+        {
+          "id": 1,
+          "author": "Jane Doe",
+          "authorId": 2,
+          "content": "JavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language that is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.",
+          "date": "2020-01-02",
+          "upvotes": 18,
+          "downvotes": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "author": "Jane Doe",
+      "authorId": 2,
+      "date": "2020-01-01",
+      "week": 2,
+      "title": "What is React?",
+      "content": "I have doubts about what React is. Can someone help me? Thanks! :)",
+      "upvotes": 20,
+      "downvotes": 10,
+      "answers": [
+        {
+          "id": 1,
+          "author": "John Doe",
+          "authorId": 1,
+          "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.",
+          "date": "2020-01-02",
+          "upvotes": 17,
+          "downvotes": 2
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "author": "Jane Doe",
+      "authorId": 2,
+      "date": "2020-01-01",
+      "week": 3,
+      "title": "What is Node.js?",
+      "content": "I have doubts about what Node.js is. Can someone help me? Thanks! :)",
+      "upvotes": 20,
+      "downvotes": 10,
+      "answers": [
+        {
+          "id": 1,
+          "author": "Jane Doe",
+          "authorId": 2,
+          "content": "Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser.",
+          "date": "2020-01-02",
+          "upvotes": 19,
+          "downvotes": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "author": "Jane Doe",
+      "authorId": 2,
+      "date": "2020-01-01",
+      "week": 3,
+      "title": "What is Express?",
+      "content": "I have doubts about what Express is. Can someone help me? Thanks! :)",
+      "upvotes": 20,
+      "downvotes": 10,
+      "answers": [
+        {
+          "id": 1,
+          "author": "John Doe",
+          "authorId": 1,
+          "content": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
+          "date": "2020-01-02",
+          "upvotes": 18,
+          "downvotes": 2
+        }
+      ]
+    }
+  ]
+}

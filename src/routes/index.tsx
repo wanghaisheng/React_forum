@@ -13,6 +13,7 @@ import TermsPage from '../pages/Terms'
 import PrivacyPage from '../pages/Privacy'
 import HelpPage from '../pages/Help'
 import ExploreTopicsPage from '../pages/ExploreTopics'
+import WeekTopicsPage from '../pages/WeekTopics/[id]'
 
 export default function AppRoutes() {
   const routes = [
@@ -26,9 +27,7 @@ export default function AppRoutes() {
     },
     {
       path: '/topics/explore/week/:id',
-      component: <main>
-        <h1>Week topics</h1>
-      </main>
+      component: <WeekTopicsPage />
     },
     {
       path: '/topics/search',

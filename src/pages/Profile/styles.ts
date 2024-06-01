@@ -5,6 +5,10 @@ export const Container = styled.main`
   flex-direction: column;
   border-radius: 4px;
   gap: 2rem;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const ProfileHeader = styled.header`

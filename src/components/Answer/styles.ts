@@ -70,12 +70,28 @@ export const AnswerHeader = styled.header`
   display: flex;
   align-items: center;
 
-  > span {
+  > div {
+    display: flex;
+    align-items: center;
+
+    a {
+      transition: 0.2s;
+      text-decoration: none;
+      color: ${props => props.theme.colors.secondary};
+    }
+
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.9;
+    }
+  }
+
+  > div > span {
     color: ${props => props.theme.colors.text};
     font-size: 0.9rem;
   }
 
-  > span::before {
+  > div > span::before {
     content: '•';
     margin: 0 0.5rem;
     color: ${props => props.theme.colors.text};

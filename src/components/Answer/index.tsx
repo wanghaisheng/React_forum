@@ -1,8 +1,20 @@
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { AnswerContainer, AnswerContent, AnswerHeader, AnswerVotes } from "./styles";
 import UserItem from "../UserItem";
+import { Link } from "react-router-dom";
 
-function Answer() {
+interface AnswerProps {
+  id: number;
+  author: string;
+  authorId: number;
+  date: string;
+  content: string;
+  upvotes: number;
+  downvotes: number;
+}
+
+
+function Answer({ id, author, authorId, date, content, upvotes, downvotes }: AnswerProps) {
   return (
     <AnswerContainer>
       <AnswerVotes>
@@ -10,7 +22,7 @@ function Answer() {
           <FaArrowUp className="up-vote" size={16} />
         </button>
 
-        <span>10</span>
+        <span>{upvotes - downvotes}</span>
 
         <button>
           <FaArrowDown className="down-vote" size={16} />
@@ -19,12 +31,16 @@ function Answer() {
 
       <div className="answer">
         <AnswerHeader>
-          <UserItem label="Answered by" userName="Jane Doe" />
-          <span>12h ago</span>
+          <div>
+            <Link to={`/profile/${authorId}`}>
+              <UserItem label="Posted by" userName={author} />
+            </Link>
+            <span>12h ago</span>
+          </div>
         </AnswerHeader>
 
         <AnswerContent>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum odio quidem quisquam ex recusandae rerum quam? Corporis quos, quo adipisci quae, explicabo laborum cumque aliquam, placeat voluptatum architecto odio ab.</p>
+          <p>{content}</p>
         </AnswerContent>
       </div>
     </AnswerContainer>

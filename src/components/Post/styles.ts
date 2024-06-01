@@ -8,8 +8,11 @@ export const PostContainer = styled.article`
   border-radius: 4px;
   padding: 2rem;
   gap: 3rem;
-
   cursor: pointer;
+
+  a {
+    text-decoration: none;
+  }
 
   .post {
     display: flex;
@@ -79,16 +82,48 @@ export const PostVotes = styled.div`
 export const PostHeader = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  > span {
+  > div {
+    display: flex;
+    align-items: center;
+
+    a {
+      transition: 0.2s;
+      text-decoration: none;
+      color: ${props => props.theme.colors.secondary};
+    }
+
+    a:hover {
+      text-decoration: underline;
+      opacity: 0.9;
+    }
+  }
+
+  > div > span {
     color: ${props => props.theme.colors.text};
     font-size: 0.9rem;
   }
 
-  > span::before {
+  > div > span:not(.week-tag)::before {
     content: '•';
     margin: 0 0.5rem;
     color: ${props => props.theme.colors.text};
+  }
+
+  a span.week-tag {
+    color: ${props => props.theme.colors.secondary};
+    font-weight: 600;
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background-color: ${props => props.theme.colors.background};
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
   }
 `;
 
