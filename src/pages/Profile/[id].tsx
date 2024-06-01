@@ -1,22 +1,40 @@
-import { Container, ProfileHeader, UserInfo, UserPhoto } from "./styles";
+import { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../store';
+import { setCurrentUser, setCurrentUserPosts } from '../../store/userSlice';
+import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
 import { FaCalendar } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
-import Post from "../../components/Post";
-import { Link, useParams } from "react-router-dom";
-import data from "../../data/db.json";
+import Post from '../../components/Post';
+import data from '../../data/db.json';
+import NotFoundPage from '../NotFound';
 
 function ProfilePage() {
-  const { id } = useParams();
-  const userId = Number(id);
-  const user = data.users.find(user => user.id === userId);
+  const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.user.currentUser);
+  const posts = useSelector((state: RootState) => state.user.currentUserPosts);
+
+  useEffect(() => {
+    const userId = Number(id);
+    const user = data.users.find(user => user.id === userId);
+    if (user) {
+      dispatch(setCurrentUser(user));
+      const userPostIds = user.postsId.map(post => post.id);
+      const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
+      dispatch(setCurrentUserPosts(userPosts));
+    } else {
+      dispatch(setCurrentUser(null));
+      dispatch(setCurrentUserPosts([]));
+    }
+  }, [dispatch, id]);
 
   if (!user) {
-    return <div>User not found</div>;
+    return (
+      <NotFoundPage />
+    )
   }
-
-  const userPostIds = user.postsId.map(post => post.id);
-
-  const posts = data.posts.filter(post => userPostIds.includes(post.id));
 
   return (
     <Container>
@@ -36,16 +54,15 @@ function ProfilePage() {
             </div>
             <div>
               <FaMessage />
-              <span>{userPostIds.length} topics</span>
+              <span>{user.postsId.length} topics</span>
             </div>
           </div>
         </UserInfo>
       </ProfileHeader>
 
       {posts.map(post => (
-        <Link to={`/topics/topic/${post.id}`}>
+        <Link key={post.id} to={`/topics/topic/${post.id}`}>
           <Post
-            key={post.id}
             id={post.id}
             author={post.author}
             authorId={post.authorId}

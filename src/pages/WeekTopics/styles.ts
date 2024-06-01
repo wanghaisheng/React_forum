@@ -13,4 +13,8 @@ export const Container = styled.main`
     width: 100%;
     text-decoration: none;
   }
+
+  > p {
+    color: ${props => props.theme.colors.text};
+  }
 `;

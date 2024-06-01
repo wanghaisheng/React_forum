@@ -1,11 +1,15 @@
+import { Provider } from 'react-redux'
 import AppRoutes from './routes'
 import GlobalStyle from './styles/global'
+import store from './store'
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <AppRoutes />
+      <Provider store={store}>
+        <AppRoutes />
+      </Provider>
     </>
   )
 }

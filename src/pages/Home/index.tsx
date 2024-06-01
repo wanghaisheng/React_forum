@@ -1,29 +1,46 @@
-import { Link } from 'react-router-dom'
-import Post from '../../components/Post'
-import { Container } from './styles'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../store';
+import { setPosts } from '../../store/userSlice';
+import Post from '../../components/Post';
+import { Container } from './styles';
+import data from '../../data/db.json';
 
-import data from '../../data/db.json'
+const Home: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const posts = useSelector((state: RootState) => state.user.posts);
 
-export default function Home() {
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setPosts(data.posts));
+    }, 1000);
+  }, [dispatch]);
+
   return (
     <Container>
-      {data.posts.map(post => (
-        <Link to={`/topics/topic/${post.id}`}>
-          <Post
-            key={post.id}
-            id={post.id}
-            author={post.author}
-            authorId={post.authorId}
-            date={post.date}
-            week={post.week}
-            title={post.title}
-            content={post.content}
-            upvotes={post.upvotes}
-            downvotes={post.downvotes}
-            answerCount={post.answers.length}
-          />
-        </Link>
-      ))}
+      {posts.length > 0 ? (
+        posts.map(post => (
+          <Link key={post.id} to={`/topics/topic/${post.id}`}>
+            <Post
+              id={post.id}
+              author={post.author}
+              authorId={post.authorId}
+              date={post.date}
+              week={post.week}
+              title={post.title}
+              content={post.content}
+              upvotes={post.upvotes}
+              downvotes={post.downvotes}
+              answerCount={post.answers.length}
+            />
+          </Link>
+        ))
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </Container>
-  )
-}
+  );
+};
+
+export default Home;

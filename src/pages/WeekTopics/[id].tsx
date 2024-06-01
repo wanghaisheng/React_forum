@@ -1,25 +1,31 @@
-import Post from "../../components/Post";
-import data from "../../data/db.json";
-import { Link, useParams } from "react-router-dom";
-import { Container } from "./styles";
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../store';
+import { setPosts } from '../../store/userSlice';
+import Post from '../../components/Post';
+import { Container } from './styles';
+import data from '../../data/db.json';
 
-function WeekTopicsPage() {
+const WeekTopicsPage: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const posts = useSelector((state: RootState) => state.user.posts);
   const { id } = useParams();
   const weekId = Number(id);
 
-  const weekTopics = data.posts.filter(post => post.week === weekId);
+  useEffect(() => {
+    const weekPosts = data.posts.filter(post => post.week === weekId);
+    dispatch(setPosts(weekPosts));
+  }, [dispatch, weekId]);
 
   return (
     <Container>
-      <h1>
-        Week {id} - Topics
-      </h1>
+      <h1>Week {id} topics</h1>
 
-      {weekTopics.length > 0 ? (
-        weekTopics.map(post => (
-          <Link to={`/topics/topic/${post.id}`}>
+      {posts.length > 0 ? (
+        posts.map(post => (
+          <Link key={post.id} to={`/topics/topic/${post.id}`}>
             <Post
-              key={post.id}
               id={post.id}
               author={post.author}
               authorId={post.authorId}
@@ -34,12 +40,10 @@ function WeekTopicsPage() {
           </Link>
         ))
       ) : (
-        <h2>
-          No topics found for this week.
-        </h2>
+        <p>There are no topics yet this week.</p>
       )}
     </Container>
-  )
-}
+  );
+};
 
 export default WeekTopicsPage;

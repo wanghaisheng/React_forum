@@ -14,6 +14,7 @@ import PrivacyPage from '../pages/Privacy'
 import HelpPage from '../pages/Help'
 import ExploreTopicsPage from '../pages/ExploreTopics'
 import WeekTopicsPage from '../pages/WeekTopics/[id]'
+import NotFoundPage from '../pages/NotFound'
 
 export default function AppRoutes() {
   const routes = [
@@ -83,9 +84,7 @@ export default function AppRoutes() {
     },
     {
       path: '/*',
-      component: <main>
-        <h1>404 - Not found</h1>
-      </main>
+      component: <NotFoundPage />
     }
   ]
 
@@ -100,6 +99,7 @@ export default function AppRoutes() {
               <Route key={index} path={route.path} element={route.component} />
             ))}
           </Routes>
+
           <Aside />
 
           <BottomMenu>
