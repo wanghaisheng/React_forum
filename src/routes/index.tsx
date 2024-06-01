@@ -12,6 +12,7 @@ import AboutPage from '../pages/About'
 import TermsPage from '../pages/Terms'
 import PrivacyPage from '../pages/Privacy'
 import HelpPage from '../pages/Help'
+import ExploreTopicsPage from '../pages/ExploreTopics'
 
 export default function AppRoutes() {
   const routes = [
@@ -21,8 +22,12 @@ export default function AppRoutes() {
     },
     {
       path: '/topics/explore',
+      component: <ExploreTopicsPage />
+    },
+    {
+      path: '/topics/explore/week/:id',
       component: <main>
-        <h1>Explore topics</h1>
+        <h1>Week topics</h1>
       </main>
     },
     {
