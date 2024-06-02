@@ -15,6 +15,7 @@ import HelpPage from '../pages/Help'
 import ExploreTopicsPage from '../pages/ExploreTopics'
 import WeekTopicsPage from '../pages/WeekTopics/[id]'
 import NotFoundPage from '../pages/NotFound'
+import SearchPage from '../pages/Search'
 
 export default function AppRoutes() {
   const routes = [
@@ -32,9 +33,7 @@ export default function AppRoutes() {
     },
     {
       path: '/topics/search',
-      component: <main>
-        <h1>Search</h1>
-      </main>
+      component: <SearchPage />
     },
     {
       path: '/topics/my-topics',

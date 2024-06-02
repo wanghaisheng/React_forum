@@ -37,6 +37,7 @@ interface UserState {
   currentPost: Post | null;
   currentUser: User | null;
   currentUserPosts: Post[];
+  searchTerm: string;
 }
 
 const initialState: UserState = {
@@ -44,6 +45,7 @@ const initialState: UserState = {
   currentPost: null,
   currentUser: null,
   currentUserPosts: [],
+  searchTerm: '',
 };
 
 const userSlice = createSlice({
@@ -62,9 +64,12 @@ const userSlice = createSlice({
     setCurrentUserPosts: (state, action: PayloadAction<Post[]>) => {
       state.currentUserPosts = action.payload;
     },
+    setSearchTerm: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload;
+    },
   },
 });
 
-export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts } = userSlice.actions;
+export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm } = userSlice.actions;
 
 export default userSlice.reducer;

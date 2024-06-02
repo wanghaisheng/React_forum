@@ -11,7 +11,7 @@ function SideMenu() {
   const links = [
     { to: "/", icon: <FaHome size={14} />, text: "Home" },
     { to: "/topics/explore", icon: <FaCompass size={14} />, text: "Explore topics" },
-    { to: "/topics/search", icon: <FaQuestion size={14} />, text: "My topics" },
+    { to: "/topics/my-topics", icon: <FaQuestion size={14} />, text: "My topics" },
     { to: "/topics/my-answers", icon: <FaMessage size={14} />, text: "My answers" },
   ];
 
