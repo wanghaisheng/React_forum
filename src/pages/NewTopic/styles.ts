@@ -57,6 +57,12 @@ export const NewTopicForm = styled.form`
   button {
     margin-top: 1rem;
   }
+
+  .error-message {
+    color: ${({ theme }) => theme.colors.danger};
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
 `;
 
 export const FormActions = styled.div`

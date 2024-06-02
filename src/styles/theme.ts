@@ -8,7 +8,7 @@ export const theme = {
     secondary: '#FF7D29',
     tertiary: '#FFBF78',
     quaternary: '#FFEEA9',
-    danger: '#ea0035',
+    danger: '#ed5249',
     confirm: '#1abb95',
   },
 
