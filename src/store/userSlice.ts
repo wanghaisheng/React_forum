@@ -67,9 +67,16 @@ const userSlice = createSlice({
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
+    addAnswer: (state, action: PayloadAction<{ postId: number, answer: Answer }>) => {
+      const { postId, answer } = action.payload;
+      const post = state.posts.find(post => post.id === postId);
+      if (post) {
+        post.answers.push(answer);
+      }
+    },
   },
 });
 
-export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm } = userSlice.actions;
+export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -40,10 +40,8 @@ function NewTopicPage() {
         content: validatedData.content,
       };
 
-      // Cria uma cópia do array de posts e adiciona o novo post
       const updatedPosts = [...dbData.posts, newPost];
 
-      // Substitui o valor do dbData.posts com a cópia atualizada
       dbData.posts = updatedPosts;
 
       console.log('Dados do post:', newPost);

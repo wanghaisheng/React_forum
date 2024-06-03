@@ -17,7 +17,11 @@ const TopicPage: React.FC = () => {
   useEffect(() => {
     const post = data.posts.find(post => post.id === Number(id));
     dispatch(setCurrentPost(post || null));
-  }, [dispatch, id]);
+  }, [dispatch, id, post]);
+
+  useEffect(() => {
+    console.log(post?.answers)
+  }, [post]);
 
   if (!post) {
     return <NotFoundPage />

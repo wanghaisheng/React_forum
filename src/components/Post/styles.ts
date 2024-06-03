@@ -184,7 +184,7 @@ export const PostMetaData = styled.div`
   }
 `
 
-export const AnswerContainer = styled.div`
+export const AnswerContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -218,5 +218,11 @@ export const AnswerContainer = styled.div`
     button {
       max-width: 8rem;
     }
+  }
+
+  .error-message {
+    color: ${(props) => props.theme.colors.danger};
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 `;
