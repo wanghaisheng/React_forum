@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Container, FormActions, NewTopicForm } from "./styles";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z, ZodError } from 'zod';
 import Button from "../../components/Button";
-
-import dbData from '../../data/db.json';
+import { createPost } from '../../api';
+import { Container, FormActions, NewTopicForm } from "./styles";
 
 const schema = z.object({
   week: z.string().min(1, 'Choose one category, please.'),
@@ -18,17 +17,17 @@ function NewTopicPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-  function handleNavigate(path: string) {
+  const handleNavigate = (path: string) => {
     navigate(path);
-  }
+  };
 
-  const onSubmit = handleSubmit((data: Record<string, string>) => {
+  const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
       const validatedData = schema.parse(data);
-      const weekNumber = Number(validatedData.week.replace('Week ', ''));
+      const weekNumber = Number(validatedData.week);
 
       const newPost = {
-        id: Math.floor(Math.random() * 100000000) + 1,
+        id: Math.floor(Math.random() * 10000000) + 1,
         author: "John Doe",
         authorId: 1,
         date: new Date().toISOString(),
@@ -40,11 +39,9 @@ function NewTopicPage() {
         content: validatedData.content,
       };
 
-      const updatedPosts = [...dbData.posts, newPost];
+      const createdPost = await createPost(newPost);
 
-      dbData.posts = updatedPosts;
-
-      console.log('Dados do post:', newPost);
+      console.log('Dados do post:', createdPost);
 
       handleNavigate('/');
     } catch (error) {
@@ -59,7 +56,6 @@ function NewTopicPage() {
         setFormErrors(fieldErrors);
       }
     }
-
   });
 
   const weeks = [
@@ -83,7 +79,7 @@ function NewTopicPage() {
     { id: 18, title: 'Week 18' },
     { id: 19, title: 'Week 19' },
     { id: 20, title: 'Week 20' },
-  ]
+  ];
 
   return (
     <Container>

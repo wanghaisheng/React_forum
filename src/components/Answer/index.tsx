@@ -13,7 +13,6 @@ interface AnswerProps {
   downvotes: number;
 }
 
-
 function Answer({ id, author, authorId, date, content, upvotes, downvotes }: AnswerProps) {
   return (
     <AnswerContainer>

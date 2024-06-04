@@ -1,4 +1,3 @@
-// src/store/userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Answer {
@@ -69,9 +68,13 @@ const userSlice = createSlice({
     },
     addAnswer: (state, action: PayloadAction<{ postId: number, answer: Answer }>) => {
       const { postId, answer } = action.payload;
-      const post = state.posts.find(post => post.id === postId);
-      if (post) {
-        post.answers.push(answer);
+      const postIndex = state.posts.findIndex(post => post.id === postId);
+      if (postIndex !== -1) {
+        state.posts[postIndex].answers.push(answer);
+      }
+
+      if (state.currentPost && state.currentPost.id === postId) {
+        state.currentPost.answers.push(answer);
       }
     },
   },

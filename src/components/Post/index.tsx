@@ -1,15 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { z, ZodError } from 'zod';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { addAnswer } from '../../store/userSlice';
+import { useDispatch } from 'react-redux';
+import { Link } from "react-router-dom";
+import { createAnswer } from '../../api';
 import Button from "../Button";
 import UserItem from "../UserItem";
 import { AnswerContainer, PostActions, PostContainer, PostContent, PostFooter, PostHeader, PostMetaData, PostVotes } from "./styles";
 import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa";
 import { FaMessage } from 'react-icons/fa6';
-import { Link } from "react-router-dom";
+import { addAnswer } from '../../store/userSlice';
 
 interface PostProps {
   id: number;
@@ -26,21 +26,34 @@ interface PostProps {
 }
 
 const answerSchema = z.object({
-  content: z.string().min(10, 'Enter a answer with at least 10 characters.').max(500, 'Answer cannot exceed 500 characters.'),
+  content: z.string().min(10, 'Enter an answer with at least 10 characters.').max(500, 'Answer cannot exceed 500 characters.'),
 });
 
 function Post({ id, author, authorId, date, week, title, content, upvotes, downvotes, answerCount, actions }: PostProps) {
   const [isAnswering, setIsAnswering] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [post, setPost] = useState<PostProps>({
+    id,
+    author,
+    authorId,
+    date,
+    week,
+    title,
+    content,
+    upvotes,
+    downvotes,
+    answerCount,
+    actions
+  });
+
   const dispatch = useDispatch();
 
-  const onSubmit = handleSubmit((data: Record<string, string>) => {
+  const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
       const validatedData = answerSchema.parse(data);
 
       const newAnswer = {
-        id: Math.floor(Math.random() * 100000000) + 1,
         author: 'John Doe',
         authorId: 1,
         date: new Date().toISOString(),
@@ -49,11 +62,13 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
         content: validatedData.content,
       };
 
-      dispatch(addAnswer({ postId: id, answer: newAnswer }));
+      const createdAnswer = await createAnswer(id, newAnswer);
 
-      console.log('Dados da resposta:', newAnswer);
-
+      dispatch(addAnswer({ postId: id, answer: createdAnswer }));
       setIsAnswering(false);
+
+      const updatedPost = { ...post, answerCount: post.answerCount + 1 };
+      setPost(updatedPost);
     } catch (error) {
       console.error('Erro de validação:', error);
       if (error instanceof ZodError) {
@@ -75,7 +90,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
           <FaArrowUp className="up-vote" size={16} />
         </button>
 
-        <span>{upvotes - downvotes}</span>
+        <span>{post.upvotes - post.downvotes}</span>
 
         <button>
           <FaArrowDown className="down-vote" size={16} />
@@ -85,28 +100,28 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
       <div className="post">
         <PostHeader>
           <div>
-            <Link to={`/profile/${authorId}`}>
-              <UserItem label="Posted by" userName={author} />
+            <Link to={`/profile/${post.authorId}`}>
+              <UserItem label="Posted by" userName={post.author} />
             </Link>
             <span>12h ago</span>
           </div>
 
-          <Link to={`/topics/explore/week/${week}`}>
-            <span className="week-tag">Week {week}</span>
+          <Link to={`/topics/explore/week/${post.week}`}>
+            <span className="week-tag">Week {post.week}</span>
           </Link>
         </PostHeader>
 
-        <h1>{title}</h1>
+        <h1>{post.title}</h1>
 
         <PostContent>
-          <p>{content}.</p>
+          <p>{post.content}.</p>
         </PostContent>
 
         <div className="separator"></div>
 
         <PostFooter>
-          <div className={actions ? '' : 'no-actions'}>
-            {actions && (
+          <div className={post.actions ? '' : 'no-actions'}>
+            {post.actions && (
               <PostActions>
                 <Button variant="transparent" onClick={() => setIsAnswering(true)}>
                   <FaPlus size={14} />
@@ -123,7 +138,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
             <PostMetaData>
               <div>
                 <FaMessage size={14} />
-                <span>{answerCount}+</span>
+                <span>{post.answerCount}+</span>
               </div>
             </PostMetaData>
           </div>

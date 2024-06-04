@@ -5,16 +5,18 @@ import { RootState, AppDispatch } from '../../store';
 import { setPosts } from '../../store/userSlice';
 import Post from '../../components/Post';
 import { Container } from './styles';
-import data from '../../data/db.json';
+import { getPosts } from '../../api';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const posts = useSelector((state: RootState) => state.user.posts);
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(setPosts(data.posts));
-    }, 1000);
+    const fetchPosts = async () => {
+      const posts = await getPosts();
+      dispatch(setPosts(posts));
+    }
+    fetchPosts();
   }, [dispatch]);
 
   return (

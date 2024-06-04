@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jane Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -41,7 +41,7 @@
   ],
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "author": "John Doe",
       "authorId": 1,
       "date": "2020-01-01",
@@ -59,11 +59,20 @@
           "date": "2020-01-02",
           "upvotes": 15,
           "downvotes": 2
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T01:49:16.954Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "hahahahaah nice answer bro",
+          "id": 2
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "John Doe",
       "authorId": 1,
       "date": "2020-01-01",
@@ -85,7 +94,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "John Doe",
       "authorId": 1,
       "date": "2020-01-01",
@@ -107,7 +116,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "author": "Jane Doe",
       "authorId": 2,
       "date": "2020-01-01",
@@ -129,7 +138,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "author": "Jane Doe",
       "authorId": 2,
       "date": "2020-01-01",
@@ -151,7 +160,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "author": "Jane Doe",
       "authorId": 2,
       "date": "2020-01-01",
@@ -171,6 +180,85 @@
           "downvotes": 2
         }
       ]
+    },
+    {
+      "id": "1507082",
+      "author": "John Doe",
+      "authorId": 1,
+      "date": "2024-06-03T23:48:29.074Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T00:50:07.624Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aokjwnodjkandoa",
+          "id": 1
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T00:57:58.218Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "dawddwadwad",
+          "id": 2
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T01:30:11.927Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaaaa",
+          "id": 3
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T01:40:15.573Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaaaa",
+          "id": 4
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T01:47:33.114Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "id": 5
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-04T01:48:51.139Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "awhgdiawgdwilgdalidgi",
+          "id": 6
+        }
+      ],
+      "week": 4,
+      "title": "My topic",
+      "content": "This is a new topic"
+    },
+    {
+      "id": "434605",
+      "author": "John Doe",
+      "authorId": 1,
+      "date": "2024-06-04T00:38:41.463Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 8,
+      "title": "aaaaaaaaaaaaaaa",
+      "content": "aaaaaaaaaaaaaaaaaaaaaa"
     }
   ]
 }
