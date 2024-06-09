@@ -5,10 +5,10 @@ interface TopUserProps {
   userPhoto?: string;
   label?: string;
   userName: string;
-  followers?: number;
+  postsQuantity?: number | string;
 }
 
-function UserItem({ userPhoto, label, userName, followers }: TopUserProps) {
+function UserItem({ userPhoto, label, userName, postsQuantity }: TopUserProps) {
   console.log(userPhoto);
   return (
     <TopUserContainer>
@@ -17,9 +17,9 @@ function UserItem({ userPhoto, label, userName, followers }: TopUserProps) {
         <p>{label} <span>{userName}</span></p>
       </div>
 
-      {followers && (
+      {postsQuantity && (
         <div className='followers-info'>
-          <span>{followers}k</span>
+          <span>{postsQuantity}</span>
           <FaArrowUp size={12} />
         </div>
       )}

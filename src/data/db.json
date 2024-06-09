@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "name": "John Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Jane Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -37,11 +37,47 @@
           "id": 6
         }
       ]
+    },
+    {
+      "id": 3,
+      "name": "Jeff Doe",
+      "bio": "I am a web developer.",
+      "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": []
+    },
+    {
+      "id": 4,
+      "name": "Jenny Doe",
+      "bio": "I am a web developer.",
+      "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": []
+    },
+    {
+      "id": 5,
+      "name": "Joe Doe",
+      "bio": "I am a web developer.",
+      "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": []
+    },
+    {
+      "id": 6,
+      "name": "Jojo Doe",
+      "bio": "I am a web developer.",
+      "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": []
     }
   ],
   "posts": [
     {
-      "id": "1",
+      "id": 1,
       "author": "John Doe",
       "authorId": 1,
       "date": "2020-01-01",
@@ -72,7 +108,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "author": "John Doe",
       "authorId": 1,
       "date": "2020-01-01",
@@ -94,7 +130,7 @@
       ]
     },
     {
-      "id": "3",
+      "id": 3,
       "author": "John Doe",
       "authorId": 1,
       "date": "2020-01-01",
@@ -116,7 +152,7 @@
       ]
     },
     {
-      "id": "4",
+      "id": 4,
       "author": "Jane Doe",
       "authorId": 2,
       "date": "2020-01-01",
@@ -138,7 +174,7 @@
       ]
     },
     {
-      "id": "5",
+      "id": 5,
       "author": "Jane Doe",
       "authorId": 2,
       "date": "2020-01-01",
@@ -160,7 +196,7 @@
       ]
     },
     {
-      "id": "6",
+      "id": 6,
       "author": "Jane Doe",
       "authorId": 2,
       "date": "2020-01-01",
@@ -182,7 +218,7 @@
       ]
     },
     {
-      "id": "1507082",
+      "id": 1507082,
       "author": "John Doe",
       "authorId": 1,
       "date": "2024-06-03T23:48:29.074Z",
@@ -242,23 +278,20 @@
           "downvotes": 0,
           "content": "awhgdiawgdwilgdalidgi",
           "id": 6
+        },
+        {
+          "author": "John Doe",
+          "authorId": 1,
+          "date": "2024-06-09T19:55:47.911Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "Nova resposta muito legal.",
+          "id": 7
         }
       ],
       "week": 4,
       "title": "My topic",
       "content": "This is a new topic"
-    },
-    {
-      "id": "434605",
-      "author": "John Doe",
-      "authorId": 1,
-      "date": "2024-06-04T00:38:41.463Z",
-      "upvotes": 0,
-      "downvotes": 0,
-      "answers": [],
-      "week": 8,
-      "title": "aaaaaaaaaaaaaaa",
-      "content": "aaaaaaaaaaaaaaaaaaaaaa"
     }
   ]
 }
