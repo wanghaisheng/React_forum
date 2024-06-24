@@ -33,6 +33,12 @@ interface User {
   postsId: { id: number }[];
 }
 
+interface Week {
+  id: number;
+  title: string;
+  description: string;
+}
+
 export const getPosts = async (): Promise<Post[]> => {
   const response: AxiosResponse<Post[]> = await axios.get(`${API_URL}/posts`);
   return response.data;
@@ -73,5 +79,10 @@ export const createAnswer = async (postId: number, answerData: Partial<Answer>):
 
 export const getUsers = async (): Promise<User[]> => {
   const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
+  return response.data;
+}
+
+export const getWeeks = async (): Promise<Week[]> => {
+  const response: AxiosResponse<Week[]> = await axios.get(`${API_URL}/weeks`);
   return response.data;
 }
