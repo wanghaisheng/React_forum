@@ -25,6 +25,14 @@ interface Answer {
   downvotes: number;
 }
 
+interface User {
+  id: number;
+  name: string;
+  bio: string;
+  createdAt: string;
+  postsId: { id: number }[];
+}
+
 export const getPosts = async (): Promise<Post[]> => {
   const response: AxiosResponse<Post[]> = await axios.get(`${API_URL}/posts`);
   return response.data;
@@ -62,3 +70,8 @@ export const createAnswer = async (postId: number, answerData: Partial<Answer>):
     return newAnswer;
   }
 };
+
+export const getUsers = async (): Promise<User[]> => {
+  const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
+  return response.data;
+}
