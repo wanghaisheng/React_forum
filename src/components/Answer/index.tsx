@@ -2,6 +2,7 @@ import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { AnswerContainer, AnswerContent, AnswerHeader, AnswerVotes } from "./styles";
 import UserItem from "../UserItem";
 import { Link } from "react-router-dom";
+import { formatTimeAgo } from "../../utils/formatDate";
 
 interface AnswerProps {
   id: number;
@@ -34,7 +35,9 @@ function Answer({ id, author, authorId, date, content, upvotes, downvotes }: Ans
             <Link to={`/profile/${authorId}`}>
               <UserItem label="Posted by" userName={author} />
             </Link>
-            <span>12h ago</span>
+            <span>
+              Há {formatTimeAgo(new Date(date))}
+            </span>
           </div>
         </AnswerHeader>
 

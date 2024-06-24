@@ -10,6 +10,7 @@ import { AnswerContainer, PostActions, PostContainer, PostContent, PostFooter, P
 import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa";
 import { FaMessage } from 'react-icons/fa6';
 import { addAnswer } from '../../store/userSlice';
+import { formatTimeAgo } from "../../utils/formatDate";
 
 interface PostProps {
   id: number;
@@ -103,7 +104,9 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
             <Link to={`/profile/${post.authorId}`}>
               <UserItem label="Posted by" userName={post.author} />
             </Link>
-            <span>12h ago</span>
+            <span>
+              Há {formatTimeAgo(new Date(post.date))}
+            </span>
           </div>
 
           <Link to={`/topics/explore/week/${post.week}`}>
