@@ -110,14 +110,18 @@ function ExploreTopicsPage() {
       <h1>Explore</h1>
       <WeeksContainer>
         {
-          weeks.map(week => (
-            <Link key={week.id} to={`/topics/explore/week/${week.id}`}>
+          weeks.length > 0 ? weeks.map((week) => (
+            <Link to={`/topics/explore/week/${week.id}`} key={week.id}>
               <WeekBox>
                 <h2>{week.title}</h2>
                 <p>{week.description}</p>
               </WeekBox>
             </Link>
-          )).reverse()
+          )) : (
+            <p>
+              There's still no weeks to show.
+            </p>
+          )
         }
       </WeeksContainer>
     </Container>

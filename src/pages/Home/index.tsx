@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
@@ -6,18 +6,29 @@ import { setPosts } from '../../store/userSlice';
 import Post from '../../components/Post';
 import { Container } from './styles';
 import { getPosts } from '../../api';
+import Loading from '../../components/Loading';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const posts = useSelector((state: RootState) => state.user.posts);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const posts = await getPosts();
       dispatch(setPosts(posts));
+      setLoading(false);
     }
     fetchPosts();
   }, [dispatch]);
+
+  if (loading) {
+    return (
+      <main>
+        <Loading />;
+      </main>
+    )
+  }
 
   return (
     <Container>
@@ -39,7 +50,9 @@ const Home: React.FC = () => {
           </Link>
         ))
       ) : (
-        <h1>Loading...</h1>
+        <p>
+          There are no posts to show. Be the first to <Link to="/topics/create">create a post</Link>!
+        </p>
       )}
     </Container>
   );

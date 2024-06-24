@@ -1,29 +1,36 @@
-// TopUsers.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../../store';
 import { setUsers } from '../../../store/userSlice';
 import User from '../../UserItem';
 import { TopUsersContainer } from './styles';
+import { getUsers } from '../../../api';
+import Spinner from '../../Loading/Spinning';
 
 const TopUsers: React.FC = () => {
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.user.users);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/users');
-        dispatch(setUsers(response.data));
+        const users = await getUsers();
+        dispatch(setUsers(users));
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUsers();
   }, [dispatch]);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <TopUsersContainer>

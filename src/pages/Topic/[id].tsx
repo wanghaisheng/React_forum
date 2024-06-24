@@ -1,15 +1,17 @@
-// TopicPage.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { setCurrentPost } from '../../store/userSlice';
-import Post from '../../components/Post';
-import Answer from '../../components/Answer';
-import { Answers, Container } from './styles';
-import NotFoundPage from '../NotFound';
+
 import { getPostById } from '../../api';
 
+import Post from '../../components/Post';
+import Answer from '../../components/Answer';
+import NotFoundPage from '../NotFound';
+
+import { Answers, Container } from './styles';
+import Loading from '../../components/Loading';
 interface Answer {
   id: number;
   author: string;
@@ -32,7 +34,6 @@ const TopicPage: React.FC = () => {
       try {
         const post = await getPostById(Number(id));
         dispatch(setCurrentPost(post));
-        // Verifica se o estado answers está vazio antes de atualizá-lo
         if (answers.length === 0) {
           setAnswers(post.answers);
         }
@@ -45,11 +46,14 @@ const TopicPage: React.FC = () => {
     };
 
     fetchPost();
-  }, [dispatch, id, answers.length]); // Removido answers da lista de dependências
-
+  }, [dispatch, id, answers.length]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <main>
+        <Loading />
+      </main>
+    )
   }
 
   if (!post) {

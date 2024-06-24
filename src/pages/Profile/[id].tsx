@@ -1,20 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { setCurrentUser, setCurrentUserPosts } from '../../store/userSlice';
-import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
+
 import { FaCalendar } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
+
 import Post from '../../components/Post';
 import data from '../../data/db.json';
 import NotFoundPage from '../NotFound';
+
+import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
+import Loading from '../../components/Loading';
 
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.user.currentUser);
   const posts = useSelector((state: RootState) => state.user.currentUserPosts);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userId = Number(id);
@@ -28,12 +33,21 @@ function ProfilePage() {
       dispatch(setCurrentUser(null));
       dispatch(setCurrentUserPosts([]));
     }
+    setLoading(false);
   }, [dispatch, id]);
+
+  if (loading) {
+    return (
+      <main>
+        <Loading />
+      </main>
+    );
+  }
 
   if (!user) {
     return (
       <NotFoundPage />
-    )
+    );
   }
 
   return (
