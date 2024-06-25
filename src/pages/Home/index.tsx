@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   if (loading) {
     return (
       <main>
-        <Loading />;
+        <Loading />
       </main>
     )
   }
