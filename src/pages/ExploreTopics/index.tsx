@@ -5,7 +5,7 @@ import { getWeeks } from "../../api";
 import Loading from "../../components/Loading";
 
 interface Week {
-  id: number;
+  id: string;
   title: string;
   description: string;
 }

@@ -13,9 +13,9 @@ import NotFoundPage from '../NotFound';
 import { Answers, Container } from './styles';
 import Loading from '../../components/Loading';
 interface Answer {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   content: string;
   upvotes: number;
@@ -32,10 +32,12 @@ const TopicPage: React.FC = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const post = await getPostById(Number(id));
-        dispatch(setCurrentPost(post));
-        if (answers.length === 0) {
-          setAnswers(post.answers);
+        if (id) {
+          const post = await getPostById(id);
+          dispatch(setCurrentPost(post));
+          if (answers.length === 0) {
+            setAnswers(post.answers);
+          }
         }
       } catch (error) {
         console.error(error);

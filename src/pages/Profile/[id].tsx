@@ -22,12 +22,13 @@ function ProfilePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userId = Number(id);
+    const userId = id;
     const user = data.users.find(user => user.id === userId);
     if (user) {
       dispatch(setCurrentUser(user));
       const userPostIds = user.postsId.map(post => post.id);
       const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
+      console.log(userPosts)
       dispatch(setCurrentUserPosts(userPosts));
     } else {
       dispatch(setCurrentUser(null));

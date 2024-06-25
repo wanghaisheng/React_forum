@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -9,18 +9,18 @@
       "votedAnswers": [],
       "postsId": [
         {
-          "id": 1
+          "id": "1"
         },
         {
-          "id": 2
+          "id": "2"
         },
         {
-          "id": 3
+          "id": "3"
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jane Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -28,18 +28,18 @@
       "votedAnswers": [],
       "postsId": [
         {
-          "id": 4
+          "id": "4"
         },
         {
-          "id": 5
+          "id": "5"
         },
         {
-          "id": 6
+          "id": "6"
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Jeff Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -48,7 +48,7 @@
       "postsId": []
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Jenny Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -57,7 +57,7 @@
       "postsId": []
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Joe Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -66,7 +66,7 @@
       "postsId": []
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Jojo Doe",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
@@ -77,111 +77,111 @@
   ],
   "weeks": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Week 1",
       "description": "Basic Introduction - Sprint 1"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Week 2",
       "description": "Web Development | Sprint 1"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Week 3",
       "description": "JavaScript | Sprint 2"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Week 4",
       "description": "Project Development (1st challenge) | Sprint 2"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Week 5",
       "description": "Learning Modern JavaScript (ES6) & TypeScript | Sprint 3"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Week 6",
       "description": "Getting Started with React.js | Sprint 3"
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "Week 7",
       "description": "Deepening with React.js | Sprint 4"
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "Week 8",
       "description": "2nd Challenge (React.js with TypeScript) | Sprint 4"
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "Week 9",
       "description": "20+ Projects in React JS learn Redux, Bootstrap, APIs"
     },
     {
-      "id": 10,
+      "id": "10",
       "title": "Week 10",
       "description": "Frontend Testing"
     },
     {
-      "id": 11,
+      "id": "11",
       "title": "Week 11",
       "description": "Cloud Computing on AWS"
     },
     {
-      "id": 12,
+      "id": "12",
       "title": "Week 12",
       "description": "Guided Project: Hosting a static website on AWS S3"
     },
     {
-      "id": 13,
+      "id": "13",
       "title": "Week 13",
       "description": "AWS Cloud Practitioner"
     },
     {
-      "id": 14,
+      "id": "14",
       "title": "Week 14",
       "description": "AWS Cloud Practitioner"
     },
     {
-      "id": 15,
+      "id": "15",
       "title": "Week 15",
       "description": "Week 15 :: AWS Cloud Practitioner"
     },
     {
-      "id": 16,
+      "id": "16",
       "title": "Week 16",
       "description": "AWS Cloud Practitioner"
     },
     {
-      "id": 17,
+      "id": "17",
       "title": "Week 17",
       "description": "AWS Cloud Practitioner"
     },
     {
-      "id": 18,
+      "id": "18",
       "title": "Week 18",
       "description": "AWS Cloud Practitioner"
     },
     {
-      "id": 19,
+      "id": "19",
       "title": "Week 19",
       "description": "AWS Cloud Practitioner"
     },
     {
-      "id": 20,
+      "id": "20",
       "title": "Week 20",
       "description": "AWS Cloud Practitioner"
     }
   ],
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "1",
       "date": "2020-01-01",
       "week": 1,
       "title": "What is HTML?",
@@ -190,29 +190,29 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "2",
           "author": "Jane Doe",
-          "authorId": 2,
+          "authorId": "1",
           "content": "HTML stands for HyperText Markup Language. It is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.",
           "date": "2020-01-02",
           "upvotes": 15,
           "downvotes": 2
         },
         {
+          "id": "2",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:49:16.954Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "hahahahaah nice answer bro",
-          "id": 2
+          "content": "hahahahaah nice answer bro"
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "1",
       "date": "2020-01-01",
       "week": 1,
       "title": "What is CSS?",
@@ -221,9 +221,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "content": "CSS stands for Cascading Style Sheets. It is a style sheet language used for describing the presentation of a document written in a markup language such as HTML.",
           "date": "2020-01-02",
           "upvotes": 15,
@@ -232,9 +232,9 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "1",
       "date": "2020-01-01",
       "week": 2,
       "title": "What is JavaScript?",
@@ -243,9 +243,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "Jane Doe",
-          "authorId": 2,
+          "authorId": "2",
           "content": "JavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language that is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.",
           "date": "2020-01-02",
           "upvotes": 18,
@@ -254,9 +254,9 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "author": "Jane Doe",
-      "authorId": 2,
+      "authorId": "2",
       "date": "2020-01-01",
       "week": 2,
       "title": "What is React?",
@@ -265,9 +265,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.",
           "date": "2020-01-02",
           "upvotes": 17,
@@ -276,9 +276,9 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "author": "Jane Doe",
-      "authorId": 2,
+      "authorId": "2",
       "date": "2020-01-01",
       "week": 3,
       "title": "What is Node.js?",
@@ -287,9 +287,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "Jane Doe",
-          "authorId": 2,
+          "authorId": "2",
           "content": "Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser.",
           "date": "2020-01-02",
           "upvotes": 19,
@@ -298,9 +298,9 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "author": "Jane Doe",
-      "authorId": 2,
+      "authorId": "2",
       "date": "2020-01-01",
       "week": 3,
       "title": "What is Express?",
@@ -309,91 +309,136 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "2",
           "content": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
           "date": "2020-01-02",
           "upvotes": 18,
           "downvotes": 2
+        },
+        {
+          "id": "2",
+          "author": "John Doe",
+          "authorId": "2",
+          "date": "2024-06-24T22:29:04.224Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "Resposta teste"
         }
       ]
     },
     {
-      "id": 1507082,
+      "id": "1507082",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "2",
       "date": "2024-06-03T23:48:29.074Z",
       "upvotes": 0,
       "downvotes": 0,
       "answers": [
         {
+          "id": "!",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T00:50:07.624Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aokjwnodjkandoa",
-          "id": 1
+          "content": "aokjwnodjkandoa"
         },
         {
+          "id": "2",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T00:57:58.218Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "dawddwadwad",
-          "id": 2
+          "content": "dawddwadwad"
         },
         {
+          "id": "3",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:30:11.927Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aaaaaaaaaaaaaaaaaaa",
-          "id": 3
+          "content": "aaaaaaaaaaaaaaaaaaa"
         },
         {
+          "id": "4",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:40:15.573Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aaaaaaaaaaaaaaaaaaa",
-          "id": 4
+          "content": "aaaaaaaaaaaaaaaaaaa"
         },
         {
+          "id": "5",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:47:33.114Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "id": 5
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         {
+          "id": "6",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:48:51.139Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "awhgdiawgdwilgdalidgi",
-          "id": 6
+          "content": "awhgdiawgdwilgdalidgi"
         },
         {
+          "id": "7",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-09T19:55:47.911Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "Nova resposta muito legal.",
-          "id": 7
+          "content": "Nova resposta muito legal."
         }
       ],
       "week": 4,
       "title": "My topic",
       "content": "This is a new topic"
+    },
+    {
+      "id": "4241280",
+      "author": "John Doe",
+      "authorId": "1",
+      "date": "2024-06-24T22:30:49.444Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 6,
+      "title": "Teste topic",
+      "content": "teste de criar topico"
+    },
+    {
+      "id": "4237971",
+      "author": "John Doe",
+      "authorId": "1",
+      "date": "2024-06-24T23:15:18.024Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 20,
+      "title": "New Build topic",
+      "content": "New build topic"
+    },
+    {
+      "id": "0374c805-b9b8-4448-8d68-9de8a498062a",
+      "author": "John Doe",
+      "authorId": "1",
+      "date": "2024-06-25T00:34:06.641Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 9,
+      "title": "teste de UUID",
+      "content": "teste de UUID"
     }
   ]
 }

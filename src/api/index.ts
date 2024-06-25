@@ -3,9 +3,9 @@ import axios, { AxiosResponse } from 'axios';
 const API_URL = 'http://localhost:8000'; // Altere para a URL do seu servidor
 
 interface Post {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   upvotes: number;
   downvotes: number;
@@ -16,9 +16,9 @@ interface Post {
 }
 
 interface Answer {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   content: string;
   upvotes: number;
@@ -26,15 +26,15 @@ interface Answer {
 }
 
 interface User {
-  id: number;
+  id: string;
   name: string;
   bio: string;
   createdAt: string;
-  postsId: { id: number }[];
+  postsId: { id: string }[];
 }
 
 interface Week {
-  id: number;
+  id: string;
   title: string;
   description: string;
 }
@@ -51,12 +51,12 @@ export const createPost = async (postData: Partial<Post>): Promise<Post> => {
   return response.data;
 };
 
-export const getPostById = async (postId: number): Promise<Post> => {
+export const getPostById = async (postId: string): Promise<Post> => {
   const response: AxiosResponse<Post> = await axios.get(`${API_URL}/posts/${postId}`);
   return response.data;
 };
 
-export const createAnswer = async (postId: number, answerData: Partial<Answer>): Promise<Answer> => {
+export const createAnswer = async (postId: string, answerData: Partial<Answer>): Promise<Answer> => {
   // Primeiro, obter os dados do post existente
   const postResponse: AxiosResponse<Post> = await axios.get(`${API_URL}/posts/${postId}`);
   const post = postResponse.data;

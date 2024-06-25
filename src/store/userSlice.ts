@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Answer {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   content: string;
   upvotes: number;
@@ -11,9 +11,9 @@ interface Answer {
 }
 
 interface Post {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   week: number;
   title: string;
@@ -24,11 +24,11 @@ interface Post {
 }
 
 interface User {
-  id: number;
+  id: string;
   name: string;
   bio: string;
   createdAt: string;
-  postsId: { id: number }[];
+  postsId: { id: string }[];
 }
 
 interface UserState {
@@ -68,7 +68,7 @@ const userSlice = createSlice({
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
-    addAnswer: (state, action: PayloadAction<{ postId: number, answer: Answer }>) => {
+    addAnswer: (state, action: PayloadAction<{ postId: string, answer: Answer }>) => {
       const { postId, answer } = action.payload;
       const postIndex = state.posts.findIndex(post => post.id === postId);
       if (postIndex !== -1) {

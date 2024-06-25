@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z, ZodError } from 'zod';
 import Button from "../../components/Button";
 import { createPost } from '../../api';
 import { Container, FormActions, NewTopicForm } from "./styles";
+import { v4 } from 'uuid';
+import { getWeeks } from '../../api'
 
 const schema = z.object({
   week: z.string().min(1, 'Choose one category, please.'),
@@ -12,10 +14,17 @@ const schema = z.object({
   content: z.string().min(10, 'Enter content with at least 10 characters.').max(500, 'Content cannot exceed 500 characters.'),
 });
 
+interface Week {
+  id: string;
+  title: string;
+  description: string;
+}
+
 function NewTopicPage() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [weeks, setWeeks] = useState<Week[]>([]);
 
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -27,9 +36,9 @@ function NewTopicPage() {
       const weekNumber = Number(validatedData.week);
 
       const newPost = {
-        id: Math.floor(Math.random() * 10000000) + 1,
+        id: v4(),
         author: "John Doe",
-        authorId: 1,
+        authorId: "1",
         date: new Date().toISOString(),
         upvotes: 0,
         downvotes: 0,
@@ -58,28 +67,15 @@ function NewTopicPage() {
     }
   });
 
-  const weeks = [
-    { id: 1, title: 'Week 1' },
-    { id: 2, title: 'Week 2' },
-    { id: 3, title: 'Week 3' },
-    { id: 4, title: 'Week 4' },
-    { id: 5, title: 'Week 5' },
-    { id: 6, title: 'Week 6' },
-    { id: 7, title: 'Week 7' },
-    { id: 8, title: 'Week 8' },
-    { id: 9, title: 'Week 9' },
-    { id: 10, title: 'Week 10' },
-    { id: 11, title: 'Week 11' },
-    { id: 12, title: 'Week 12' },
-    { id: 13, title: 'Week 13' },
-    { id: 14, title: 'Week 14' },
-    { id: 15, title: 'Week 15' },
-    { id: 16, title: 'Week 16' },
-    { id: 17, title: 'Week 17' },
-    { id: 18, title: 'Week 18' },
-    { id: 19, title: 'Week 19' },
-    { id: 20, title: 'Week 20' },
-  ];
+  useEffect(() => {
+    const fetchWeeks = async () => {
+      const weeks = await getWeeks();
+
+      setWeeks(weeks);
+    }
+
+    fetchWeeks();
+  }, []);
 
   return (
     <Container>

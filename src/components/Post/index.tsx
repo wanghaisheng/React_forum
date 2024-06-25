@@ -13,9 +13,9 @@ import { addAnswer } from '../../store/userSlice';
 import { formatTimeAgo } from "../../utils/formatDate";
 
 interface PostProps {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   week: number;
   title: string;
@@ -32,7 +32,7 @@ const answerSchema = z.object({
 
 function Post({ id, author, authorId, date, week, title, content, upvotes, downvotes, answerCount, actions }: PostProps) {
   const [isAnswering, setIsAnswering] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [post, setPost] = useState<PostProps>({
     id,
@@ -56,7 +56,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
 
       const newAnswer = {
         author: 'John Doe',
-        authorId: 1,
+        authorId: "1",
         date: new Date().toISOString(),
         upvotes: 0,
         downvotes: 0,

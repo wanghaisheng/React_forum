@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { formatTimeAgo } from "../../utils/formatDate";
 
 interface AnswerProps {
-  id: number;
+  id: string;
   author: string;
-  authorId: number;
+  authorId: string;
   date: string;
   content: string;
   upvotes: number;
@@ -16,7 +16,7 @@ interface AnswerProps {
 
 function Answer({ id, author, authorId, date, content, upvotes, downvotes }: AnswerProps) {
   return (
-    <AnswerContainer>
+    <AnswerContainer key={id}>
       <AnswerVotes>
         <button>
           <FaArrowUp className="up-vote" size={16} />
