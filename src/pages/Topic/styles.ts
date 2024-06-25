@@ -16,4 +16,9 @@ export const Answers = styled.section`
   width: 100%;
   flex-direction: column;
   gap: 1rem;
+
+  > p {
+    color: ${props => props.theme.colors.text};
+    text-align: center;
+  }
 `;

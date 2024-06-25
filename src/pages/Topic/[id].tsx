@@ -91,6 +91,9 @@ const TopicPage: React.FC = () => {
             downvotes={answer.downvotes}
           />
         ))}
+        {post.answers && post.answers.length === 0 && (
+          <p>This topic still doesn't have any answers. Be the first to answer!</p>
+        )}
       </Answers>
     </Container>
   );
