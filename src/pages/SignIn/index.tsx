@@ -1,12 +1,36 @@
 import { Container, Description, FormContainer, HeroContainer, HeroImage, HeroTitle, StyledLogo } from "./styles";
 import heroImage from '../../assets/hero-image.png';
 import Marquee from "../../components/Marquee";
+import AuthForm from "../../components/AuthForm";
 
 function SignIn() {
   return (
     <Container>
       <FormContainer>
-        <h1>Sign In</h1>
+        <AuthForm
+          title="Sign In"
+          buttonText="Sign In"
+          onSubmit={(event) => event.preventDefault()}
+          formFields={[
+            {
+              label: "Email",
+              type: "email",
+              name: "email",
+              value: "",
+              onChange: (event) => console.log(event.target.value),
+            },
+            {
+              label: "Password",
+              type: "password",
+              name: "password",
+              value: "",
+              onChange: (event) => console.log(event.target.value),
+            },
+          ]}
+          socialButtons
+          bottomLink="signup"
+          width="500px"
+        />
       </FormContainer>
 
       <HeroContainer>

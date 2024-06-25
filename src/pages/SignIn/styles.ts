@@ -17,6 +17,8 @@ export const FormContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const HeroContainer = styled.section`
