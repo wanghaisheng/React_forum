@@ -71,6 +71,5 @@ export const StyledLogo = styled(Logo)`
 
 export const Description = styled.p`
   color: ${props => props.theme.colors.text};
-  font-size: 1.125rem;
   text-align: center;
 `;

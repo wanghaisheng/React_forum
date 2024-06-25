@@ -1,5 +1,6 @@
 import { Container, Description, FormContainer, HeroContainer, HeroImage, HeroTitle, StyledLogo } from "./styles";
 import heroImage from '../../assets/hero-image.png';
+import Marquee from "../../components/Marquee";
 
 function SignIn() {
   return (
@@ -22,8 +23,10 @@ function SignIn() {
         <HeroImage src={heroImage} alt="" />
 
         <Description>
-          Be part of our community and share knowledge with others. Start your journey now!
+          Be part of our community and share knowledge with others. Start your journey now and clear your doubts about:
         </Description>
+
+        <Marquee duration={30} />
       </HeroContainer>
     </Container>
   )
