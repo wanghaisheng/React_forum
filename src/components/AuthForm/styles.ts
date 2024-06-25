@@ -47,6 +47,7 @@ export const SocialSection = styled.div<StyledFormProps>`
     span {
       color: ${({ theme }) => theme.colors.text};
       font-weight: 500;
+      font-size: 0.875rem;
     }
   }
 
@@ -54,6 +55,25 @@ export const SocialSection = styled.div<StyledFormProps>`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    button img {
+      width: 25px;
+      height: 25px;
+    }
+
+    .btnGoogle {
+      background-color: ${({ theme }) => theme.colors.title};
+      color: ${({ theme }) => theme.colors.primary};
+      border: 1px solid ${({ theme }) => theme.colors.primary};
+      margin-bottom: 1rem;
+    }
+
+    .btnGithub {
+      background-color: #333333;
+      color: ${({ theme }) => theme.colors.title};
+      border: 1px solid #333333;
+      margin-bottom: 1rem;
+    }
   }
 `;
 

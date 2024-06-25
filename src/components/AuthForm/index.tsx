@@ -1,8 +1,14 @@
 import React from 'react';
 import Button from '../Button';
 import Input from '../Input';
-import { BottomLink, SocialSection, StyledForm } from './styles';
 import { Link } from 'react-router-dom';
+
+import googleIcon from '../../assets/google-icon.svg';
+import githubIcon from '../../assets/github-icon.svg';
+
+import { BottomLink, SocialSection, StyledForm } from './styles';
+
+
 
 interface AuthFormProps {
   title: string;
@@ -41,8 +47,12 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
           </div>
 
           <div className='buttons'>
-            <Button variant='transparent'>Sign in with Google</Button>
-            <Button variant='transparent'>Sign in with GitHub</Button>
+            <Button className='btnGoogle' variant='transparent' icon={<SocialButtonIcon icon='google' />}>
+              Sign in with Google
+            </Button>
+            <Button className='btnGithub' variant='transparent' icon={<SocialButtonIcon icon='github' />}>
+              Sign in with Github
+            </Button>
           </div>
         </SocialSection>
       )}
@@ -63,3 +73,17 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
 }
 
 export default AuthForm;
+
+interface SocialButtonIconProps {
+  icon: string;
+}
+
+function SocialButtonIcon({ icon }: SocialButtonIconProps) {
+  return (
+    icon === 'google' ? (
+      <img src={googleIcon} alt="Google" />
+    ) : (
+      <img src={githubIcon} alt="Github" />
+    )
+  );
+}
