@@ -1,14 +1,16 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+
+import { auth, provider } from '../../services/firebase';
+import { signInWithPopup, User } from 'firebase/auth';
+
 import Button from '../Button';
 import Input from '../Input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import googleIcon from '../../assets/google-icon.svg';
 import githubIcon from '../../assets/github-icon.svg';
 
 import { BottomLink, SocialSection, StyledForm } from './styles';
-
-
 
 interface AuthFormProps {
   title: string;
@@ -27,6 +29,28 @@ interface AuthFormProps {
 }
 
 function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bottomLink, width }: AuthFormProps) {
+  const [value, setValue] = useState<User>();
+  const navigate = useNavigate();
+
+  function handleSignInWithGoogle() {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        setValue(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    const user = auth.currentUser;
+
+    if (user) {
+      setValue(user);
+      navigate('/');
+    }
+  }, [value, navigate]);
+
   return (
     <>
       <StyledForm onSubmit={onSubmit} width={width}>
@@ -47,7 +71,7 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
           </div>
 
           <div className='buttons'>
-            <Button className='btnGoogle' variant='transparent' icon={<SocialButtonIcon icon='google' />}>
+            <Button onClick={handleSignInWithGoogle} className='btnGoogle' variant='transparent' icon={<SocialButtonIcon icon='google' />}>
               Sign in with Google
             </Button>
             <Button className='btnGithub' variant='transparent' icon={<SocialButtonIcon icon='github' />}>
