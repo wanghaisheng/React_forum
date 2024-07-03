@@ -26,6 +26,7 @@ interface Post {
 interface User {
   id: string;
   name: string;
+  photoUrl: string;
   bio: string;
   createdAt: string;
   postsId: { id: string }[];

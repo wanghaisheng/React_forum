@@ -1,19 +1,23 @@
 import { FaArrowUp } from 'react-icons/fa'
-import { TopUserContainer } from './styles';
+import { UserItemContainer } from './styles';
 
 interface TopUserProps {
-  userPhoto?: string;
+  userPhoto: string;
   label?: string;
   userName: string;
   postsQuantity?: number | string;
 }
 
 function UserItem({ userPhoto, label, userName, postsQuantity }: TopUserProps) {
-  console.log(userPhoto);
   return (
-    <TopUserContainer>
+    <UserItemContainer>
       <div className='user-info'>
-        <div className="user-photo"></div>
+        {userPhoto ? (
+          <img src={userPhoto} alt={userName} className="user-photo" />
+        ) : (
+          <div className="user-photo" />
+        )}
+
         <p>{label} <span>{userName}</span></p>
       </div>
 
@@ -23,7 +27,7 @@ function UserItem({ userPhoto, label, userName, postsQuantity }: TopUserProps) {
           <FaArrowUp size={12} />
         </div>
       )}
-    </TopUserContainer>
+    </UserItemContainer>
   )
 }
 

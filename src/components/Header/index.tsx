@@ -54,13 +54,19 @@ function Header() {
 
         <div className="actions-container">
           <FaBell size={16} />
-          <Link to={`/profile/${user?.id}`}>
-            {user ? (
-              <span>{user.name}</span>
-            ) : (
-              <div className="user-photo"></div>
-            )}
-          </Link>
+          {user ? (
+            <Link to={`/profile/${user?.id}`}>
+              {
+                user.photoUrl ? (
+                  <img src={user.photoUrl} alt="User" className="user-photo" />
+                ) : (
+                  <span>{user.name}</span>
+                )
+              }
+            </Link>
+          ) : (
+            <Link to="/signin">Sign In</Link>
+          )}
         </div>
       </div>
     </HeaderContainer>

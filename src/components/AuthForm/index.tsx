@@ -48,6 +48,7 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
     const newUser = {
       id: user.uid,
       name: user.displayName ?? '',
+      photoUrl: user.photoURL ?? '',
       bio: '',
       createdAt: user.metadata.creationTime ?? '',
       postsId: [],

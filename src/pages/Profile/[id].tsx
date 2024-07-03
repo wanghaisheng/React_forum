@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { setCurrentUser, setCurrentUserPosts } from '../../store/userSlice';
+import { setCurrentUserPosts } from '../../store/userSlice'; // Import fetchUsers
 
 import { FaCalendar } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
@@ -14,27 +14,39 @@ import NotFoundPage from '../NotFound';
 import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
 import Loading from '../../components/Loading';
 
+import { formatDate } from '../../utils/formatDate';
+
+interface User {
+  id: string;
+  name: string;
+  photoUrl: string;
+  bio: string;
+  createdAt: string;
+  postsId: { id: string }[];
+}
+
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const posts = useSelector((state: RootState) => state.user.currentUserPosts);
   const users = useSelector((state: RootState) => state.user.users);
   const [loading, setLoading] = useState(true);
-
-  const user = users.find(user => user.id === id);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    if (user) {
-      const userPostIds = user.postsId.map(post => post.id);
+    const foundUser = users.find(user => user.id === id);
+    setUser(foundUser);
+
+    if (foundUser) {
+      const userPostIds = foundUser.postsId.map(post => post.id);
       const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
-      console.log(userPosts)
       dispatch(setCurrentUserPosts(userPosts));
     } else {
-      dispatch(setCurrentUser(null));
       dispatch(setCurrentUserPosts([]));
     }
+
     setLoading(false);
-  }, [dispatch, user]);
+  }, [dispatch, id, users]);
 
   if (loading) {
     return (
@@ -55,7 +67,13 @@ function ProfilePage() {
       <ProfileHeader>
         <div className="photo">
           <UserPhoto>
-            <div></div>
+            {
+              user.photoUrl ? (
+                <img src={user.photoUrl} alt={user.name} />
+              ) : (
+                <div className='no-photo'></div>
+              )
+            }
           </UserPhoto>
         </div>
         <UserInfo>
@@ -64,7 +82,7 @@ function ProfilePage() {
           <div>
             <div>
               <FaCalendar size={14} />
-              <span>Joined on {user.createdAt}</span>
+              <span>Joined on {formatDate(user.createdAt)}</span>
             </div>
             <div>
               <FaMessage />

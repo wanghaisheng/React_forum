@@ -50,6 +50,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     actions
   });
 
+  const users = useSelector((state: RootState) => state.user.users);
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch();
 
@@ -108,7 +109,8 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
         <PostHeader>
           <div>
             <Link to={`/profile/${post.authorId}`}>
-              <UserItem label="Posted by" userName={post.author} />
+              <UserItem label="Posted by" userName={post.author} userPhoto={
+                users.find(user => user.id === post.authorId)?.photoUrl || ''} />
             </Link>
             <span>
               Há {formatTimeAgo(new Date(post.date))}

@@ -41,6 +41,8 @@ const TopUsers: React.FC = () => {
           <Link key={user.id} to={`/profile/${user.id}`}>
             <User userName={user.name} postsQuantity={
               user.postsId.length > 0 ? user.postsId.length : "0"
+            } userPhoto={
+              user.photoUrl
             } />
           </Link>
         )
@@ -51,7 +53,7 @@ const TopUsers: React.FC = () => {
             <div className="separator"></div>
 
             <Link to={`/profile/${currentUser.id}`}>
-              <User userName={currentUser.name} postsQuantity={currentUser.postsId.length > 0 ? currentUser.postsId.length : "0"} />
+              <User userName={currentUser.name} postsQuantity={currentUser.postsId.length > 0 ? currentUser.postsId.length : "0"} userPhoto={currentUser.photoUrl} />
             </Link>
           </>
         )}

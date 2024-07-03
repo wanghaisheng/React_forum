@@ -10,7 +10,6 @@ import AuthRoutes from '../components/authRoutes';
 function AppContent() {
   const location = useLocation();
   const isAuthRoute = location.pathname.startsWith('/sign');
-  console.log(isAuthRoute);
 
   return (
     <>

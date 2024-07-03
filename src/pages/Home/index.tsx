@@ -45,7 +45,6 @@ const Home: React.FC = () => {
     )
   }
 
-
   return (
     <Container>
       {posts.length > 0 ? (

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const TopUserContainer = styled.div`
+export const UserItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

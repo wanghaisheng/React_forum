@@ -60,6 +60,17 @@ export const HeaderContainer = styled.header`
       display: flex;
       gap: 1rem;
       align-items: center;
+
+      a {
+        color: ${props => props.theme.colors.input};
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.2s;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
     }
 
     .actions-container svg {
@@ -72,7 +83,6 @@ export const HeaderContainer = styled.header`
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
-      background-color: ${props => props.theme.colors.input};
       cursor: pointer;
       transition: 0.2s;
     }

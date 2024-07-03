@@ -3,6 +3,8 @@ import { AnswerContainer, AnswerContent, AnswerHeader, AnswerVotes } from "./sty
 import UserItem from "../UserItem";
 import { Link } from "react-router-dom";
 import { formatTimeAgo } from "../../utils/formatDate";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 interface AnswerProps {
   id: string;
@@ -15,6 +17,8 @@ interface AnswerProps {
 }
 
 function Answer({ id, author, authorId, date, content, upvotes, downvotes }: AnswerProps) {
+  const users = useSelector((state: RootState) => state.user.users);
+
   return (
     <AnswerContainer key={id}>
       <AnswerVotes>
@@ -33,7 +37,8 @@ function Answer({ id, author, authorId, date, content, upvotes, downvotes }: Ans
         <AnswerHeader>
           <div>
             <Link to={`/profile/${authorId}`}>
-              <UserItem label="Posted by" userName={author} />
+              <UserItem label="Posted by" userName={author} userPhoto={
+                users.find(user => user.id === authorId)?.photoUrl || ''} />
             </Link>
             <span>
               Há {formatTimeAgo(new Date(date))}

@@ -3,6 +3,7 @@
     {
       "id": "1",
       "name": "John Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -22,6 +23,7 @@
     {
       "id": "2",
       "name": "Jane Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -41,6 +43,7 @@
     {
       "id": "3",
       "name": "Jeff Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -50,6 +53,7 @@
     {
       "id": "4",
       "name": "Jenny Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -59,6 +63,7 @@
     {
       "id": "5",
       "name": "Joe Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -68,6 +73,7 @@
     {
       "id": "6",
       "name": "Jojo Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -77,11 +83,12 @@
     {
       "id": "RbPagTpw6OXIV8rwuXyrbyun4R33",
       "name": "Vitor Hugo",
+      "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ9x229alskm1vz18J6WZsn6CZrg9XguRGvNzOb0gzYCottwA=s96-c",
       "bio": "",
       "createdAt": "Tue, 25 Jun 2024 19:55:43 GMT",
       "postsId": [
         {
-          "id": "fa075398-4b97-4abe-9c7b-400a06b396f6"
+          "id": "be6cf656-db31-4bae-b469-9ab50f7d779c"
         }
       ]
     }
@@ -217,15 +224,6 @@
           "upvotes": 0,
           "downvotes": 0,
           "content": "hahahahaah nice answer bro"
-        },
-        {
-          "id": "a2d683b1-76fb-4b39-99c9-96b8e7f80b04",
-          "author": "Vitor Hugo",
-          "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
-          "date": "2024-07-03T15:46:24.157Z",
-          "upvotes": 0,
-          "downvotes": 0,
-          "content": "Hello, nice topic bro."
         }
       ]
     },
@@ -484,13 +482,13 @@
           "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         {
-          "id": "2b4d800e-0f72-44b0-b493-f8588d625d15",
+          "id": "e910532c-eaaa-49b0-9da9-4430220e14e4",
           "author": "Vitor Hugo",
           "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
-          "date": "2024-07-02T19:24:34.447Z",
+          "date": "2024-07-03T21:30:58.542Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "iasjhdbasidbaidb"
+          "content": "resresresreser"
         }
       ],
       "week": 9,
@@ -498,16 +496,16 @@
       "content": "teste de UUID"
     },
     {
-      "id": "fa075398-4b97-4abe-9c7b-400a06b396f6",
+      "id": "be6cf656-db31-4bae-b469-9ab50f7d779c",
       "author": "Vitor Hugo",
       "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
-      "date": "2024-07-03T15:42:36.028Z",
+      "date": "2024-07-03T19:11:15.949Z",
       "upvotes": 0,
       "downvotes": 0,
       "answers": [],
-      "week": 18,
+      "week": 20,
       "title": "Duvidas sobre AWS",
-      "content": "Preciso tirar duvidas sobre EC2."
+      "content": "Duvidas sobre AWS"
     }
   ]
 }

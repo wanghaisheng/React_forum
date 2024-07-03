@@ -39,10 +39,13 @@ export const UserPhoto = styled.div`
   top: 3rem;
   background: ${({ theme }) => theme.colors.input};
 
-  div {
+  img, div {
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
+  }
+
+  div {
     background: ${({ theme }) => theme.colors.text};
   }
 `;

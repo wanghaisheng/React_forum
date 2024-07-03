@@ -6,7 +6,7 @@ import Post from "../../components/Post";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import data from '../../data/db.json';
-import { setCurrentUser, setCurrentUserPosts } from "../../store/userSlice";
+import { setCurrentUserPosts } from "../../store/userSlice";
 
 function UserTopics() {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
@@ -22,9 +22,6 @@ function UserTopics() {
       const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
       console.log(userPosts)
       dispatch(setCurrentUserPosts(userPosts));
-    } else {
-      dispatch(setCurrentUser(null));
-      dispatch(setCurrentUserPosts([]));
     }
     setLoading(false);
   }, [dispatch, currentUser]);
@@ -33,7 +30,6 @@ function UserTopics() {
     navigate('/signin');
     return null;
   }
-
 
   if (loading) {
     return (
@@ -45,22 +41,32 @@ function UserTopics() {
 
   return (
     <Container>
-      {posts.map(post => (
-        <Link key={post.id} to={`/topics/topic/${post.id}`}>
-          <Post
-            id={post.id}
-            author={post.author}
-            authorId={post.authorId}
-            date={post.date}
-            week={post.week}
-            title={post.title}
-            content={post.content}
-            upvotes={post.upvotes}
-            downvotes={post.downvotes}
-            answerCount={post.answers.length}
-          />
-        </Link>
-      ))}
+      {
+        posts.length > 0 ? (
+          posts.map(post => (
+            <Link to={`/topics/${post.id}`} key={post.id}>
+              <Post
+                id={post.id}
+                author={post.author}
+                authorId={post.authorId}
+                date={post.date}
+                week={post.week}
+                title={post.title}
+                content={post.content}
+                upvotes={post.upvotes}
+                downvotes={post.downvotes}
+                answerCount={post.answers.length}
+              />
+            </Link>
+          ))
+        ) : (
+          <p className="no-topics">
+            You haven't created any topics yet. Click
+            <strong><Link to="/topics/new-topic"> here </Link></strong>
+            or the create topic button to add a new topic.
+          </p>
+        )
+      }
     </Container>
   )
 }

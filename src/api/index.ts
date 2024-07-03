@@ -28,6 +28,7 @@ interface Answer {
 interface User {
   id: string;
   name: string;
+  photoUrl: string;
   bio: string;
   createdAt: string;
   postsId: { id: string }[];
@@ -89,11 +90,6 @@ export const getTopUsers = async (): Promise<User[]> => {
   const topUsers = response.data
     .sort((a, b) => b.postsId.length - a.postsId.length)
     .slice(0, 5);
-
-  console.log(
-    'Top users response:',
-    topUsers.map(user => ({ name: user.name, postCount: user.postsId.length }))
-  );
 
   return topUsers;
 }
