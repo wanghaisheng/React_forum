@@ -12,6 +12,7 @@ import ExploreTopicsPage from '../../pages/ExploreTopics'
 import WeekTopicsPage from '../../pages/WeekTopics/[id]'
 import NotFoundPage from '../../pages/NotFound'
 import SearchPage from '../../pages/Search'
+import UserTopics from '../../pages/UserTopics'
 
 function MainRoutes() {
   const routes = [
@@ -33,9 +34,7 @@ function MainRoutes() {
     },
     {
       path: '/topics/my-topics',
-      component: <main>
-        <h1>My topics</h1>
-      </main>
+      component: <UserTopics />
     },
     {
       path: '/topics/my-answers',
