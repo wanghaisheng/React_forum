@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-const API_URL = 'http://localhost:8000'; // Altere para a URL do seu servidor
+const API_URL = 'http://localhost:8000';
 
 interface Post {
   id: string;
@@ -81,6 +81,27 @@ export const getUsers = async (): Promise<User[]> => {
   const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
   return response.data;
 }
+
+export const getTopUsers = async (): Promise<User[]> => {
+  const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
+
+  // Filtrando e ordenando os usuários no frontend
+  const topUsers = response.data
+    .sort((a, b) => b.postsId.length - a.postsId.length)
+    .slice(0, 5);
+
+  console.log(
+    'Top users response:',
+    topUsers.map(user => ({ name: user.name, postCount: user.postsId.length }))
+  );
+
+  return topUsers;
+}
+
+export const updateUser = async (userId: string, updatedUser: Partial<User>): Promise<User> => {
+  const response = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+  return response.data;
+};
 
 export const getWeeks = async (): Promise<Week[]> => {
   const response: AxiosResponse<Week[]> = await axios.get(`${API_URL}/weeks`);

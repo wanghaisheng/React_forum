@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { setPosts } from '../../store/userSlice';
+import { setPosts, setUsers } from '../../store/userSlice';
 import Post from '../../components/Post';
 import { Container } from './styles';
-import { getPosts } from '../../api';
+import { getPosts, getUsers } from '../../api';
 import Loading from '../../components/Loading';
 
 const Home: React.FC = () => {
@@ -22,6 +22,21 @@ const Home: React.FC = () => {
     fetchPosts();
   }, [dispatch]);
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const users = await getUsers();
+        dispatch(setUsers(users));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, [dispatch]);
+
   if (loading) {
     return (
       <main>
@@ -29,6 +44,7 @@ const Home: React.FC = () => {
       </main>
     )
   }
+
 
   return (
     <Container>

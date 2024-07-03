@@ -38,6 +38,7 @@ interface UserState {
   currentUserPosts: Post[];
   searchTerm: string;
   users: User[];
+  topUsers: User[];
 }
 
 const initialState: UserState = {
@@ -47,6 +48,7 @@ const initialState: UserState = {
   currentUserPosts: [],
   searchTerm: '',
   users: [],
+  topUsers: [],
 };
 
 const userSlice = createSlice({
@@ -83,9 +85,12 @@ const userSlice = createSlice({
     setUsers: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
     },
+    setTopUsers: (state, action: PayloadAction<User[]>) => {
+      state.topUsers = action.payload;
+    }
   },
 });
 
-export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers } = userSlice.actions;
+export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers } = userSlice.actions;
 
 export default userSlice.reducer;

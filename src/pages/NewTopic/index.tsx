@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z, ZodError } from 'zod';
 import Button from "../../components/Button";
-import { createPost } from '../../api';
+import { createPost, updateUser } from '../../api';
 import { Container, FormActions, NewTopicForm } from "./styles";
 import { v4 } from 'uuid';
 import { getWeeks } from '../../api'
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { setCurrentUser } from '../../store/userSlice';
 
 const schema = z.object({
   week: z.string().min(1, 'Choose one category, please.'),
@@ -24,11 +27,28 @@ function NewTopicPage() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const [weeks, setWeeks] = useState<Week[]>([]);
 
   const handleNavigate = (path: string) => {
     navigate(path);
   };
+
+  useEffect(() => {
+    const fetchWeeks = async () => {
+      const weeks = await getWeeks();
+
+      setWeeks(weeks);
+    }
+
+    fetchWeeks();
+  }, []);
+
+  if (!currentUser) {
+    navigate('/signIn');
+    return null;
+  }
 
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
@@ -37,8 +57,8 @@ function NewTopicPage() {
 
       const newPost = {
         id: v4(),
-        author: "John Doe",
-        authorId: "1",
+        author: currentUser.name,
+        authorId: currentUser.id,
         date: new Date().toISOString(),
         upvotes: 0,
         downvotes: 0,
@@ -49,6 +69,15 @@ function NewTopicPage() {
       };
 
       const createdPost = await createPost(newPost);
+
+      const updatedUser = {
+        ...currentUser,
+        postsId: [...currentUser.postsId, { id: createdPost.id }],
+      };
+      const updatedUserResponse = await updateUser(currentUser.id, updatedUser);
+
+      // Atualizar o estado do Redux com o usuário atualizado
+      dispatch(setCurrentUser(updatedUserResponse));
 
       console.log('Dados do post:', createdPost);
 
@@ -66,16 +95,6 @@ function NewTopicPage() {
       }
     }
   });
-
-  useEffect(() => {
-    const fetchWeeks = async () => {
-      const weeks = await getWeeks();
-
-      setWeeks(weeks);
-    }
-
-    fetchWeeks();
-  }, []);
 
   return (
     <Container>

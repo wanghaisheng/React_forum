@@ -79,7 +79,11 @@
       "name": "Vitor Hugo",
       "bio": "",
       "createdAt": "Tue, 25 Jun 2024 19:55:43 GMT",
-      "postsId": []
+      "postsId": [
+        {
+          "id": "fa075398-4b97-4abe-9c7b-400a06b396f6"
+        }
+      ]
     }
   ],
   "weeks": [
@@ -483,6 +487,18 @@
       "week": 9,
       "title": "teste de UUID",
       "content": "teste de UUID"
+    },
+    {
+      "id": "fa075398-4b97-4abe-9c7b-400a06b396f6",
+      "author": "Vitor Hugo",
+      "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
+      "date": "2024-07-03T15:42:36.028Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 18,
+      "title": "Duvidas sobre AWS",
+      "content": "Preciso tirar duvidas sobre EC2."
     }
   ]
 }
