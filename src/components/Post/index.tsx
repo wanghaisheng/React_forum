@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { z, ZodError } from 'zod';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { createAnswer } from '../../api';
 import Button from "../Button";
@@ -11,6 +11,8 @@ import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa";
 import { FaMessage } from 'react-icons/fa6';
 import { addAnswer } from '../../store/userSlice';
 import { formatTimeAgo } from "../../utils/formatDate";
+import { v4 } from "uuid";
+import { RootState } from "../../store";
 
 interface PostProps {
   id: string;
@@ -48,6 +50,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     actions
   });
 
+  const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch();
 
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
@@ -55,15 +58,18 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
       const validatedData = answerSchema.parse(data);
 
       const newAnswer = {
-        author: 'John Doe',
-        authorId: "1",
+        id: v4(),
+        author: currentUser?.name,
+        authorId: currentUser?.id,
         date: new Date().toISOString(),
         upvotes: 0,
         downvotes: 0,
         content: validatedData.content,
       };
 
+      console.log(newAnswer);
       const createdAnswer = await createAnswer(id, newAnswer);
+      console.log(createdAnswer);
 
       dispatch(addAnswer({ postId: id, answer: createdAnswer }));
       setIsAnswering(false);

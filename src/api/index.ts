@@ -62,7 +62,7 @@ export const createAnswer = async (postId: string, answerData: Partial<Answer>):
   const post = postResponse.data;
 
   // Garantir que o campo answers seja um array
-  const updatedAnswers = [...post.answers, { ...answerData, id: post.answers.length + 1 }]
+  const updatedAnswers = [...post.answers, { ...answerData }]
 
   // Atualizar o post com o novo array de respostas
   const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, { answers: updatedAnswers });

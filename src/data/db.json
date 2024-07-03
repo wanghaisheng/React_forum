@@ -73,6 +73,13 @@
       "votedPosts": [],
       "votedAnswers": [],
       "postsId": []
+    },
+    {
+      "id": "RbPagTpw6OXIV8rwuXyrbyun4R33",
+      "name": "Vitor Hugo",
+      "bio": "",
+      "createdAt": "Tue, 25 Jun 2024 19:55:43 GMT",
+      "postsId": []
     }
   ],
   "weeks": [
@@ -337,7 +344,7 @@
       "downvotes": 0,
       "answers": [
         {
-          "id": "!",
+          "id": "1",
           "author": "John Doe",
           "authorId": "1",
           "date": "2024-06-04T00:50:07.624Z",
@@ -435,7 +442,44 @@
       "date": "2024-06-25T00:34:06.641Z",
       "upvotes": 0,
       "downvotes": 0,
-      "answers": [],
+      "answers": [
+        {
+          "author": "John Doe",
+          "authorId": "1",
+          "date": "2024-06-25T00:42:35.887Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "Resposta teste.",
+          "id": "1423432432"
+        },
+        {
+          "author": "John Doe",
+          "authorId": "1",
+          "date": "2024-06-25T00:42:53.707Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "testestestesee",
+          "id": "221313123213"
+        },
+        {
+          "id": "f4ca5353-0f0c-47ac-9e61-6a7a02763e30",
+          "author": "John Doe",
+          "authorId": "1",
+          "date": "2024-07-02T19:22:32.928Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "2b4d800e-0f72-44b0-b493-f8588d625d15",
+          "author": "Vitor Hugo",
+          "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
+          "date": "2024-07-02T19:24:34.447Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "iasjhdbasidbaidb"
+        }
+      ],
       "week": 9,
       "title": "teste de UUID",
       "content": "teste de UUID"

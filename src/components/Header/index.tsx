@@ -8,6 +8,7 @@ import { RootState } from '../../store';
 
 function Header() {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.currentUser);
   const searchTerm = useSelector((state: RootState) => state.user.searchTerm);
   const [activeSearch, setActiveSearch] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -53,8 +54,12 @@ function Header() {
 
         <div className="actions-container">
           <FaBell size={16} />
-          <Link to={"/profile/1"}>
-            <div className="user-photo"></div>
+          <Link to={`/profile/${user?.id}`}>
+            {user ? (
+              <span>{user.name}</span>
+            ) : (
+              <div className="user-photo"></div>
+            )}
           </Link>
         </div>
       </div>

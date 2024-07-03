@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
 import { auth, provider } from '../../services/firebase';
-import { signInWithPopup, User } from 'firebase/auth';
+import { signInWithPopup, User as FirebaseUser } from 'firebase/auth';
 
 import Button from '../Button';
 import Input from '../Input';
@@ -11,6 +10,9 @@ import googleIcon from '../../assets/google-icon.svg';
 import githubIcon from '../../assets/github-icon.svg';
 
 import { BottomLink, SocialSection, StyledForm } from './styles';
+import { useDispatch } from 'react-redux';
+import { createUserInServer } from '../../store/userThunks';
+import { AppDispatch } from '../../store';
 
 interface AuthFormProps {
   title: string;
@@ -29,27 +31,47 @@ interface AuthFormProps {
 }
 
 function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bottomLink, width }: AuthFormProps) {
-  const [value, setValue] = useState<User>();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   function handleSignInWithGoogle() {
     signInWithPopup(auth, provider)
       .then((result) => {
-        setValue(result.user);
+        handleUserLogin(result.user);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  useEffect(() => {
-    const user = auth.currentUser;
+  const handleUserLogin = async (user: FirebaseUser) => {
+    const newUser = {
+      id: user.uid,
+      name: user.displayName ?? '',
+      bio: '',
+      createdAt: user.metadata.creationTime ?? '',
+      postsId: [],
+    };
 
-    if (user) {
-      setValue(user);
+    try {
+      await dispatch(createUserInServer(newUser));
       navigate('/');
+    } catch (error) {
+      console.error('Erro ao criar o novo usuário:', error);
     }
-  }, [value, navigate]);
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        handleUserLogin(user);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch, navigate]);
 
   return (
     <>

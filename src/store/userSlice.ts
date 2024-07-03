@@ -70,6 +70,7 @@ const userSlice = createSlice({
     },
     addAnswer: (state, action: PayloadAction<{ postId: string, answer: Answer }>) => {
       const { postId, answer } = action.payload;
+      console.log('Adding answer:', answer, 'to post:', postId)
       const postIndex = state.posts.findIndex(post => post.id === postId);
       if (postIndex !== -1) {
         state.posts[postIndex].answers.push(answer);

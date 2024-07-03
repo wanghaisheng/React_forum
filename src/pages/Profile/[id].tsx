@@ -17,15 +17,14 @@ import Loading from '../../components/Loading';
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const user = useSelector((state: RootState) => state.user.currentUser);
   const posts = useSelector((state: RootState) => state.user.currentUserPosts);
+  const users = useSelector((state: RootState) => state.user.users);
   const [loading, setLoading] = useState(true);
 
+  const user = users.find(user => user.id === id);
+
   useEffect(() => {
-    const userId = id;
-    const user = data.users.find(user => user.id === userId);
     if (user) {
-      dispatch(setCurrentUser(user));
       const userPostIds = user.postsId.map(post => post.id);
       const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
       console.log(userPosts)
@@ -35,7 +34,7 @@ function ProfilePage() {
       dispatch(setCurrentUserPosts([]));
     }
     setLoading(false);
-  }, [dispatch, id]);
+  }, [dispatch, user]);
 
   if (loading) {
     return (
