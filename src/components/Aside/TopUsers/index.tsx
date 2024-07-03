@@ -46,12 +46,14 @@ const TopUsers: React.FC = () => {
         )
         )}
 
-        <div className="separator"></div>
-
         {currentUser && (
-          <Link to={`/profile/${currentUser.id}`}>
-            <User userName={currentUser.name} postsQuantity={currentUser.postsId.length > 0 ? currentUser.postsId.length : "0"} />
-          </Link>
+          <>
+            <div className="separator"></div>
+
+            <Link to={`/profile/${currentUser.id}`}>
+              <User userName={currentUser.name} postsQuantity={currentUser.postsId.length > 0 ? currentUser.postsId.length : "0"} />
+            </Link>
+          </>
         )}
       </ul>
     </TopUsersContainer>
