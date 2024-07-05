@@ -45,6 +45,8 @@ export const SkeletonWeekBody = styled.div`
   padding: 1rem;
   background-color: ${props => props.theme.colors.background};
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 
   .header {
     width: 30%;
@@ -90,9 +92,33 @@ export const SkeletonTopUsersBody = styled.div`
   }
 `;
 
+export const SkeletonProfileBody = styled.div`
+  height: 289px;
+  width: 100%;
+  padding: 0;
+  background-color: ${props => props.theme.colors.primary};
+  border-radius: 4px;
+
+  .profile-photo {
+    margin: 3rem 0 0 0;
+  }
+
+  > div {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 2rem;
+
+    .content {
+      width: 100%;
+      height: 26px;
+    }
+  }
+`;
+
 export const SkeletonAvatarBody = styled.div`
   display: flex;
-  align-items: center;
 `;
 
 export const SkeletonText = styled(Skeleton)`

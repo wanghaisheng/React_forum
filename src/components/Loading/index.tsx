@@ -1,5 +1,5 @@
 import { SkeletonTheme } from "react-loading-skeleton";
-import { SkeletonAvatarBody, SkeletonPostBody, SkeletonText, SkeletonTopUsersBody, SkeletonWeekBody } from "./styles";
+import { SkeletonAvatarBody, SkeletonPostBody, SkeletonProfileBody, SkeletonText, SkeletonTopUsersBody, SkeletonWeekBody } from "./styles";
 
 interface SkeletonPostProps {
   quantity: number;
@@ -52,6 +52,23 @@ export function SkeletonTopUsers() {
           </div>
         </SkeletonTopUsersBody>
       ))}
+    </SkeletonTheme>
+  );
+}
+
+export function SkeletonProfile() {
+  return (
+    <SkeletonTheme baseColor="#444" highlightColor="#777">
+      <SkeletonProfileBody>
+        <SkeletonAvatarBody className="profile-photo">
+          <SkeletonText circle height={96} width={96} />
+        </SkeletonAvatarBody>
+
+        <div>
+          <SkeletonText className="content" />
+          <SkeletonText className="content" />
+        </div>
+      </SkeletonProfileBody>
     </SkeletonTheme>
   );
 }

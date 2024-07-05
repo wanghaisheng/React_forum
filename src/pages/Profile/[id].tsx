@@ -12,7 +12,7 @@ import data from '../../data/db.json';
 import NotFoundPage from '../NotFound';
 
 import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
-import { SkeletonPost } from '../../components/Loading';
+import { SkeletonProfile } from '../../components/Loading';
 
 import { formatDate } from '../../utils/formatDate';
 
@@ -50,9 +50,7 @@ function ProfilePage() {
 
   if (loading) {
     return (
-      <main>
-        <SkeletonPost quantity={1} />
-      </main>
+      <SkeletonProfile />
     );
   }
 

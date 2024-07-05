@@ -66,9 +66,7 @@ function Header() {
             <Link to={`/profile/${user?.id}`}>
               <img
                 src={user.photoUrl}
-                alt="User"
                 className="user-photo"
-                referrerPolicy="no-referrer"
               />
             </Link>
           ) : (
