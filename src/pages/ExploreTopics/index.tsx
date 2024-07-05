@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Container, WeekBox, WeeksContainer } from "./styles";
 import { useEffect, useState } from "react";
 import { getWeeks } from "../../api";
-import Loading from "../../components/Loading";
+import { SkeletonWeek } from "../../components/Loading";
 
 interface Week {
   id: string;
@@ -31,9 +31,10 @@ function ExploreTopicsPage() {
 
   if (loading) {
     return (
-      <main>
-        <Loading />
-      </main>
+      <Container id="about-container">
+        <h1>Explore</h1>
+        <SkeletonWeek />
+      </Container>
     );
   }
 
@@ -41,9 +42,7 @@ function ExploreTopicsPage() {
     <Container id="about-container">
       <h1>Explore</h1>
       <WeeksContainer>
-        {loading ? (
-          <Loading />
-        ) : (
+        {
           weeks.length > 0 ? (
             weeks.map((week) => (
               <Link to={`/topics/explore/week/${week.id}`} key={week.id}>
@@ -56,7 +55,7 @@ function ExploreTopicsPage() {
           ) : (
             <p>There's still no weeks to show.</p>
           )
-        )}
+        }
       </WeeksContainer>
     </Container>
   );

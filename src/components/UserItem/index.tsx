@@ -15,7 +15,7 @@ function UserItem({ userPhoto, label, userName, postsQuantity }: TopUserProps) {
         {userPhoto ? (
           <img src={userPhoto} alt={userName} className="user-photo" />
         ) : (
-          <div className="user-photo" />
+          <div className="user-without-photo" />
         )}
 
         <p>{label} <span>{userName}</span></p>

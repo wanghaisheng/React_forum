@@ -11,7 +11,7 @@ import Answer from '../../components/Answer';
 import NotFoundPage from '../NotFound';
 
 import { Answers, Container } from './styles';
-import Loading from '../../components/Loading';
+import { SkeletonPost } from '../../components/Loading';
 interface Answer {
   id: string;
   author: string;
@@ -53,7 +53,7 @@ const TopicPage: React.FC = () => {
   if (isLoading) {
     return (
       <main>
-        <Loading />
+        <SkeletonPost quantity={1} />
       </main>
     )
   }

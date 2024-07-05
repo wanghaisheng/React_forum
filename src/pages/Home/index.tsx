@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { setPosts, setUsers } from '../../store/userSlice';
+import { setPosts } from '../../store/userSlice';
 import Post from '../../components/Post';
 import { Container } from './styles';
-import { getPosts, getUsers } from '../../api';
-import Loading from '../../components/Loading';
+import { getPosts } from '../../api';
+import { SkeletonPost } from '../../components/Loading';
+
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,34 +17,23 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const posts = await getPosts();
-      dispatch(setPosts(posts));
-      setLoading(false);
-    }
-    fetchPosts();
-  }, [dispatch]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
       try {
-        const users = await getUsers();
-        dispatch(setUsers(users));
+        const posts = await getPosts();
+        dispatch(setPosts(posts));
+        setLoading(false);
       } catch (error) {
         console.error(error);
-      } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchPosts();
   }, [dispatch]);
 
   if (loading) {
     return (
-      <main>
-        <Loading />
-      </main>
-    )
+      <SkeletonPost quantity={5} />
+    );
   }
 
   return (
@@ -66,7 +57,7 @@ const Home: React.FC = () => {
         ))
       ) : (
         <p>
-          There are no posts to show. Be the first to <Link to="/topics/create">create a post</Link>!
+          There are no posts to show. Be the first to <Link to="/topics/new-topic">create a post</Link>!
         </p>
       )}
     </Container>

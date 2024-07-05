@@ -6,7 +6,7 @@ import { setTopUsers } from '../../../store/userSlice';
 import User from '../../UserItem';
 import { TopUsersContainer } from './styles';
 import { getTopUsers } from '../../../api';
-import Spinner from '../../Loading/Spinning';
+import { SkeletonTopUsers } from '../../Loading';
 
 const TopUsers: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,12 @@ const TopUsers: React.FC = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <TopUsersContainer>
+        <h3>Top Users</h3>
+        <SkeletonTopUsers />
+      </TopUsersContainer>
+    )
   }
 
   return (

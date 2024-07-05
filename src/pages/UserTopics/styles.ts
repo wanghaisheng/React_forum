@@ -6,8 +6,8 @@ export const Container = styled.main`
   }
 
   .no-topics {
+    width: 100%;
     text-align: center;
-    margin-top: 2rem;
     color: ${({ theme }) => theme.colors.text};
 
     a {

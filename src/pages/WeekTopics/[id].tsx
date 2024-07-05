@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
@@ -6,17 +6,35 @@ import { setPosts } from '../../store/userSlice';
 import Post from '../../components/Post';
 import { Container } from './styles';
 import data from '../../data/db.json';
+import { SkeletonPost } from '../../components/Loading';
 
 const WeekTopicsPage: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
   const posts = useSelector((state: RootState) => state.user.posts);
   const { id } = useParams();
   const weekId = Number(id);
 
   useEffect(() => {
-    const weekPosts = data.posts.filter(post => post.week === weekId);
-    dispatch(setPosts(weekPosts));
+    try {
+      const weekPosts = data.posts.filter(post => post.week === weekId);
+      dispatch(setPosts(weekPosts));
+      setLoading(false);
+    }
+    catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   }, [dispatch, weekId]);
+
+  if (loading) {
+    return (
+      <Container>
+        <h1>Week {id} topics</h1>
+        <SkeletonPost quantity={1} />
+      </Container>
+    );
+  }
 
   return (
     <Container>

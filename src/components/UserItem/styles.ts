@@ -20,10 +20,13 @@ export const UserItemContainer = styled.div`
       color: ${props => props.theme.colors.secondary};
     }
 
-    .user-photo {
+    .user-photo, .user-without-photo {
       width: 1.5rem;
       height: 1.5rem;
       border-radius: 50%;
+    }
+
+    .user-without-photo {
       background-color: #ccc;
     }
   }

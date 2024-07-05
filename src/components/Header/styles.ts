@@ -73,6 +73,10 @@ export const HeaderContainer = styled.header`
       }
     }
 
+    .actions-container a {
+      display: flex;
+    }
+
     .actions-container svg {
       fill: ${props => props.theme.colors.input};
       cursor: pointer;

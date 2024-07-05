@@ -11,7 +11,24 @@ export const Container = styled.main`
   }
 
   > a {
-    width: 100%;
     text-decoration: none;
+    width: 100%;
   }
+
+  > p {
+    text-align: center;
+    color: ${({ theme }) => theme.colors.text};
+
+    a {
+      color: ${({ theme }) => theme.colors.secondary};
+      font-weight: 500;
+      transition: 0.2s;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+    }
+  } 
 `;

@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "../../store";
 import { Link, useNavigate } from "react-router-dom";
 import Post from "../../components/Post";
 import { useEffect, useState } from "react";
-import Loading from "../../components/Loading";
+import { SkeletonPost } from "../../components/Loading";
 import data from '../../data/db.json';
 import { setCurrentUserPosts } from "../../store/userSlice";
 
@@ -28,13 +28,12 @@ function UserTopics() {
 
   if (!currentUser) {
     navigate('/signin');
-    return null;
   }
 
   if (loading) {
     return (
       <main>
-        <Loading />
+        <SkeletonPost quantity={1} />
       </main>
     );
   }
