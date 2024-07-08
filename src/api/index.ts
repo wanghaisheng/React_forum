@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 
 const API_URL = 'http://localhost:8000';
 
-interface Post {
+export interface Post {
   id: string;
   author: string;
   authorId: string;
@@ -31,6 +31,7 @@ interface User {
   photoUrl: string;
   bio: string;
   createdAt: string;
+  votedPosts: { id: string, vote: 'up' | 'down' }[];
   postsId: { id: string }[];
 }
 
@@ -83,6 +84,11 @@ export const getUsers = async (): Promise<User[]> => {
   return response.data;
 }
 
+const getUserById = async (userId: string): Promise<User> => {
+  const response: AxiosResponse<User> = await axios.get(`${API_URL}/users/${userId}`);
+  return response.data;
+};
+
 export const getTopUsers = async (): Promise<User[]> => {
   const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
 
@@ -97,6 +103,82 @@ export const getTopUsers = async (): Promise<User[]> => {
 export const updateUser = async (userId: string, updatedUser: Partial<User>): Promise<User> => {
   const response = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
   return response.data;
+};
+
+export const upvotePost = async (postId: string, userId: string): Promise<[Post, User]> => {
+  const post = await getPostById(postId);
+  const user = await getUserById(userId);
+
+  // Verifica se o usuário já votou neste post
+  const existingVoteIndex = user.votedPosts.findIndex(vote => vote.id === postId);
+
+  if (existingVoteIndex !== -1) {
+    const existingVote = user.votedPosts[existingVoteIndex];
+
+    if (existingVote.vote === 'up') {
+      // Remove o voto de up se já votou up novamente
+      const updatedPost = { ...post, upvotes: post.upvotes - 1 };
+      const updatedUser = { ...user, votedPosts: user.votedPosts.filter(vote => vote.id !== postId) };
+      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+
+      return [response.data, response2.data];
+    } else {
+      // Altera o voto de down para up
+      const updatedPost = { ...post, upvotes: post.upvotes + 1, downvotes: post.downvotes - 1 };
+      const updatedUser = { ...user, votedPosts: user.votedPosts.map(vote => vote.id === postId ? { id: postId, vote: 'up' } : vote) };
+      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+
+      return [response.data, response2.data];
+    }
+  } else {
+    // Vota up pela primeira vez
+    const updatedPost = { ...post, upvotes: post.upvotes + 1 };
+    const updatedUser = { ...user, votedPosts: [...user.votedPosts, { id: postId, vote: 'up' }] };
+    const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+    const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+
+    return [response.data, response2.data];
+  }
+};
+
+export const downvotePost = async (postId: string, userId: string): Promise<[Post, User]> => {
+  const post = await getPostById(postId);
+  const user = await getUserById(userId);
+
+  // Verifica se o usuário já votou neste post
+  const existingVoteIndex = user.votedPosts.findIndex(vote => vote.id === postId);
+
+  if (existingVoteIndex !== -1) {
+    const existingVote = user.votedPosts[existingVoteIndex];
+
+    if (existingVote.vote === 'down') {
+      // Remove o voto de down se já votou down novamente
+      const updatedPost = { ...post, downvotes: post.downvotes - 1 };
+      const updatedUser = { ...user, votedPosts: user.votedPosts.filter(vote => vote.id !== postId) };
+      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+
+      return [response.data, response2.data];
+    } else {
+      // Altera o voto de up para down
+      const updatedPost = { ...post, upvotes: post.upvotes - 1, downvotes: post.downvotes + 1 };
+      const updatedUser = { ...user, votedPosts: user.votedPosts.map(vote => vote.id === postId ? { id: postId, vote: 'down' } : vote) };
+      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+
+      return [response.data, response2.data];
+    }
+  } else {
+    // Vota down pela primeira vez
+    const updatedPost = { ...post, downvotes: post.downvotes + 1 };
+    const updatedUser = { ...user, votedPosts: [...user.votedPosts, { id: postId, vote: 'down' }] };
+    const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+    const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+
+    return [response.data, response2.data];
+  }
 };
 
 export const getWeeks = async (): Promise<Week[]> => {

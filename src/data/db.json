@@ -81,16 +81,34 @@
       "postsId": []
     },
     {
-      "id": "RbPagTpw6OXIV8rwuXyrbyun4R33",
+      "id": "neqciNUBtdhshzDUC3NHgwtqCH63",
       "name": "Vitor Hugo",
       "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ9x229alskm1vz18J6WZsn6CZrg9XguRGvNzOb0gzYCottwA=s96-c",
       "bio": "",
-      "createdAt": "Tue, 25 Jun 2024 19:55:43 GMT",
-      "postsId": [
+      "createdAt": "Fri, 05 Jul 2024 19:34:55 GMT",
+      "votedPosts": [
         {
-          "id": "be6cf656-db31-4bae-b469-9ab50f7d779c"
+          "id": "a77f50a2-471a-4939-b0f4-feb19284315f",
+          "vote": "up"
         }
-      ]
+      ],
+      "votedAnswers": [],
+      "postsId": []
+    },
+    {
+      "id": "5r9sVWokaqWEYrvxhrjaw7YlVn13",
+      "name": "Vitor Hugo",
+      "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI59YLjBzK_5U9d84ZddrrgVd3tBaueW0zPYA-yEUgVElvH9SE=s96-c",
+      "bio": "",
+      "createdAt": "Mon, 08 Jul 2024 00:33:37 GMT",
+      "votedPosts": [
+        {
+          "id": "a77f50a2-471a-4939-b0f4-feb19284315f",
+          "vote": "up"
+        }
+      ],
+      "votedAnswers": [],
+      "postsId": []
     }
   ],
   "weeks": [
@@ -257,8 +275,8 @@
       "week": 2,
       "title": "What is JavaScript?",
       "content": "I have doubts about what JavaScript is. Can someone help me? Thanks! :)",
-      "upvotes": 20,
-      "downvotes": 10,
+      "upvotes": 24,
+      "downvotes": 12,
       "answers": [
         {
           "id": "1",
@@ -451,8 +469,8 @@
       "author": "John Doe",
       "authorId": "1",
       "date": "2024-06-25T00:34:06.641Z",
-      "upvotes": 0,
-      "downvotes": 0,
+      "upvotes": 3,
+      "downvotes": 1,
       "answers": [
         {
           "author": "John Doe",
@@ -480,32 +498,24 @@
           "upvotes": 0,
           "downvotes": 0,
           "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        },
-        {
-          "id": "e910532c-eaaa-49b0-9da9-4430220e14e4",
-          "author": "Vitor Hugo",
-          "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
-          "date": "2024-07-03T21:30:58.542Z",
-          "upvotes": 0,
-          "downvotes": 0,
-          "content": "resresresreser"
         }
       ],
       "week": 9,
       "title": "teste de UUID",
-      "content": "teste de UUID"
+      "content": "teste de UUID",
+      "action": "downvote"
     },
     {
-      "id": "be6cf656-db31-4bae-b469-9ab50f7d779c",
+      "id": "a77f50a2-471a-4939-b0f4-feb19284315f",
       "author": "Vitor Hugo",
-      "authorId": "RbPagTpw6OXIV8rwuXyrbyun4R33",
-      "date": "2024-07-03T19:11:15.949Z",
-      "upvotes": 0,
+      "authorId": "5r9sVWokaqWEYrvxhrjaw7YlVn13",
+      "date": "2024-07-08T02:28:47.975Z",
+      "upvotes": 2,
       "downvotes": 0,
       "answers": [],
       "week": 20,
-      "title": "Duvidas sobre AWS",
-      "content": "Duvidas sobre AWS"
+      "title": "aaaaaaaaaaaaaaaaaaaa",
+      "content": "aaaaaaaaaaaaaaaaaaaa"
     }
   ]
 }

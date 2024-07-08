@@ -10,7 +10,7 @@ interface Answer {
   downvotes: number;
 }
 
-interface Post {
+export interface Post {
   id: string;
   author: string;
   authorId: string;
@@ -23,12 +23,13 @@ interface Post {
   answers: Answer[];
 }
 
-interface User {
+export interface User {
   id: string;
   name: string;
   photoUrl: string;
   bio: string;
   createdAt: string;
+  votedPosts: { id: string, vote: 'up' | 'down' }[];
   postsId: { id: string }[];
 }
 
@@ -73,7 +74,6 @@ const userSlice = createSlice({
     },
     addAnswer: (state, action: PayloadAction<{ postId: string, answer: Answer }>) => {
       const { postId, answer } = action.payload;
-      console.log('Adding answer:', answer, 'to post:', postId)
       const postIndex = state.posts.findIndex(post => post.id === postId);
       if (postIndex !== -1) {
         state.posts[postIndex].answers.push(answer);
@@ -88,10 +88,23 @@ const userSlice = createSlice({
     },
     setTopUsers: (state, action: PayloadAction<User[]>) => {
       state.topUsers = action.payload;
-    }
+    },
+    upvotePost(state, action: PayloadAction<Post>) {
+      const updatedPosts = state.posts.map(post =>
+        post.id === action.payload.id ? action.payload : post
+      );
+      return { ...state, posts: updatedPosts, currentPost: action.payload };
+    },
+
+    downvotePost(state, action: PayloadAction<Post>) {
+      const updatedPosts = state.posts.map(post =>
+        post.id === action.payload.id ? action.payload : post
+      );
+      return { ...state, posts: updatedPosts, currentPost: action.payload };
+    },
   },
 });
 
-export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers } = userSlice.actions;
+export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers, upvotePost, downvotePost } = userSlice.actions;
 
 export default userSlice.reducer;

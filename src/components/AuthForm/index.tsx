@@ -51,6 +51,8 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
       photoUrl: user.photoURL ?? '',
       bio: '',
       createdAt: user.metadata.creationTime ?? '',
+      votedPosts: [],
+      votedAnswers: [],
       postsId: [],
     };
 

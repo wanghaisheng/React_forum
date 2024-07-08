@@ -9,10 +9,11 @@ import UserItem from "../UserItem";
 import { AnswerContainer, PostActions, PostContainer, PostContent, PostFooter, PostHeader, PostMetaData, PostVotes } from "./styles";
 import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa";
 import { FaMessage } from 'react-icons/fa6';
-import { addAnswer } from '../../store/userSlice';
+import { Post as PostSlice, addAnswer } from '../../store/userSlice';
+import { upvotePostThunk, downvotePostThunk } from '../../store/voteThunks';
 import { formatTimeAgo } from "../../utils/formatDate";
 import { v4 } from "uuid";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 
 interface PostProps {
   id: string;
@@ -52,7 +53,9 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
 
   const users = useSelector((state: RootState) => state.user.users);
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const [isVoting, setIsVoting] = useState(false); // Estado para controlar se está votando
 
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
@@ -91,16 +94,73 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     }
   });
 
+  const handleUpvote = async (postId: string) => {
+    if (currentUser && !isVoting) { // Verifica se não está votando para evitar spam
+      setIsVoting(true);
+
+      try {
+        await dispatch(upvotePostThunk({ postId, voteType: 'up' }))
+          .then((response) => {
+            if (!response.payload) return;
+            const updatedPost = response.payload as PostSlice;
+            setPost((prevPost) => ({
+              ...prevPost,
+              upvotes: updatedPost.upvotes,
+              downvotes: updatedPost.downvotes,
+            }));
+            console.log('Upvoted post:', postId);
+          })
+          .catch((error: Error) => console.error('Failed to upvote post:', error));
+      } finally {
+        // Reativa os botões depois de 1 segundo
+        setTimeout(() => {
+          setIsVoting(false); // Define que não está mais votando
+        }, 1000);
+      }
+    }
+  };
+
+  const handleDownvote = async (postId: string) => {
+    if (currentUser && !isVoting) { // Verifica se não está votando para evitar spam
+      setIsVoting(true);
+
+      try {
+        await dispatch(downvotePostThunk({ postId, voteType: 'down' }))
+          .then((response) => {
+            if (!response.payload) return;
+            const updatedPost = response.payload as PostSlice;
+            setPost((prevPost) => ({
+              ...prevPost,
+              upvotes: updatedPost.upvotes,
+              downvotes: updatedPost.downvotes,
+            }));
+            console.log('Downvoted post:', postId);
+          })
+          .catch((error: Error) => console.error('Failed to downvote post:', error));
+      } finally {
+        // Reativa os botões depois de 1 segundo
+        setTimeout(() => {
+          setIsVoting(false); // Define que não está mais votando
+        }, 1000);
+      }
+    }
+  };
+
   return (
     <PostContainer>
       <PostVotes>
-        <button>
+        <button onClick={() => handleUpvote(post.id)} disabled={isVoting} className={
+          users.find(user => user.id === currentUser?.id)?.votedPosts.find(vote => vote.id === post.id && vote.vote === 'up') ? 'voted' : ''
+        }>
           <FaArrowUp className="up-vote" size={16} />
         </button>
 
         <span>{post.upvotes - post.downvotes}</span>
 
-        <button>
+        <button onClick={() => handleDownvote(post.id)} disabled={isVoting} className={
+          users.find(user => user.id === currentUser?.id)?.votedPosts.find(vote => vote.id === post.id && vote.vote === 'down') ? 'voted' : ''
+
+        }>
           <FaArrowDown className="down-vote" size={16} />
         </button>
       </PostVotes>
