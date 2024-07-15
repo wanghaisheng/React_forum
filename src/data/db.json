@@ -86,7 +86,16 @@
       "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ9x229alskm1vz18J6WZsn6CZrg9XguRGvNzOb0gzYCottwA=s96-c",
       "bio": "",
       "createdAt": "Fri, 05 Jul 2024 19:34:55 GMT",
-      "votedPosts": [],
+      "votedPosts": [
+        {
+          "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "vote": "up"
+        },
+        {
+          "id": "9466f02d-3892-4647-a7e4-5cffcc49d131",
+          "vote": "up"
+        }
+      ],
       "votedAnswers": [
         {
           "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
@@ -106,6 +115,11 @@
         {
           "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
           "answerId": "92965241-6242-466b-9429-4bb286e3b0ef",
+          "vote": "up"
+        },
+        {
+          "postId": "1",
+          "answerId": "2",
           "vote": "up"
         }
       ],
@@ -255,7 +269,7 @@
           "authorId": "1",
           "content": "HTML stands for HyperText Markup Language. It is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.",
           "date": "2020-01-02",
-          "upvotes": 15,
+          "upvotes": 16,
           "downvotes": 2
         },
         {
@@ -263,9 +277,45 @@
           "author": "John Doe",
           "authorId": "1",
           "date": "2024-06-04T01:49:16.954Z",
-          "upvotes": 0,
+          "upvotes": 16,
           "downvotes": 0,
           "content": "hahahahaah nice answer bro"
+        },
+        {
+          "id": "75c5d845-ec04-48f9-9d85-80aee60aa0bf",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:48:55.230Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste"
+        },
+        {
+          "id": "baf65880-cade-4b13-8ecf-82f95564e49a",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:50:39.074Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste"
+        },
+        {
+          "id": "1ef83774-acb6-43ba-8f33-4b06daf355ca",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:54:45.564Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste"
+        },
+        {
+          "id": "bf3e1002-d83b-4854-9674-96e47fea2afe",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:56:10.052Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste 2"
         }
       ]
     },
@@ -546,9 +596,28 @@
       "author": "Vitor Hugo",
       "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
       "date": "2024-07-12T18:16:36.676Z",
-      "upvotes": 1,
+      "upvotes": 2,
       "downvotes": 2,
-      "answers": [],
+      "answers": [
+        {
+          "id": "73f9c23c-d099-4c07-bdda-02f0cb63d676",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:59:06.449Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "2d378746-5d71-4985-b891-e3ded8395784",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:59:32.461Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaa"
+        }
+      ],
       "week": 20,
       "title": "aaaaaaaaaaaaaaaaaaaaaaaa",
       "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -558,7 +627,7 @@
       "author": "Vitor Hugo",
       "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
       "date": "2024-07-12T18:35:49.205Z",
-      "upvotes": 3,
+      "upvotes": 4,
       "downvotes": 0,
       "answers": [
         {

@@ -72,7 +72,9 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
         content: validatedData.content,
       };
 
+      console.log(newAnswer);
       const createdAnswer = await createAnswer(id, newAnswer);
+      console.log(createdAnswer);
 
       dispatch(addAnswer({ postId: id, answer: createdAnswer }));
       setIsAnswering(false);

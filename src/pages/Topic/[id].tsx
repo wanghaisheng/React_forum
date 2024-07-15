@@ -26,7 +26,8 @@ interface Answer {
 const TopicPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const post = useSelector((state: RootState) => state.user.currentPost);
+  const postState = useSelector((state: RootState) => state.user.currentPost);
+
   const [isLoading, setIsLoading] = useState(true);
   const [answers, setAnswers] = useState<Answer[]>([]);
 
@@ -47,7 +48,13 @@ const TopicPage: React.FC = () => {
     };
 
     fetchPost();
-  }, [dispatch, id, answers]);
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (postState) {
+      setAnswers(postState.answers);
+    }
+  }, [postState]);
 
   if (isLoading) {
     return (
@@ -57,24 +64,24 @@ const TopicPage: React.FC = () => {
     );
   }
 
-  if (!post) {
+  if (!postState) {
     return <NotFoundPage />;
   }
 
   return (
     <Container>
       <Post
-        key={post.id}
-        id={post.id}
-        author={post.author}
-        authorId={post.authorId}
-        date={post.date}
-        week={post.week}
-        title={post.title}
-        content={post.content}
-        upvotes={post.upvotes}
-        downvotes={post.downvotes}
-        answerCount={post.answers ? post.answers.length : 0}
+        key={postState.id}
+        id={postState.id}
+        author={postState.author}
+        authorId={postState.authorId}
+        date={postState.date}
+        week={postState.week}
+        title={postState.title}
+        content={postState.content}
+        upvotes={postState.upvotes}
+        downvotes={postState.downvotes}
+        answerCount={postState.answers ? postState.answers.length : 0}
         actions
       />
       <Answers>
