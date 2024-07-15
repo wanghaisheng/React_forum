@@ -12,6 +12,7 @@ import NotFoundPage from '../NotFound';
 
 import { Answers, Container } from './styles';
 import { SkeletonPost } from '../../components/Loading';
+
 interface Answer {
   id: string;
   author: string;
@@ -35,9 +36,7 @@ const TopicPage: React.FC = () => {
         if (id) {
           const post = await getPostById(id);
           dispatch(setCurrentPost(post));
-          if (answers.length === 0) {
-            setAnswers(post.answers);
-          }
+          setAnswers(post.answers);
         }
       } catch (error) {
         console.error(error);
@@ -48,14 +47,14 @@ const TopicPage: React.FC = () => {
     };
 
     fetchPost();
-  }, [dispatch, id, answers.length]);
+  }, [dispatch, id, answers]);
 
   if (isLoading) {
     return (
       <main>
         <SkeletonPost quantity={1} />
       </main>
-    )
+    );
   }
 
   if (!post) {
@@ -79,7 +78,7 @@ const TopicPage: React.FC = () => {
         actions
       />
       <Answers>
-        {post.answers && post.answers.map((answer) => (
+        {answers.map((answer) => (
           <Answer
             key={answer.id}
             id={answer.id}
@@ -91,7 +90,7 @@ const TopicPage: React.FC = () => {
             downvotes={answer.downvotes}
           />
         ))}
-        {post.answers && post.answers.length === 0 && (
+        {answers.length === 0 && (
           <p>This topic still doesn't have any answers. Be the first to answer!</p>
         )}
       </Answers>

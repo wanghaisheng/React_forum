@@ -86,14 +86,43 @@
       "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ9x229alskm1vz18J6WZsn6CZrg9XguRGvNzOb0gzYCottwA=s96-c",
       "bio": "",
       "createdAt": "Fri, 05 Jul 2024 19:34:55 GMT",
-      "votedPosts": [
+      "votedPosts": [],
+      "votedAnswers": [
         {
-          "id": "a77f50a2-471a-4939-b0f4-feb19284315f",
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
+          "vote": "up"
+        },
+        {
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "07e16bbd-0e33-4080-942c-ebd218ccbe2c",
+          "vote": "down"
+        },
+        {
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "a4561334-e2e0-4615-a2b6-d6662e0899ec",
+          "vote": "down"
+        },
+        {
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "92965241-6242-466b-9429-4bb286e3b0ef",
           "vote": "up"
         }
       ],
-      "votedAnswers": [],
-      "postsId": []
+      "postsId": [
+        {
+          "id": "46425df5-9647-4951-a3d4-2a5695eef74a"
+        },
+        {
+          "id": "29a3616c-d797-4176-9e1a-d585dd1fc177"
+        },
+        {
+          "id": "9466f02d-3892-4647-a7e4-5cffcc49d131"
+        },
+        {
+          "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91"
+        }
+      ]
     },
     {
       "id": "5r9sVWokaqWEYrvxhrjaw7YlVn13",
@@ -101,12 +130,7 @@
       "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI59YLjBzK_5U9d84ZddrrgVd3tBaueW0zPYA-yEUgVElvH9SE=s96-c",
       "bio": "",
       "createdAt": "Mon, 08 Jul 2024 00:33:37 GMT",
-      "votedPosts": [
-        {
-          "id": "a77f50a2-471a-4939-b0f4-feb19284315f",
-          "vote": "up"
-        }
-      ],
+      "votedPosts": [],
       "votedAnswers": [],
       "postsId": []
     }
@@ -506,16 +530,86 @@
       "action": "downvote"
     },
     {
-      "id": "a77f50a2-471a-4939-b0f4-feb19284315f",
+      "id": "29a3616c-d797-4176-9e1a-d585dd1fc177",
       "author": "Vitor Hugo",
-      "authorId": "5r9sVWokaqWEYrvxhrjaw7YlVn13",
-      "date": "2024-07-08T02:28:47.975Z",
-      "upvotes": 2,
+      "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "date": "2024-07-12T17:51:56.671Z",
+      "upvotes": 9,
       "downvotes": 0,
       "answers": [],
       "week": 20,
-      "title": "aaaaaaaaaaaaaaaaaaaa",
-      "content": "aaaaaaaaaaaaaaaaaaaa"
+      "title": "novo teste de votes",
+      "content": "novo teste de votes"
+    },
+    {
+      "id": "9466f02d-3892-4647-a7e4-5cffcc49d131",
+      "author": "Vitor Hugo",
+      "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "date": "2024-07-12T18:16:36.676Z",
+      "upvotes": 1,
+      "downvotes": 2,
+      "answers": [],
+      "week": 20,
+      "title": "aaaaaaaaaaaaaaaaaaaaaaaa",
+      "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+      "author": "Vitor Hugo",
+      "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "date": "2024-07-12T18:35:49.205Z",
+      "upvotes": 3,
+      "downvotes": 0,
+      "answers": [
+        {
+          "id": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-12T20:23:57.212Z",
+          "upvotes": 1,
+          "downvotes": 0,
+          "content": "comentario teste"
+        },
+        {
+          "id": "07e16bbd-0e33-4080-942c-ebd218ccbe2c",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:00:41.827Z",
+          "upvotes": 0,
+          "downvotes": 1,
+          "content": "novo comentario teste"
+        },
+        {
+          "id": "a4561334-e2e0-4615-a2b6-d6662e0899ec",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:21:57.427Z",
+          "upvotes": 0,
+          "downvotes": 1,
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "92965241-6242-466b-9429-4bb286e3b0ef",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:23:59.540Z",
+          "upvotes": 1,
+          "downvotes": 0,
+          "content": "bbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        {
+          "id": "dc150647-5293-4b2b-8009-52d7ec890c86",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:24:20.259Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "cccccccccccccccccccccccccccc"
+        }
+      ],
+      "week": 10,
+      "title": "hhhhhhhhhhhhhhhhhhhhhhhhh",
+      "content": "hhhhhhhhhhhhhhhhhhhhhhhhh"
     }
   ]
 }

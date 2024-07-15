@@ -43,7 +43,7 @@ function UserTopics() {
       {
         posts.length > 0 ? (
           posts.map(post => (
-            <Link to={`/topics/${post.id}`} key={post.id}>
+            <Link to={`/topics/topic/${post.id}`} key={post.id}>
               <Post
                 id={post.id}
                 author={post.author}

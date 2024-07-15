@@ -13,7 +13,7 @@ function UserItem({ userPhoto, label, userName, postsQuantity }: TopUserProps) {
     <UserItemContainer>
       <div className='user-info'>
         {userPhoto ? (
-          <img src={userPhoto} alt={userName} className="user-photo" />
+          <img src={userPhoto} alt={userName} className="user-photo" referrerPolicy="no-referrer" />
         ) : (
           <div className="user-without-photo" />
         )}

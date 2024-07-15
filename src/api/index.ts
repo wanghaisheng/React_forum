@@ -15,7 +15,7 @@ export interface Post {
   content: string;
 }
 
-interface Answer {
+export interface Answer {
   id: string;
   author: string;
   authorId: string;
@@ -32,6 +32,7 @@ interface User {
   bio: string;
   createdAt: string;
   votedPosts: { id: string, vote: 'up' | 'down' }[];
+  votedAnswers: { postId: string, answerId: string, vote: 'up' | 'down' }[];
   postsId: { id: string }[];
 }
 
@@ -57,6 +58,17 @@ export const getPostById = async (postId: string): Promise<Post> => {
   const response: AxiosResponse<Post> = await axios.get(`${API_URL}/posts/${postId}`);
   return response.data;
 };
+
+export const getAnswerById = async (postId: string, answerId: string): Promise<Answer> => {
+  const post = await getPostById(postId);
+  const answer = post.answers.find(answer => answer.id === answerId);
+
+  if (!answer) {
+    throw new Error('Resposta não encontrada');
+  } else {
+    return answer;
+  }
+}
 
 export const createAnswer = async (postId: string, answerData: Partial<Answer>): Promise<Answer> => {
   // Primeiro, obter os dados do post existente
@@ -105,81 +117,180 @@ export const updateUser = async (userId: string, updatedUser: Partial<User>): Pr
   return response.data;
 };
 
+export const updatePost = async (postId: string, updatedPost: Partial<Post>): Promise<Post> => {
+  const response = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+  return response.data;
+};
+
+export const updateAnswer = async (postId: string, answerId: string, updatedAnswer: Partial<Answer>): Promise<Answer> => {
+  const post = await getPostById(postId);
+  const updatedAnswers = post.answers.map(answer => answer.id === answerId ? { ...answer, ...updatedAnswer } : answer);
+
+  const response = await axios.patch(`${API_URL}/posts/${postId}`, { answers: updatedAnswers });
+  return response.data.answers.find((answer: Answer) => answer.id === answerId);
+};
+
 export const upvotePost = async (postId: string, userId: string): Promise<[Post, User]> => {
   const post = await getPostById(postId);
   const user = await getUserById(userId);
 
-  // Verifica se o usuário já votou neste post
-  const existingVoteIndex = user.votedPosts.findIndex(vote => vote.id === postId);
+  // Verificar se o usuário já votou neste post
+  const userVotedPost = user.votedPosts.find(votedPost => votedPost.id === postId);
 
-  if (existingVoteIndex !== -1) {
-    const existingVote = user.votedPosts[existingVoteIndex];
+  let updatedPost: Partial<Post>;
+  let updatedUser: Partial<User>;
 
-    if (existingVote.vote === 'up') {
-      // Remove o voto de up se já votou up novamente
-      const updatedPost = { ...post, upvotes: post.upvotes - 1 };
-      const updatedUser = { ...user, votedPosts: user.votedPosts.filter(vote => vote.id !== postId) };
-      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-
-      return [response.data, response2.data];
-    } else {
-      // Altera o voto de down para up
-      const updatedPost = { ...post, upvotes: post.upvotes + 1, downvotes: post.downvotes - 1 };
-      const updatedUser = { ...user, votedPosts: user.votedPosts.map(vote => vote.id === postId ? { id: postId, vote: 'up' } : vote) };
-      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-
-      return [response.data, response2.data];
-    }
-  } else {
-    // Vota up pela primeira vez
-    const updatedPost = { ...post, upvotes: post.upvotes + 1 };
-    const updatedUser = { ...user, votedPosts: [...user.votedPosts, { id: postId, vote: 'up' }] };
-    const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-    const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-
-    return [response.data, response2.data];
+  // Se o usuário já votou no post como upvote, remover o voto
+  if (userVotedPost && userVotedPost.vote === 'up') {
+    updatedPost = { upvotes: post.upvotes - 1 };
+    updatedUser = {
+      votedPosts: user.votedPosts.filter(votedPost => votedPost.id !== postId)
+    };
   }
+  // Se o usuário já votou no post como downvote, atualizar para upvote
+  else if (userVotedPost && userVotedPost.vote === 'down') {
+    updatedPost = { upvotes: post.upvotes + 1, downvotes: post.downvotes - 1 };
+    updatedUser = {
+      votedPosts: user.votedPosts.map(votedPost => votedPost.id === postId ? { id: postId, vote: 'up' } : votedPost)
+    };
+  }
+  // Se o usuário ainda não votou no post, adicionar um voto de upvote
+  else {
+    updatedPost = { upvotes: post.upvotes + 1 };
+    updatedUser = {
+      votedPosts: [...user.votedPosts, { id: postId, vote: 'up' }]
+    };
+  }
+
+  // Atualizar o post e o usuário no banco de dados
+  const updatedPostResponse = await updatePost(postId, updatedPost);
+  const updatedUserResponse = await updateUser(userId, updatedUser);
+
+  return [updatedPostResponse, updatedUserResponse];
 };
 
 export const downvotePost = async (postId: string, userId: string): Promise<[Post, User]> => {
   const post = await getPostById(postId);
   const user = await getUserById(userId);
 
-  // Verifica se o usuário já votou neste post
-  const existingVoteIndex = user.votedPosts.findIndex(vote => vote.id === postId);
+  // Verificar se o usuário já votou neste post
+  const userVotedPost = user.votedPosts.find(votedPost => votedPost.id === postId);
 
-  if (existingVoteIndex !== -1) {
-    const existingVote = user.votedPosts[existingVoteIndex];
+  let updatedPost: Partial<Post>;
+  let updatedUser: Partial<User>;
 
-    if (existingVote.vote === 'down') {
-      // Remove o voto de down se já votou down novamente
-      const updatedPost = { ...post, downvotes: post.downvotes - 1 };
-      const updatedUser = { ...user, votedPosts: user.votedPosts.filter(vote => vote.id !== postId) };
-      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-
-      return [response.data, response2.data];
-    } else {
-      // Altera o voto de up para down
-      const updatedPost = { ...post, upvotes: post.upvotes - 1, downvotes: post.downvotes + 1 };
-      const updatedUser = { ...user, votedPosts: user.votedPosts.map(vote => vote.id === postId ? { id: postId, vote: 'down' } : vote) };
-      const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-      const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-
-      return [response.data, response2.data];
-    }
-  } else {
-    // Vota down pela primeira vez
-    const updatedPost = { ...post, downvotes: post.downvotes + 1 };
-    const updatedUser = { ...user, votedPosts: [...user.votedPosts, { id: postId, vote: 'down' }] };
-    const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-    const response2: AxiosResponse<User> = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-
-    return [response.data, response2.data];
+  // Se o usuário já votou no post como downvote, remover o voto
+  if (userVotedPost && userVotedPost.vote === 'down') {
+    updatedPost = { downvotes: post.downvotes - 1 };
+    updatedUser = {
+      votedPosts: user.votedPosts.filter(votedPost => votedPost.id !== postId)
+    };
   }
+  // Se o usuário já votou no post como upvote, atualizar para downvote
+  else if (userVotedPost && userVotedPost.vote === 'up') {
+    updatedPost = { upvotes: post.upvotes - 1, downvotes: post.downvotes + 1 };
+    updatedUser = {
+      votedPosts: user.votedPosts.map(votedPost => votedPost.id === postId ? { id: postId, vote: 'down' } : votedPost)
+    };
+  }
+  // Se o usuário ainda não votou no post, adicionar um voto de downvote
+  else {
+    updatedPost = { downvotes: post.downvotes + 1 };
+    updatedUser = {
+      votedPosts: [...user.votedPosts, { id: postId, vote: 'down' }]
+    };
+  }
+
+  // Atualizar o post e o usuário no banco de dados
+  const updatedPostResponse = await updatePost(postId, updatedPost);
+  const updatedUserResponse = await updateUser(userId, updatedUser);
+
+  return [updatedPostResponse, updatedUserResponse];
 };
+
+export const upvoteAnswer = async (postId: string, answerId: string, userId: string): Promise<[Answer, User]> => {
+  const answer = await getAnswerById(postId, answerId);
+  const user = await getUserById(userId);
+
+  // Verificar se o usuário já votou nesta resposta
+  const userVotedAnswer = user.votedAnswers.find(votedAnswer => votedAnswer.answerId === answerId);
+
+  let updatedAnswer: Partial<Answer>;
+  let updatedUser: Partial<User>;
+
+  // Se o usuário já votou na resposta como upvote, remover o voto
+  if (userVotedAnswer && userVotedAnswer.vote === 'up') {
+    updatedAnswer = { upvotes: answer.upvotes - 1 };
+    updatedUser = {
+      votedAnswers: user.votedAnswers.filter(votedAnswer => votedAnswer.answerId !== answerId)
+    };
+  }
+
+  // Se o usuário já votou na resposta como downvote, atualizar para upvote
+  else if (userVotedAnswer && userVotedAnswer.vote === 'down') {
+    updatedAnswer = { upvotes: answer.upvotes + 1, downvotes: answer.downvotes - 1 };
+    updatedUser = {
+      votedAnswers: user.votedAnswers.map(votedAnswer => votedAnswer.answerId === answerId ? { postId, answerId, vote: 'up' } : votedAnswer)
+    };
+  }
+
+  // Se o usuário ainda não votou na resposta, adicionar um voto de upvote
+  else {
+    updatedAnswer = { upvotes: answer.upvotes + 1 };
+    updatedUser = {
+      votedAnswers: [...user.votedAnswers, { postId, answerId, vote: 'up' }]
+    };
+  }
+
+  // Atualizar a resposta e o usuário no banco de dados
+  const updatedAnswerResponse = await updateAnswer(postId, answerId, updatedAnswer);
+  const updatedUserResponse = await updateUser(userId, updatedUser);
+
+  return [updatedAnswerResponse, updatedUserResponse];
+}
+
+export const downvoteAnswer = async (postId: string, answerId: string, userId: string): Promise<[Answer, User]> => {
+  const answer = await getAnswerById(postId, answerId);
+  const user = await getUserById(userId);
+
+  // Verificar se o usuário já votou nesta resposta
+  const userVotedAnswer = user.votedAnswers.find(votedAnswer => votedAnswer.answerId === answerId);
+
+  let updatedAnswer: Partial<Answer>;
+  let updatedUser: Partial<User>;
+
+  // Se o usuário já votou na resposta como downvote, remover o voto
+
+  if (userVotedAnswer && userVotedAnswer.vote === 'down') {
+    updatedAnswer = { downvotes: answer.downvotes - 1 };
+    updatedUser = {
+      votedAnswers: user.votedAnswers.filter(votedAnswer => votedAnswer.answerId !== answerId)
+    };
+  }
+
+  // Se o usuário já votou na resposta como upvote, atualizar para downvote
+  else if (userVotedAnswer && userVotedAnswer.vote === 'up') {
+    updatedAnswer = { upvotes: answer.upvotes - 1, downvotes: answer.downvotes + 1 };
+    updatedUser = {
+      votedAnswers: user.votedAnswers.map(votedAnswer => votedAnswer.answerId === answerId ? { postId, answerId, vote: 'down' } : votedAnswer)
+    };
+  }
+
+  // Se o usuário ainda não votou na resposta, adicionar um voto de downvote
+  else {
+    updatedAnswer = { downvotes: answer.downvotes + 1 };
+    updatedUser = {
+      votedAnswers: [...user.votedAnswers, { postId, answerId, vote: 'down' }]
+    };
+  }
+
+  // Atualizar a resposta e o usuário no banco de dados
+
+  const updatedAnswerResponse = await updateAnswer(postId, answerId, updatedAnswer);
+  const updatedUserResponse = await updateUser(userId, updatedUser);
+
+  return [updatedAnswerResponse, updatedUserResponse];
+}
 
 export const getWeeks = async (): Promise<Week[]> => {
   const response: AxiosResponse<Week[]> = await axios.get(`${API_URL}/weeks`);

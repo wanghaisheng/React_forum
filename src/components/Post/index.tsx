@@ -37,17 +37,18 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
   const [isAnswering, setIsAnswering] = useState(false);
   const { register, handleSubmit } = useForm();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const postState = useSelector((state: RootState) => state.user.posts.find(post => post.id === id));
   const [post, setPost] = useState<PostProps>({
-    id,
-    author,
-    authorId,
-    date,
-    week,
-    title,
-    content,
+    id: postState?.id || id,
+    author: postState?.author || author,
+    authorId: postState?.authorId || authorId,
+    date: postState?.date || date,
+    week: postState?.week || week,
+    title: postState?.title || title,
+    content: postState?.content || content,
     upvotes,
     downvotes,
-    answerCount,
+    answerCount: postState?.answers.length || answerCount,
     actions
   });
 
@@ -71,9 +72,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
         content: validatedData.content,
       };
 
-      console.log(newAnswer);
       const createdAnswer = await createAnswer(id, newAnswer);
-      console.log(createdAnswer);
 
       dispatch(addAnswer({ postId: id, answer: createdAnswer }));
       setIsAnswering(false);
@@ -112,10 +111,10 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
           })
           .catch((error: Error) => console.error('Failed to upvote post:', error));
       } finally {
-        // Reativa os botões depois de 1 segundo
+        // Reativa os botões depois de 2 segundos
         setTimeout(() => {
           setIsVoting(false); // Define que não está mais votando
-        }, 1000);
+        }, 2000);
       }
     }
   };
@@ -138,10 +137,10 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
           })
           .catch((error: Error) => console.error('Failed to downvote post:', error));
       } finally {
-        // Reativa os botões depois de 1 segundo
+        // Reativa os botões depois de 2 segundos
         setTimeout(() => {
           setIsVoting(false); // Define que não está mais votando
-        }, 1000);
+        }, 2000);
       }
     }
   };

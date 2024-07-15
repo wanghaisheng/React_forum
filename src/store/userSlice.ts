@@ -21,6 +21,7 @@ export interface Post {
   upvotes: number;
   downvotes: number;
   answers: Answer[];
+  actions?: boolean;
 }
 
 export interface User {
@@ -30,6 +31,7 @@ export interface User {
   bio: string;
   createdAt: string;
   votedPosts: { id: string, vote: 'up' | 'down' }[];
+  votedAnswers: { postId: string, answerId: string, vote: 'up' | 'down' }[];
   postsId: { id: string }[];
 }
 
@@ -102,9 +104,44 @@ const userSlice = createSlice({
       );
       return { ...state, posts: updatedPosts, currentPost: action.payload };
     },
+
+    upvoteAnswer: (state, action: PayloadAction<{ postId: string, answer: Answer }>) => {
+      const { postId, answer } = action.payload;
+      const postIndex = state.posts.findIndex(post => post.id === postId);
+      if (postIndex !== -1) {
+        const updatedAnswers = state.posts[postIndex].answers.map(ans =>
+          ans.id === answer.id ? answer : ans
+        );
+        state.posts[postIndex].answers = updatedAnswers;
+      }
+
+      if (state.currentPost && state.currentPost.id === postId) {
+        const updatedAnswers = state.currentPost.answers.map(ans =>
+          ans.id === answer.id ? answer : ans
+        );
+        state.currentPost.answers = updatedAnswers;
+      }
+    },
+    downvoteAnswer: (state, action: PayloadAction<{ postId: string, answer: Answer }>) => {
+      const { postId, answer } = action.payload;
+      const postIndex = state.posts.findIndex(post => post.id === postId);
+      if (postIndex !== -1) {
+        const updatedAnswers = state.posts[postIndex].answers.map(ans =>
+          ans.id === answer.id ? answer : ans
+        );
+        state.posts[postIndex].answers = updatedAnswers;
+      }
+
+      if (state.currentPost && state.currentPost.id === postId) {
+        const updatedAnswers = state.currentPost.answers.map(ans =>
+          ans.id === answer.id ? answer : ans
+        );
+        state.currentPost.answers = updatedAnswers;
+      }
+    },
   },
 });
 
-export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers, upvotePost, downvotePost } = userSlice.actions;
+export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers, upvotePost, downvotePost, upvoteAnswer, downvoteAnswer } = userSlice.actions;
 
 export default userSlice.reducer;

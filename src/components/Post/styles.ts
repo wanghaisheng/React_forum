@@ -47,7 +47,7 @@ export const PostVotes = styled.div`
   gap: 1rem;
   align-items: center;
 
-  button {
+  > button {
     background-color: transparent;
     border: none;
     cursor: pointer;

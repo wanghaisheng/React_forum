@@ -67,6 +67,8 @@ function Header() {
               <img
                 src={user.photoUrl}
                 className="user-photo"
+                alt={user.name}
+                referrerPolicy="no-referrer"
               />
             </Link>
           ) : (
