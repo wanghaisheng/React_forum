@@ -86,16 +86,7 @@
       "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ9x229alskm1vz18J6WZsn6CZrg9XguRGvNzOb0gzYCottwA=s96-c",
       "bio": "",
       "createdAt": "Fri, 05 Jul 2024 19:34:55 GMT",
-      "votedPosts": [
-        {
-          "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
-          "vote": "up"
-        },
-        {
-          "id": "9466f02d-3892-4647-a7e4-5cffcc49d131",
-          "vote": "up"
-        }
-      ],
+      "votedPosts": [],
       "votedAnswers": [
         {
           "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
@@ -104,22 +95,12 @@
         },
         {
           "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
-          "answerId": "07e16bbd-0e33-4080-942c-ebd218ccbe2c",
-          "vote": "down"
-        },
-        {
-          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
-          "answerId": "a4561334-e2e0-4615-a2b6-d6662e0899ec",
-          "vote": "down"
-        },
-        {
-          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
-          "answerId": "92965241-6242-466b-9429-4bb286e3b0ef",
+          "answerId": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
           "vote": "up"
         },
         {
-          "postId": "1",
-          "answerId": "2",
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
           "vote": "up"
         }
       ],
@@ -135,6 +116,12 @@
         },
         {
           "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91"
+        },
+        {
+          "id": "qDuUWh9WDSIDN59cjPLv"
+        },
+        {
+          "id": "oNWvYeVX1vViyVRXrlu2"
         }
       ]
     },

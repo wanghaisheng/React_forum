@@ -3,8 +3,7 @@ import AppContent from './components/appContent';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUsers } from '../store/userSlice';
-import data from '../data/db.json';
-import { User } from '../store/userSlice';
+import { getUsers } from '../api';
 
 function AppRoutes() {
 
@@ -12,7 +11,12 @@ function AppRoutes() {
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser');
     dispatch(setCurrentUser(currentUser ? JSON.parse(currentUser) : null));
-    dispatch(setUsers(data.users as User[]));
+
+    const fetchUsers = async () => {
+      const users = await getUsers();
+      dispatch(setUsers(users));
+    };
+    fetchUsers();
   }, [
     dispatch
   ]);
