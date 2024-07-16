@@ -1,4 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { db } from '../services/firebase';
+import { getDoc } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 
 const API_URL = 'http://localhost:8000';
 
@@ -41,22 +45,66 @@ interface Week {
   title: string;
   description: string;
 }
-
 export const getPosts = async (): Promise<Post[]> => {
-  const response: AxiosResponse<Post[]> = await axios.get(`${API_URL}/posts`);
-  return response.data;
+  // const response: AxiosResponse<Post[]> = await axios.get(`${API_URL}/posts`);
+  // Busca todos os posts no Firestore
+  const postsCollection = collection(db, 'posts');
+  return getDocs(postsCollection).then((querySnapshot) => {
+    const posts = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id } as Post;
+    });
+    return posts;
+  }).catch(() => {
+    throw new Error('Erro ao buscar os posts');
+  });
 };
 
 export const createPost = async (postData: Partial<Post>): Promise<Post> => {
   // Certificar que o campo answers seja um array vazio se não estiver definido
-  const completePostData = { ...postData, answers: postData.answers || [] };
-  const response: AxiosResponse<Post> = await axios.post(`${API_URL}/posts`, completePostData);
-  return response.data;
+  const completePostData = {
+    ...postData,
+    answers: postData.answers || [],
+    author: postData.author ?? '',
+    authorId: postData.authorId ?? 'defaultAuthorId',
+    upvotes: 0,
+    downvotes: 0,
+    week: postData.week ?? 1,
+    title: postData.title ?? '',
+    content: postData.content ?? '',
+    date: new Date().toISOString(),
+  };
+  // const response: AxiosResponse<Post> = await axios.post(`${API_URL}/posts`, completePostData);
+
+  // Adicionar o post ao Firestore
+  try {
+    const docRef = await addDoc(collection(db, 'posts'), completePostData);
+    return { ...completePostData, id: docRef.id };
+  } catch (error) {
+    throw new Error('Erro ao criar o post');
+  }
+};
+
+export const createUser = async (userData: Partial<User>): Promise<User> => {
+  // const response: AxiosResponse<User> = await axios.post(`${API_URL}/users`, userData);
+  // Adiciona o usuário ao Firestore
+  try {
+    const docRef = await addDoc(collection(db, 'users'), userData);
+    return { ...userData, id: docRef.id } as User;
+  } catch (error) {
+    throw new Error('Erro ao criar o usuário');
+  }
 };
 
 export const getPostById = async (postId: string): Promise<Post> => {
-  const response: AxiosResponse<Post> = await axios.get(`${API_URL}/posts/${postId}`);
-  return response.data;
+  // const response: AxiosResponse<Post> = await axios.get(`${API_URL}/posts/${postId}`);
+  // Busca o post no Firestore
+  const docRef = doc(db, 'posts', postId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { ...docSnap.data(), id: docSnap.id } as Post;
+  } else {
+    throw new Error('Post não encontrado');
+  }
 };
 
 export const getAnswerById = async (postId: string, answerId: string): Promise<Answer> => {
@@ -72,40 +120,64 @@ export const getAnswerById = async (postId: string, answerId: string): Promise<A
 
 export const createAnswer = async (postId: string, answerData: Partial<Answer>): Promise<Answer> => {
   // Primeiro, obter os dados do post existente
-  const postResponse: AxiosResponse<Post> = await axios.get(`${API_URL}/posts/${postId}`);
-  const post = postResponse.data;
+  const postResponse = await getPostById(postId);
+  const post = postResponse;
 
   // Garantir que o campo answers seja um array
   const updatedAnswers = [...post.answers, { ...answerData }]
 
   // Atualizar o post com o novo array de respostas
-  const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, { answers: updatedAnswers });
+  // const response: AxiosResponse<Post> = await axios.patch(`${API_URL}/posts/${postId}`, { answers: updatedAnswers });
 
-  // Retornar a resposta recém-adicionada
-  const newAnswer = response.data.answers.find((answer: Answer) => answer.content === answerData.content);
+  // Cria uma nova resposta no Firestore
+  const newAnswer = updatedAnswers.find(answer => answer.content === answerData.content) as Answer;
 
-  if (!newAnswer) {
-    throw new Error('Resposta não encontrada');
-  } else {
-    return newAnswer;
-  }
+  // Atualiza o post no Firestore
+  await setDoc(doc(db, 'posts', postId), { answers: updatedAnswers }, { merge: true });
+
+  return newAnswer;
 };
 
 export const getUsers = async (): Promise<User[]> => {
-  const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
-  return response.data;
+  // const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
+  // Busca todos os usuários no Firestore
+  const usersCollection = collection(db, 'users');
+  return getDocs(usersCollection).then((querySnapshot) => {
+    const users = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id } as User
+    })
+    return users
+  }).catch(() => {
+    throw new Error('Erro ao buscar os usuários')
+  });
 }
 
-const getUserById = async (userId: string): Promise<User> => {
-  const response: AxiosResponse<User> = await axios.get(`${API_URL}/users/${userId}`);
-  return response.data;
+export const getUserById = async (userId: string): Promise<User> => {
+  // const response: AxiosResponse<User> = await axios.get(`${API_URL}/users/${userId}`);
+  // Busca o usuário no Firestore
+  const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { ...docSnap.data(), id: docSnap.id } as User;
+  } else {
+    throw new Error('Usuário não encontrado');
+  }
 };
 
 export const getTopUsers = async (): Promise<User[]> => {
-  const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
+  // const response: AxiosResponse<User[]> = await axios.get(`${API_URL}/users`);
+  const usersCollection = collection(db, 'users');
+  const querySnapshot = await getDocs(usersCollection);
+  const users = querySnapshot.docs.map((doc) => {
+    return { ...doc.data(), id: doc.id } as User
+  });
 
   // Filtrando e ordenando os usuários no frontend
-  const topUsers = response.data
+  // const topUsers = response.data
+  //   .sort((a, b) => b.postsId.length - a.postsId.length)
+  //   .slice(0, 5);
+
+  const topUsers = users
     .sort((a, b) => b.postsId.length - a.postsId.length)
     .slice(0, 5);
 
