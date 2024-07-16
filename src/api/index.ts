@@ -1,10 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from '../services/firebase';
 import { getDoc } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
-
-const API_URL = 'http://localhost:8000';
 
 export interface Post {
   id: string;
@@ -31,6 +28,7 @@ export interface Answer {
 
 interface User {
   id: string;
+  uuid: string;
   name: string;
   photoUrl: string;
   bio: string;
@@ -42,6 +40,7 @@ interface User {
 
 interface Week {
   id: string;
+  weekNumber: number;
   title: string;
   description: string;
 }
@@ -85,11 +84,12 @@ export const createPost = async (postData: Partial<Post>): Promise<Post> => {
 };
 
 export const createUser = async (userData: Partial<User>): Promise<User> => {
-  // const response: AxiosResponse<User> = await axios.post(`${API_URL}/users`, userData);
-  // Adiciona o usuário ao Firestore
   try {
-    const docRef = await addDoc(collection(db, 'users'), userData);
-    return { ...userData, id: docRef.id } as User;
+    const userRef = doc(db, 'users', userData.id!); // Use o ID do usuário como o caminho do documento
+    await setDoc(userRef, userData, { merge: true }); // Use setDoc para criar/atualizar o documento
+
+    const createdUserSnapshot = await getDoc(userRef);
+    return { id: createdUserSnapshot.id, ...createdUserSnapshot.data() } as User;
   } catch (error) {
     throw new Error('Erro ao criar o usuário');
   }
@@ -185,21 +185,33 @@ export const getTopUsers = async (): Promise<User[]> => {
 }
 
 export const updateUser = async (userId: string, updatedUser: Partial<User>): Promise<User> => {
-  const response = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
-  return response.data;
+  // const response = await axios.patch(`${API_URL}/users/${userId}`, updatedUser);
+  // Atualiza o usuário no Firestore
+  const userRef = doc(db, 'users', userId);
+  await setDoc(userRef, updatedUser, { merge: true });
+
+  return { ...updatedUser, id: userId } as User;
 };
 
 export const updatePost = async (postId: string, updatedPost: Partial<Post>): Promise<Post> => {
-  const response = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
-  return response.data;
+  // const response = await axios.patch(`${API_URL}/posts/${postId}`, updatedPost);
+  // Atualiza o post no Firestore
+  const postRef = doc(db, 'posts', postId);
+  await setDoc(postRef, updatedPost, { merge: true });
+
+  return { ...updatedPost, id: postId } as Post;
 };
 
 export const updateAnswer = async (postId: string, answerId: string, updatedAnswer: Partial<Answer>): Promise<Answer> => {
   const post = await getPostById(postId);
   const updatedAnswers = post.answers.map(answer => answer.id === answerId ? { ...answer, ...updatedAnswer } : answer);
 
-  const response = await axios.patch(`${API_URL}/posts/${postId}`, { answers: updatedAnswers });
-  return response.data.answers.find((answer: Answer) => answer.id === answerId);
+  // const response = await axios.patch(`${API_URL}/posts/${postId}`, { answers: updatedAnswers });
+  // Atualiza o post no Firestore
+  const postRef = doc(db, 'posts', postId);
+  await setDoc(postRef, { answers: updatedAnswers }, { merge: true });
+  // return response.data.answers.find((answer: Answer) => answer.id === answerId);
+  return updatedAnswers.find((answer: Answer) => answer.id === answerId) as Answer;
 };
 
 export const upvotePost = async (postId: string, userId: string): Promise<[Post, User]> => {
@@ -214,7 +226,7 @@ export const upvotePost = async (postId: string, userId: string): Promise<[Post,
 
   // Se o usuário já votou no post como upvote, remover o voto
   if (userVotedPost && userVotedPost.vote === 'up') {
-    updatedPost = { upvotes: post.upvotes - 1 };
+    updatedPost = { upvotes: post.upvotes - 1, downvotes: post.downvotes };
     updatedUser = {
       votedPosts: user.votedPosts.filter(votedPost => votedPost.id !== postId)
     };
@@ -228,7 +240,7 @@ export const upvotePost = async (postId: string, userId: string): Promise<[Post,
   }
   // Se o usuário ainda não votou no post, adicionar um voto de upvote
   else {
-    updatedPost = { upvotes: post.upvotes + 1 };
+    updatedPost = { upvotes: post.upvotes + 1, downvotes: post.downvotes };
     updatedUser = {
       votedPosts: [...user.votedPosts, { id: postId, vote: 'up' }]
     };
@@ -237,6 +249,9 @@ export const upvotePost = async (postId: string, userId: string): Promise<[Post,
   // Atualizar o post e o usuário no banco de dados
   const updatedPostResponse = await updatePost(postId, updatedPost);
   const updatedUserResponse = await updateUser(userId, updatedUser);
+
+  console.log('updatedPostResponse', updatedPostResponse);
+  console.log('updatedUserResponse', updatedUserResponse);
 
   return [updatedPostResponse, updatedUserResponse];
 };
@@ -253,7 +268,7 @@ export const downvotePost = async (postId: string, userId: string): Promise<[Pos
 
   // Se o usuário já votou no post como downvote, remover o voto
   if (userVotedPost && userVotedPost.vote === 'down') {
-    updatedPost = { downvotes: post.downvotes - 1 };
+    updatedPost = { downvotes: post.downvotes - 1, upvotes: post.upvotes };
     updatedUser = {
       votedPosts: user.votedPosts.filter(votedPost => votedPost.id !== postId)
     };
@@ -267,7 +282,7 @@ export const downvotePost = async (postId: string, userId: string): Promise<[Pos
   }
   // Se o usuário ainda não votou no post, adicionar um voto de downvote
   else {
-    updatedPost = { downvotes: post.downvotes + 1 };
+    updatedPost = { downvotes: post.downvotes + 1, upvotes: post.upvotes };
     updatedUser = {
       votedPosts: [...user.votedPosts, { id: postId, vote: 'down' }]
     };
@@ -292,7 +307,7 @@ export const upvoteAnswer = async (postId: string, answerId: string, userId: str
 
   // Se o usuário já votou na resposta como upvote, remover o voto
   if (userVotedAnswer && userVotedAnswer.vote === 'up') {
-    updatedAnswer = { upvotes: answer.upvotes - 1 };
+    updatedAnswer = { upvotes: answer.upvotes - 1, downvotes: answer.downvotes };
     updatedUser = {
       votedAnswers: user.votedAnswers.filter(votedAnswer => votedAnswer.answerId !== answerId)
     };
@@ -308,7 +323,7 @@ export const upvoteAnswer = async (postId: string, answerId: string, userId: str
 
   // Se o usuário ainda não votou na resposta, adicionar um voto de upvote
   else {
-    updatedAnswer = { upvotes: answer.upvotes + 1 };
+    updatedAnswer = { upvotes: answer.upvotes + 1, downvotes: answer.downvotes };
     updatedUser = {
       votedAnswers: [...user.votedAnswers, { postId, answerId, vote: 'up' }]
     };
@@ -334,7 +349,7 @@ export const downvoteAnswer = async (postId: string, answerId: string, userId: s
   // Se o usuário já votou na resposta como downvote, remover o voto
 
   if (userVotedAnswer && userVotedAnswer.vote === 'down') {
-    updatedAnswer = { downvotes: answer.downvotes - 1 };
+    updatedAnswer = { downvotes: answer.downvotes - 1, upvotes: answer.upvotes };
     updatedUser = {
       votedAnswers: user.votedAnswers.filter(votedAnswer => votedAnswer.answerId !== answerId)
     };
@@ -350,7 +365,7 @@ export const downvoteAnswer = async (postId: string, answerId: string, userId: s
 
   // Se o usuário ainda não votou na resposta, adicionar um voto de downvote
   else {
-    updatedAnswer = { downvotes: answer.downvotes + 1 };
+    updatedAnswer = { downvotes: answer.downvotes + 1, upvotes: answer.upvotes };
     updatedUser = {
       votedAnswers: [...user.votedAnswers, { postId, answerId, vote: 'down' }]
     };
@@ -365,6 +380,15 @@ export const downvoteAnswer = async (postId: string, answerId: string, userId: s
 }
 
 export const getWeeks = async (): Promise<Week[]> => {
-  const response: AxiosResponse<Week[]> = await axios.get(`${API_URL}/weeks`);
-  return response.data;
+  // const response: AxiosResponse<Week[]> = await axios.get(`${API_URL}/weeks`);
+  // Busca todas as semanas no Firestore
+  const weeksCollection = collection(db, 'weeks');
+  return getDocs(weeksCollection).then((querySnapshot) => {
+    const weeks = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id } as Week
+    })
+    return weeks
+  }).catch(() => {
+    throw new Error('Erro ao buscar as semanas')
+  });
 }

@@ -7,6 +7,9 @@ import { setSearchTerm } from '../../store/userSlice';
 import { RootState } from '../../store';
 import { SkeletonAvatar } from '../Loading';
 
+import { signOut } from 'firebase/auth';
+import { auth } from '../../services/firebase';
+
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.currentUser);
@@ -30,6 +33,16 @@ function Header() {
       navigate('/topics/search');
     }
   };
+
+  const handleSignOut = async () => {
+    try {
+      localStorage.removeItem('currentUser');
+      await signOut(auth);
+      navigate('/signin');
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     setLoading(false);
@@ -63,14 +76,18 @@ function Header() {
           {loading ? (
             <SkeletonAvatar />
           ) : user ? (
-            <Link to={`/profile/${user?.id}`}>
-              <img
-                src={user.photoUrl}
-                className="user-photo"
-                alt={user.name}
-                referrerPolicy="no-referrer"
-              />
-            </Link>
+            <>
+              <Link to={`/profile/${user?.id}`}>
+                <img
+                  src={user.photoUrl}
+                  className="user-photo"
+                  alt={user.name}
+                  referrerPolicy="no-referrer"
+                />
+              </Link>
+
+              <button onClick={handleSignOut}>Sign Out</button>
+            </>
           ) : (
             <Link to="/signin">Sign In</Link>
           )}

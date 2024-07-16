@@ -7,6 +7,10 @@ export const Container = styled.main`
   h1 {
     color: ${props => props.theme.colors.title};
     font-size: ${props => props.theme.fontSizes['2xl']};
+
+    &.week-not-found {
+      text-align: center;
+    }
   }
 
   > a {
@@ -16,5 +20,6 @@ export const Container = styled.main`
 
   > p {
     color: ${props => props.theme.colors.text};
+    text-align: center;
   }
 `;

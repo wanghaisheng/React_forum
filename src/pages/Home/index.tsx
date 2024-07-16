@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { setPosts } from '../../store/userSlice';
+import { setPosts, setWeeks } from '../../store/userSlice';
 import Post from '../../components/Post';
 import { Container } from './styles';
-import { getPosts } from '../../api';
+import { getPosts, getWeeks } from '../../api';
 import { SkeletonPost } from '../../components/Loading';
 
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -19,7 +19,9 @@ const Home: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const posts = await getPosts();
+        const weeks = await getWeeks();
         dispatch(setPosts(posts));
+        dispatch(setWeeks(weeks));
         setLoading(false);
       } catch (error) {
         console.error(error);

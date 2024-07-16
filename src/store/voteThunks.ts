@@ -20,6 +20,7 @@ export const upvotePostThunk = createAsyncThunk<Post, VotePayload, { state: Root
     }
 
     const [updatedPost] = await upvotePost(postId, currentUser.id);
+    console.log('updatedPost', updatedPost);
     upvotePostAction(updatedPost);
 
     return updatedPost;

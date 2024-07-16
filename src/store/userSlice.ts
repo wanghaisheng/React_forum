@@ -26,6 +26,7 @@ export interface Post {
 
 export interface User {
   id: string;
+  uuid: string;
   name: string;
   photoUrl: string;
   bio: string;
@@ -33,6 +34,13 @@ export interface User {
   votedPosts: { id: string, vote: 'up' | 'down' }[];
   votedAnswers: { postId: string, answerId: string, vote: 'up' | 'down' }[];
   postsId: { id: string }[];
+}
+
+export interface Week {
+  id: string;
+  weekNumber: number;
+  title: string;
+  description: string;
 }
 
 interface UserState {
@@ -43,6 +51,7 @@ interface UserState {
   searchTerm: string;
   users: User[];
   topUsers: User[];
+  weeks: Week[];
 }
 
 const initialState: UserState = {
@@ -53,6 +62,7 @@ const initialState: UserState = {
   searchTerm: '',
   users: [],
   topUsers: [],
+  weeks: [],
 };
 
 const userSlice = createSlice({
@@ -62,6 +72,10 @@ const userSlice = createSlice({
     setPosts: (state, action: PayloadAction<Post[]>) => {
       state.posts = action.payload;
     },
+    setWeeks: (state, action: PayloadAction<Week[]>) => {
+      state.weeks = action.payload;
+    },
+
     setCurrentPost: (state, action: PayloadAction<Post | null>) => {
       state.currentPost = action.payload;
     },
@@ -142,6 +156,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers, upvotePost, downvotePost, upvoteAnswer, downvoteAnswer } = userSlice.actions;
+export const { setPosts, setCurrentPost, setCurrentUser, setCurrentUserPosts, setSearchTerm, addAnswer, setUsers, setTopUsers, upvotePost, downvotePost, upvoteAnswer, downvoteAnswer, setWeeks } = userSlice.actions;
 
 export default userSlice.reducer;

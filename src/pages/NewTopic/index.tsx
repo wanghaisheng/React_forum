@@ -19,6 +19,7 @@ const schema = z.object({
 
 interface Week {
   id: string;
+  weekNumber: number;
   title: string;
   description: string;
 }
@@ -38,8 +39,9 @@ function NewTopicPage() {
   useEffect(() => {
     const fetchWeeks = async () => {
       const weeks = await getWeeks();
+      const orderedWeeks = weeks.sort((a, b) => a.weekNumber - b.weekNumber);
 
-      setWeeks(weeks);
+      setWeeks(orderedWeeks);
     }
 
     fetchWeeks();
@@ -53,7 +55,8 @@ function NewTopicPage() {
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
       const validatedData = schema.parse(data);
-      const weekNumber = Number(validatedData.week);
+      const weekNumber = parseInt(validatedData.week, 10); // Usando parseInt para converter week para número
+      console.log('Dados validados de week:', weekNumber);
 
       const newPost = {
         id: v4(),
@@ -105,7 +108,7 @@ function NewTopicPage() {
           <select id="week" {...register("week")} defaultValue={""}>
             <option value="" disabled hidden>Choose the week number of the topic</option>
             {weeks.map(week => (
-              <option key={week.id} value={week.id}>{week.title}</option>
+              <option key={week.id} value={week.weekNumber.toString()}>{week.title}</option>
             ))}
           </select>
           {formErrors.week && <span className='error-message'>{formErrors.week}</span>}

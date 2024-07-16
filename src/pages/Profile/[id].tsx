@@ -8,7 +8,6 @@ import { FaCalendar } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
 
 import Post from '../../components/Post';
-import data from '../../data/db.json';
 import NotFoundPage from '../NotFound';
 
 import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
@@ -28,8 +27,9 @@ interface User {
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const posts = useSelector((state: RootState) => state.user.currentUserPosts);
+  const posts = useSelector((state: RootState) => state.user.posts);
   const users = useSelector((state: RootState) => state.user.users);
+  console.log('USERS', users);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User>();
 
@@ -38,8 +38,10 @@ function ProfilePage() {
     setUser(foundUser);
 
     if (foundUser) {
-      const userPostIds = foundUser.postsId.map(post => post.id);
-      const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
+      const userPostIds: string[] = foundUser.postsId.map(post => post.id);
+      console.log('USER POST IDS', userPostIds);
+      console.log('POSTS', posts);
+      const userPosts = posts.filter(post => userPostIds.includes(post.id));
       dispatch(setCurrentUserPosts(userPosts));
     } else {
       dispatch(setCurrentUserPosts([]));

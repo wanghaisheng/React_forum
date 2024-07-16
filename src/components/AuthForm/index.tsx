@@ -34,19 +34,10 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  function handleSignInWithGoogle() {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        handleUserLogin(result.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   const handleUserLogin = async (user: FirebaseUser) => {
     const newUser = {
       id: user.uid,
+      uuid: user.uid,
       name: user.displayName ?? '',
       photoUrl: user.photoURL ?? '',
       bio: '',
@@ -63,6 +54,16 @@ function AuthForm({ title, buttonText, onSubmit, formFields, socialButtons, bott
       console.error('Erro ao criar o novo usuário:', error);
     }
   };
+
+  function handleSignInWithGoogle() {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        handleUserLogin(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {

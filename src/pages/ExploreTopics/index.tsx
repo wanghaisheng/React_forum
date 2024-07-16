@@ -6,6 +6,7 @@ import { SkeletonWeek } from "../../components/Loading";
 
 interface Week {
   id: string;
+  weekNumber: number;
   title: string;
   description: string;
 }
@@ -18,7 +19,9 @@ function ExploreTopicsPage() {
     const fetchWeeks = async () => {
       try {
         const weeks = await getWeeks();
-        setWeeks(weeks);
+        const orderedWeeks = weeks.sort((a, b) => a.weekNumber - b.weekNumber);
+        setWeeks(orderedWeeks);
+
       } catch (error) {
         console.error(error);
       } finally {
