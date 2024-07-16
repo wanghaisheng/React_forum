@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCurrentUser } from './userSlice';
+import { createUser, getUserById } from '../api';
 
 interface User {
   id: string;
@@ -23,11 +24,12 @@ export const createUserInServer = createAsyncThunk(
 
     try {
       // Verifique se o usuário já existe no servidor
-      const existingUserResponse = await axios.get(`http://localhost:8000/users/${userData.id}`);
+      // const existingUserResponse = await axios.get(`http://localhost:8000/users/${userData.id}`);
+      const existingUserResponse = await getUserById(userData.id);
 
-      if (existingUserResponse.data) {
+      if (existingUserResponse) {
         // Se o usuário já existir, atualize o estado com as informações existentes
-        const existingUser = existingUserResponse.data;
+        const existingUser = existingUserResponse;
         dispatch(setCurrentUser(existingUser));
         localStorage.setItem('currentUser', JSON.stringify(existingUser)); // Armazene no localStorage
         return existingUser;
@@ -42,8 +44,8 @@ export const createUserInServer = createAsyncThunk(
 
     // Se o usuário não existir, crie um novo usuário
     try {
-      const response = await axios.post(`http://localhost:8000/users`, userData);
-      const createdUser = response.data;
+      const response = await createUser(userData);
+      const createdUser = response;
 
       dispatch(setCurrentUser(createdUser));
       localStorage.setItem('currentUser', JSON.stringify(createdUser)); // Armazene no localStorage
