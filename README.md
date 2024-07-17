@@ -1,30 +1,44 @@
-# React + TypeScript + Vite
+# React forum
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a forum developed in TypeScript to facilitate discussions and interactions between users in an organized and secure way.
 
-Currently, two official plugins are available:
+## Resources
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Secure Authentication**: Uses the Firebase SDK for secure authentication with social login.
+- **Post Creation**: Users can create new posts easily.
+- **Answers**: Users can create answers to topics to resolve doubts.
+- **Voting System**: Users can vote on posts and replies.
+- **Responsive Interface**: Modern and responsive interface for a better user experience.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- TypeScript, React.js, Redux, Styled Components
+- Authentication: Firebase Authentication
+- Database: Firestore database
 
-- Configure the top-level `parserOptions` property like this:
+## Installation and Use
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/VitorHugoAntunes/React_forum.git
+   cd React_forum-main
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Install dependencies**
+    ```bash
+    npm install
+
+3. **Start the server**
+    ```bash
+    npm run dev
+
+4. **Open the project in your browser**
+
+    Copy the localhost link into your browser and use the project locally.
+
+## How to Contribute
+
+Contributions are welcome! Feel free to open issues, propose improvements or collaborate directly on development.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/VitorHugoAntunes/React_forum/blob/main/LICENSE) file for more details.
