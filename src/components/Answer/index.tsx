@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { AnswerContainer, AnswerContent, AnswerHeader, AnswerVotes } from "./styles";
 import UserItem from "../UserItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { formatTimeAgo } from "../../utils/formatDate";
 import { RootState, AppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +25,7 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
   const answerState = postState?.answers.find(answer => answer.id === id);
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const [isVoting, setIsVoting] = useState(false);
   const [userVote, setUserVote] = useState<string>(''); // Estado para controlar o voto do usuário
   const [answer, setAnswer] = useState<AnswerProps>({
@@ -38,6 +39,12 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
   });
 
   const handleVote = async (answerId: string, voteType: 'up' | 'down') => {
+
+    if (!currentUser) {
+      navigate('/signin');
+      return;
+    }
+
     if (currentUser && !isVoting && answerState) {
       setIsVoting(true);
       const postId = postState?.id || '';
@@ -56,9 +63,17 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
             }));
 
             if (voteType === 'up') {
-              setUserVote('up');
+              if (userVote === 'up') {
+                setUserVote('');
+              } else {
+                setUserVote('up');
+              }
             } else if (voteType === 'down') {
-              setUserVote('down');
+              if (userVote === 'down') {
+                setUserVote('');
+              } else {
+                setUserVote('down');
+              }
             }
 
           })
@@ -70,6 +85,7 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
       }
     }
   };
+
   useEffect(() => {
     const fetchCurrentUser = async () => {
       if (currentUser) {
@@ -79,7 +95,6 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
     };
 
     fetchCurrentUser();
-
   }, [
     currentUser,
     answer.id,

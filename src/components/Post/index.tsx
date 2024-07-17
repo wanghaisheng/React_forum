@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { z, ZodError } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createAnswer, getUserById } from '../../api';
 import Button from "../Button";
 import UserItem from "../UserItem";
@@ -52,6 +52,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     actions
   });
 
+  const navigate = useNavigate();
   const users = useSelector((state: RootState) => state.user.users);
   const weeks = useSelector((state: RootState) => state.user.weeks);
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
@@ -99,6 +100,12 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
   ) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!currentUser) {
+      navigate('/signin');
+      return;
+    }
+
     if (currentUser && !isVoting) { // Verifica se não está votando para evitar spam
       setIsVoting(true);
 
@@ -133,6 +140,12 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
   ) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!currentUser) {
+      navigate('/signin');
+      return;
+    }
+
     if (currentUser && !isVoting) { // Verifica se não está votando para evitar spam
       setIsVoting(true);
 
