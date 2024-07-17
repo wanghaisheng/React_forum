@@ -21,9 +21,7 @@ function AppContent() {
               <SideMenu />
               <MainRoutes />
               <Aside />
-              <BottomMenu>
-                <h1>Bottom menu</h1>
-              </BottomMenu>
+              <BottomMenu />
             </LayoutContainer>
           </Wrapper>
         </>
