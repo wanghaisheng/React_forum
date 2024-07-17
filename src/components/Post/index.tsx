@@ -3,13 +3,13 @@ import { z, ZodError } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { createAnswer, getPostById, getUserById } from '../../api';
+import { createAnswer, getUserById } from '../../api';
 import Button from "../Button";
 import UserItem from "../UserItem";
 import { AnswerContainer, PostActions, PostContainer, PostContent, PostFooter, PostHeader, PostMetaData, PostVotes } from "./styles";
 import { FaArrowUp, FaArrowDown, FaPlus, FaShare } from "react-icons/fa";
 import { FaMessage } from 'react-icons/fa6';
-import { Post as PostSlice, addAnswer, setUsers } from '../../store/userSlice';
+import { Post as PostSlice, addAnswer } from '../../store/userSlice';
 import { upvotePostThunk, downvotePostThunk } from '../../store/voteThunks';
 import { formatTimeAgo } from "../../utils/formatDate";
 import { v4 } from "uuid";
@@ -53,7 +53,6 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
   });
 
   const users = useSelector((state: RootState) => state.user.users);
-  const userVotedPosts = useSelector((state: RootState) => state.user.currentUser?.votedPosts);
   const weeks = useSelector((state: RootState) => state.user.weeks);
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
@@ -95,7 +94,11 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     }
   });
 
-  const handleUpvote = async (postId: string) => {
+  const handleUpvote = async (postId: string, e:
+    React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (currentUser && !isVoting) { // Verifica se não está votando para evitar spam
       setIsVoting(true);
 
@@ -125,7 +128,11 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     }
   };
 
-  const handleDownvote = async (postId: string) => {
+  const handleDownvote = async (postId: string, e:
+    React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (currentUser && !isVoting) { // Verifica se não está votando para evitar spam
       setIsVoting(true);
 
@@ -173,13 +180,13 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
   return (
     <PostContainer>
       <PostVotes>
-        <button onClick={() => handleUpvote(post.id)} disabled={isVoting} className={userVote === 'up' ? 'voted' : ''}>
+        <button onClick={(e) => handleUpvote(post.id, e)} disabled={isVoting} className={userVote === 'up' ? 'voted' : ''}>
           <FaArrowUp className="up-vote" size={16} />
         </button>
 
         <span>{post.upvotes - post.downvotes}</span>
 
-        <button onClick={() => handleDownvote(post.id)} disabled={isVoting} className={userVote === 'down' ? 'voted' : ''}>
+        <button onClick={(e) => handleDownvote(post.id, e)} disabled={isVoting} className={userVote === 'down' ? 'voted' : ''}>
           <FaArrowDown className="down-vote" size={16} />
         </button>
       </PostVotes>
@@ -240,7 +247,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
                 className={isAnswering ? 'active' : ''}
               />
               {formErrors.content && <span className='error-message'>{formErrors.content}</span>}
-              <div>
+              <div className="answer-actions">
                 <Button variant="confirm" type="submit">Submit</Button>
                 <Button variant="transparent" onClick={() => setIsAnswering(false)}>Cancel</Button>
               </div>

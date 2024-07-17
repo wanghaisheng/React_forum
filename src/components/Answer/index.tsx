@@ -7,6 +7,7 @@ import { formatTimeAgo } from "../../utils/formatDate";
 import { RootState, AppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { upvoteAnswerThunk, downvoteAnswerThunk } from '../../store/voteThunks';
+import { getUserById } from '../../api';
 
 interface AnswerProps {
   id: string;
@@ -25,6 +26,7 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
   const [isVoting, setIsVoting] = useState(false);
+  const [userVote, setUserVote] = useState<string>(''); // Estado para controlar o voto do usuário
   const [answer, setAnswer] = useState<AnswerProps>({
     id: answerState?.id || id,
     author: answerState?.author || author,
@@ -53,6 +55,12 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
               downvotes: updatedAnswer?.downvotes || 0,
             }));
 
+            if (voteType === 'up') {
+              setUserVote('up');
+            } else if (voteType === 'down') {
+              setUserVote('down');
+            }
+
           })
           .catch((error: Error) => console.error(`Failed to ${voteType}vote answer:`, error));
       } finally {
@@ -62,10 +70,20 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
       }
     }
   };
-
   useEffect(() => {
-    console.log('answerState', answerState);
-  }, [answerState]);
+    const fetchCurrentUser = async () => {
+      if (currentUser) {
+        const user = await getUserById(currentUser.id);
+        setUserVote(user.votedAnswers.find(vote => vote.answerId === answer.id)?.vote || '');
+      }
+    };
+
+    fetchCurrentUser();
+
+  }, [
+    currentUser,
+    answer.id,
+  ]);
 
   if (!answerState) {
     return null;
@@ -75,9 +93,7 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
   return (
     <AnswerContainer key={answer.id}>
       <AnswerVotes>
-        <button onClick={() => handleVote(answer.id, 'up')} disabled={isVoting} className={
-          users.find(user => user.id === currentUser?.id)?.votedAnswers.find(vote => vote.postId === postState?.id && vote.answerId === answer.id && vote.vote === 'up') ? 'voted' : ''
-        }>
+        <button onClick={() => handleVote(answer.id, 'up')} disabled={isVoting} className={userVote === 'up' ? 'voted' : ''}>
           <FaArrowUp className="up-vote" size={16} />
         </button>
 
@@ -86,9 +102,7 @@ const Answer = ({ id, author, authorId, date, content, upvotes, downvotes }: Ans
         }
         </span>
 
-        <button onClick={() => handleVote(answer.id, 'down')} disabled={isVoting} className={
-          users.find(user => user.id === currentUser?.id)?.votedAnswers.find(vote => vote.postId === postState?.id && vote.answerId === answer.id && vote.vote === 'down') ? 'voted' : ''
-        }>
+        <button onClick={() => handleVote(answer.id, 'down')} disabled={isVoting} className={userVote === 'down' ? 'voted' : ''}>
           <FaArrowDown className="down-vote" size={16} />
         </button>
       </AnswerVotes>

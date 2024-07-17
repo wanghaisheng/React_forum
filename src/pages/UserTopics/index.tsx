@@ -5,12 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Post from "../../components/Post";
 import { useEffect, useState } from "react";
 import { SkeletonPost } from "../../components/Loading";
-import data from '../../data/db.json';
 import { setCurrentUserPosts } from "../../store/userSlice";
 
 function UserTopics() {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
-  const posts = useSelector((state: RootState) => state.user.currentUserPosts);
+  const users = useSelector((state: RootState) => state.user.users);
+  const allPosts = useSelector((state: RootState) => state.user.posts); // Get all posts from the state
+  const userPosts = useSelector((state: RootState) => state.user.currentUserPosts);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -18,16 +19,23 @@ function UserTopics() {
 
   useEffect(() => {
     if (currentUser) {
-      const userPostIds = currentUser.postsId.map(post => post.id);
-      const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
-      console.log(userPosts)
-      dispatch(setCurrentUserPosts(userPosts));
+      const foundUser = users.find(user => user.id === currentUser.id);
+      if (foundUser) {
+        const userPostIds = foundUser.postsId.map(post => post.id);
+        const filteredPosts = allPosts.filter(post => userPostIds.includes(post.id));
+        dispatch(setCurrentUserPosts(filteredPosts));
+      } else {
+        dispatch(setCurrentUserPosts([]));
+      }
+      setLoading(false);
     }
-    setLoading(false);
-  }, [dispatch, currentUser]);
+  }, [dispatch, currentUser, users, allPosts]);
 
   if (!currentUser) {
     navigate('/signin');
+    return <main>
+      <h1><SkeletonPost quantity={1} /></h1>
+    </main>;
   }
 
   if (loading) {
@@ -41,8 +49,8 @@ function UserTopics() {
   return (
     <Container>
       {
-        posts.length > 0 ? (
-          posts.map(post => (
+        userPosts.length > 0 ? (
+          userPosts.map(post => (
             <Link to={`/topics/topic/${post.id}`} key={post.id}>
               <Post
                 id={post.id}

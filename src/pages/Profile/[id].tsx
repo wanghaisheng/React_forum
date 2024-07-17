@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { setCurrentUserPosts } from '../../store/userSlice'; // Import fetchUsers
+import { setCurrentUserPosts } from '../../store/userSlice';
 
 import { FaCalendar } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
@@ -27,9 +27,9 @@ interface User {
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const posts = useSelector((state: RootState) => state.user.posts);
+  const allPosts = useSelector((state: RootState) => state.user.posts);
   const users = useSelector((state: RootState) => state.user.users);
-  console.log('USERS', users);
+  const userPosts = useSelector((state: RootState) => state.user.currentUserPosts);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User>();
 
@@ -39,27 +39,21 @@ function ProfilePage() {
 
     if (foundUser) {
       const userPostIds: string[] = foundUser.postsId.map(post => post.id);
-      console.log('USER POST IDS', userPostIds);
-      console.log('POSTS', posts);
-      const userPosts = posts.filter(post => userPostIds.includes(post.id));
-      dispatch(setCurrentUserPosts(userPosts));
+      const filteredPosts = allPosts.filter(post => userPostIds.includes(post.id));
+      dispatch(setCurrentUserPosts(filteredPosts));
     } else {
       dispatch(setCurrentUserPosts([]));
     }
 
     setLoading(false);
-  }, [dispatch, id, users]);
+  }, [dispatch, id, users, allPosts]);
 
   if (loading) {
-    return (
-      <SkeletonProfile />
-    );
+    return <SkeletonProfile />;
   }
 
   if (!user) {
-    return (
-      <NotFoundPage />
-    );
+    return <NotFoundPage />;
   }
 
   return (
@@ -92,7 +86,7 @@ function ProfilePage() {
         </UserInfo>
       </ProfileHeader>
 
-      {posts.map(post => (
+      {userPosts.map(post => (
         <Link key={post.id} to={`/topics/topic/${post.id}`}>
           <Post
             id={post.id}
