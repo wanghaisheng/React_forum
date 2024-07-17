@@ -9,6 +9,7 @@ import { SkeletonAvatar } from '../Loading';
 
 import { signOut } from 'firebase/auth';
 import { auth } from '../../services/firebase';
+import Button from '../Button';
 
 function Header() {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ function Header() {
                 />
               </Link>
 
-              <button onClick={handleSignOut}>Sign Out</button>
+              <Button className='sign-out-button' variant='cancel' onClick={handleSignOut}>Sign Out</Button>
             </>
           ) : (
             <Link to="/signin">Sign In</Link>

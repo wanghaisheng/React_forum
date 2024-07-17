@@ -71,6 +71,17 @@ export const HeaderContainer = styled.header`
           opacity: 0.8;
         }
       }
+
+      .sign-out-button {
+        width: fit-content;
+        border: 1px solid ${props => props.theme.colors.text};
+      }
+
+      .sign-out-button:hover {
+        color: ${props => props.theme.colors.danger};
+        border-color: ${props => props.theme.colors.danger};
+        opacity: 1;
+      }
     }
 
     .actions-container a {
