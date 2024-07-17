@@ -72,6 +72,10 @@ export const ListItem = styled.li<{ open: boolean }>`
   &:not(.open):hover {
     border: 1px solid ${({ theme }) => theme.colors.text};
   }
+
+  &:last-child {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const QuestionHeader = styled.div`

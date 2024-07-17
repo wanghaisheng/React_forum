@@ -10,6 +10,7 @@ export default createGlobalStyle`
   body {
     font-family: 'Roboto', sans-serif;
     background-color: ${props => props.theme.colors.background};
+    height: 100vh;
   }
 
   #root {

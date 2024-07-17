@@ -1,47 +1,75 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { setCurrentUser, setCurrentUserPosts } from '../../store/userSlice';
-import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
+import { setCurrentUserPosts } from '../../store/userSlice';
+
 import { FaCalendar } from 'react-icons/fa';
 import { FaMessage } from 'react-icons/fa6';
+
 import Post from '../../components/Post';
-import data from '../../data/db.json';
 import NotFoundPage from '../NotFound';
+
+import { Container, ProfileHeader, UserInfo, UserPhoto } from './styles';
+import { SkeletonProfile } from '../../components/Loading';
+
+import { formatDate } from '../../utils/formatDate';
+
+interface User {
+  id: string;
+  name: string;
+  photoUrl: string;
+  bio: string;
+  createdAt: string;
+  postsId: { id: string }[];
+}
 
 function ProfilePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const user = useSelector((state: RootState) => state.user.currentUser);
-  const posts = useSelector((state: RootState) => state.user.currentUserPosts);
+  const allPosts = useSelector((state: RootState) => state.user.posts);
+  const users = useSelector((state: RootState) => state.user.users);
+  const userPosts = useSelector((state: RootState) => state.user.currentUserPosts);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const userId = Number(id);
-    const user = data.users.find(user => user.id === userId);
-    if (user) {
-      dispatch(setCurrentUser(user));
-      const userPostIds = user.postsId.map(post => post.id);
-      const userPosts = data.posts.filter(post => userPostIds.includes(post.id));
-      dispatch(setCurrentUserPosts(userPosts));
+    const foundUser = users.find(user => user.id === id);
+    setUser(foundUser);
+
+    if (foundUser) {
+      const userPostIds: string[] = foundUser.postsId.map(post => post.id);
+      const filteredPosts = allPosts.filter(post => userPostIds.includes(post.id));
+      dispatch(setCurrentUserPosts(filteredPosts));
     } else {
-      dispatch(setCurrentUser(null));
       dispatch(setCurrentUserPosts([]));
     }
-  }, [dispatch, id]);
+
+    setLoading(false);
+  }, [dispatch, id, users, allPosts]);
+
+  if (loading) {
+    return <SkeletonProfile />;
+  }
 
   if (!user) {
-    return (
-      <NotFoundPage />
-    )
+    return <NotFoundPage />;
   }
+
+  const sortedPosts = userPosts.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <Container>
       <ProfileHeader>
         <div className="photo">
           <UserPhoto>
-            <div></div>
+            {
+              user.photoUrl ? (
+                <img src={user.photoUrl} alt={user.name} />
+              ) : (
+                <div className='no-photo'></div>
+              )
+            }
           </UserPhoto>
         </div>
         <UserInfo>
@@ -50,7 +78,7 @@ function ProfilePage() {
           <div>
             <div>
               <FaCalendar size={14} />
-              <span>Joined on {user.createdAt}</span>
+              <span>Joined on {formatDate(user.createdAt)}</span>
             </div>
             <div>
               <FaMessage />
@@ -60,7 +88,7 @@ function ProfilePage() {
         </UserInfo>
       </ProfileHeader>
 
-      {posts.map(post => (
+      {sortedPosts.map(post => (
         <Link key={post.id} to={`/topics/topic/${post.id}`}>
           <Post
             id={post.id}

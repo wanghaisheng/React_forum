@@ -34,7 +34,7 @@ export const AnswerVotes = styled.div`
   gap: 1rem;
   align-items: center;
 
-  button {
+  > button {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -43,7 +43,15 @@ export const AnswerVotes = styled.div`
       transition: 0.2s;
     }
 
-    &:hover svg {
+    &.voted .up-vote {
+      color: ${props => props.theme.colors.secondary};
+    }
+
+    &.voted .down-vote {
+      color: ${props => props.theme.colors.danger};
+    }
+
+    &:not(:disabled):hover svg {
       transform: scale(1.3);
 
       &.up-vote {
@@ -53,6 +61,10 @@ export const AnswerVotes = styled.div`
       &.down-vote {
         color: ${props => props.theme.colors.danger};
       }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 

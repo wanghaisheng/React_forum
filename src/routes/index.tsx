@@ -1,111 +1,38 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from '../pages/Home'
-import Header from '../components/Header'
-import { LayoutContainer, Wrapper } from './layout'
-import Aside from '../components/Aside'
-import SideMenu from '../components/SideMenu'
-import BottomMenu from '../components/BottomMenu'
-import TopicPage from '../pages/Topic/[id]'
-import ProfilePage from '../pages/Profile/[id]'
-import NewTopicPage from '../pages/NewTopic'
-import AboutPage from '../pages/About'
-import TermsPage from '../pages/Terms'
-import PrivacyPage from '../pages/Privacy'
-import HelpPage from '../pages/Help'
-import ExploreTopicsPage from '../pages/ExploreTopics'
-import WeekTopicsPage from '../pages/WeekTopics/[id]'
-import NotFoundPage from '../pages/NotFound'
-import SearchPage from '../pages/Search'
+import { BrowserRouter } from 'react-router-dom';
+import AppContent from './components/appContent';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setPosts, setUsers } from '../store/userSlice';
+import { getPosts, getUsers } from '../api';
 
-export default function AppRoutes() {
-  const routes = [
-    {
-      path: '/',
-      component: <Home />
-    },
-    {
-      path: '/topics/explore',
-      component: <ExploreTopicsPage />
-    },
-    {
-      path: '/topics/explore/week/:id',
-      component: <WeekTopicsPage />
-    },
-    {
-      path: '/topics/search',
-      component: <SearchPage />
-    },
-    {
-      path: '/topics/my-topics',
-      component: <main>
-        <h1>My topics</h1>
-      </main>
-    },
-    {
-      path: '/topics/my-answers',
-      component: <main>
-        <h1>My answers</h1>
-      </main>
-    },
-    {
-      path: '/topics/topic/:id',
-      component: <TopicPage />
-    },
-    {
-      path: '/topics/new-topic',
-      component: <NewTopicPage />
-    },
-    {
-      path: '/users/:id',
-      component: <main>
-        <h1>User</h1>
-      </main>
-    },
-    {
-      path: '/profile/:id',
-      component: <ProfilePage />
-    },
-    {
-      path: '/about',
-      component: <AboutPage />
-    },
-    {
-      path: '/help',
-      component: <HelpPage />
-    },
-    {
-      path: '/privacy',
-      component: <PrivacyPage />
-    },
-    {
-      path: '/terms',
-      component: <TermsPage />
-    },
-    {
-      path: '/*',
-      component: <NotFoundPage />
+function AppRoutes() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function fetchData() {
+      const currentUser = localStorage.getItem('currentUser');
+      const allUsers = await getUsers();
+      const allPosts = await getPosts();
+      localStorage.setItem('users', JSON.stringify(allUsers));
+      localStorage.setItem('posts', JSON.stringify(allPosts));
+      dispatch(setCurrentUser(currentUser ? JSON.parse(currentUser) : null));
+      dispatch(setUsers(
+        JSON.parse(localStorage.getItem('users') ?? '[]')
+      ));
+      dispatch(setPosts(
+        JSON.parse(localStorage.getItem('posts') ?? '[]')
+      ));
     }
-  ]
+    fetchData();
+  }, [
+    dispatch
+  ]);
 
   return (
     <BrowserRouter>
-      <Header />
-      <Wrapper>
-        <LayoutContainer>
-          <SideMenu />
-          <Routes>
-            {routes.map((route, index) => (
-              <Route key={index} path={route.path} element={route.component} />
-            ))}
-          </Routes>
-
-          <Aside />
-
-          <BottomMenu>
-            <h1>Bottom menu</h1>
-          </BottomMenu>
-        </LayoutContainer>
-      </Wrapper>
+      <AppContent />
     </BrowserRouter>
-  )
+  );
 }
+
+export default AppRoutes;

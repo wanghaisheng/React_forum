@@ -1,46 +1,49 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
       "votedAnswers": [],
       "postsId": [
         {
-          "id": 1
+          "id": "1"
         },
         {
-          "id": 2
+          "id": "2"
         },
         {
-          "id": 3
+          "id": "3"
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jane Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
       "votedAnswers": [],
       "postsId": [
         {
-          "id": 4
+          "id": "4"
         },
         {
-          "id": 5
+          "id": "5"
         },
         {
-          "id": 6
+          "id": "6"
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Jeff Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -48,8 +51,9 @@
       "postsId": []
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Jenny Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -57,8 +61,9 @@
       "postsId": []
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Joe Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
       "votedPosts": [],
@@ -66,20 +71,178 @@
       "postsId": []
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Jojo Doe",
+      "photoUrl": "",
       "bio": "I am a web developer.",
       "createdAt": "2020-01-01",
+      "votedPosts": [],
+      "votedAnswers": [],
+      "postsId": []
+    },
+    {
+      "id": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "name": "Vitor Hugo",
+      "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocJ9x229alskm1vz18J6WZsn6CZrg9XguRGvNzOb0gzYCottwA=s96-c",
+      "bio": "",
+      "createdAt": "Fri, 05 Jul 2024 19:34:55 GMT",
+      "votedPosts": [],
+      "votedAnswers": [
+        {
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
+          "vote": "up"
+        },
+        {
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
+          "vote": "up"
+        },
+        {
+          "postId": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+          "answerId": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
+          "vote": "up"
+        }
+      ],
+      "postsId": [
+        {
+          "id": "46425df5-9647-4951-a3d4-2a5695eef74a"
+        },
+        {
+          "id": "29a3616c-d797-4176-9e1a-d585dd1fc177"
+        },
+        {
+          "id": "9466f02d-3892-4647-a7e4-5cffcc49d131"
+        },
+        {
+          "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91"
+        },
+        {
+          "id": "qDuUWh9WDSIDN59cjPLv"
+        },
+        {
+          "id": "oNWvYeVX1vViyVRXrlu2"
+        }
+      ]
+    },
+    {
+      "id": "5r9sVWokaqWEYrvxhrjaw7YlVn13",
+      "name": "Vitor Hugo",
+      "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocI59YLjBzK_5U9d84ZddrrgVd3tBaueW0zPYA-yEUgVElvH9SE=s96-c",
+      "bio": "",
+      "createdAt": "Mon, 08 Jul 2024 00:33:37 GMT",
       "votedPosts": [],
       "votedAnswers": [],
       "postsId": []
     }
   ],
+  "weeks": [
+    {
+      "id": "1",
+      "title": "Week 1",
+      "description": "Basic Introduction - Sprint 1"
+    },
+    {
+      "id": "2",
+      "title": "Week 2",
+      "description": "Web Development | Sprint 1"
+    },
+    {
+      "id": "3",
+      "title": "Week 3",
+      "description": "JavaScript | Sprint 2"
+    },
+    {
+      "id": "4",
+      "title": "Week 4",
+      "description": "Project Development (1st challenge) | Sprint 2"
+    },
+    {
+      "id": "5",
+      "title": "Week 5",
+      "description": "Learning Modern JavaScript (ES6) & TypeScript | Sprint 3"
+    },
+    {
+      "id": "6",
+      "title": "Week 6",
+      "description": "Getting Started with React.js | Sprint 3"
+    },
+    {
+      "id": "7",
+      "title": "Week 7",
+      "description": "Deepening with React.js | Sprint 4"
+    },
+    {
+      "id": "8",
+      "title": "Week 8",
+      "description": "2nd Challenge (React.js with TypeScript) | Sprint 4"
+    },
+    {
+      "id": "9",
+      "title": "Week 9",
+      "description": "20+ Projects in React JS learn Redux, Bootstrap, APIs"
+    },
+    {
+      "id": "10",
+      "title": "Week 10",
+      "description": "Frontend Testing"
+    },
+    {
+      "id": "11",
+      "title": "Week 11",
+      "description": "Cloud Computing on AWS"
+    },
+    {
+      "id": "12",
+      "title": "Week 12",
+      "description": "Guided Project: Hosting a static website on AWS S3"
+    },
+    {
+      "id": "13",
+      "title": "Week 13",
+      "description": "AWS Cloud Practitioner"
+    },
+    {
+      "id": "14",
+      "title": "Week 14",
+      "description": "AWS Cloud Practitioner"
+    },
+    {
+      "id": "15",
+      "title": "Week 15",
+      "description": "Week 15 :: AWS Cloud Practitioner"
+    },
+    {
+      "id": "16",
+      "title": "Week 16",
+      "description": "AWS Cloud Practitioner"
+    },
+    {
+      "id": "17",
+      "title": "Week 17",
+      "description": "AWS Cloud Practitioner"
+    },
+    {
+      "id": "18",
+      "title": "Week 18",
+      "description": "AWS Cloud Practitioner"
+    },
+    {
+      "id": "19",
+      "title": "Week 19",
+      "description": "AWS Cloud Practitioner"
+    },
+    {
+      "id": "20",
+      "title": "Week 20",
+      "description": "AWS Cloud Practitioner"
+    }
+  ],
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "1",
       "date": "2020-01-01",
       "week": 1,
       "title": "What is HTML?",
@@ -88,29 +251,65 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "2",
           "author": "Jane Doe",
-          "authorId": 2,
+          "authorId": "1",
           "content": "HTML stands for HyperText Markup Language. It is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.",
           "date": "2020-01-02",
-          "upvotes": 15,
+          "upvotes": 16,
           "downvotes": 2
         },
         {
+          "id": "2",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:49:16.954Z",
+          "upvotes": 16,
+          "downvotes": 0,
+          "content": "hahahahaah nice answer bro"
+        },
+        {
+          "id": "75c5d845-ec04-48f9-9d85-80aee60aa0bf",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:48:55.230Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "hahahahaah nice answer bro",
-          "id": 2
+          "content": "resposta teste"
+        },
+        {
+          "id": "baf65880-cade-4b13-8ecf-82f95564e49a",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:50:39.074Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste"
+        },
+        {
+          "id": "1ef83774-acb6-43ba-8f33-4b06daf355ca",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:54:45.564Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste"
+        },
+        {
+          "id": "bf3e1002-d83b-4854-9674-96e47fea2afe",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:56:10.052Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "resposta teste 2"
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "1",
       "date": "2020-01-01",
       "week": 1,
       "title": "What is CSS?",
@@ -119,9 +318,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "content": "CSS stands for Cascading Style Sheets. It is a style sheet language used for describing the presentation of a document written in a markup language such as HTML.",
           "date": "2020-01-02",
           "upvotes": 15,
@@ -130,20 +329,20 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "1",
       "date": "2020-01-01",
       "week": 2,
       "title": "What is JavaScript?",
       "content": "I have doubts about what JavaScript is. Can someone help me? Thanks! :)",
-      "upvotes": 20,
-      "downvotes": 10,
+      "upvotes": 24,
+      "downvotes": 12,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "Jane Doe",
-          "authorId": 2,
+          "authorId": "2",
           "content": "JavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language that is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.",
           "date": "2020-01-02",
           "upvotes": 18,
@@ -152,9 +351,9 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "author": "Jane Doe",
-      "authorId": 2,
+      "authorId": "2",
       "date": "2020-01-01",
       "week": 2,
       "title": "What is React?",
@@ -163,9 +362,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.",
           "date": "2020-01-02",
           "upvotes": 17,
@@ -174,9 +373,9 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "author": "Jane Doe",
-      "authorId": 2,
+      "authorId": "2",
       "date": "2020-01-01",
       "week": 3,
       "title": "What is Node.js?",
@@ -185,9 +384,9 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "Jane Doe",
-          "authorId": 2,
+          "authorId": "2",
           "content": "Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser.",
           "date": "2020-01-02",
           "upvotes": 19,
@@ -196,9 +395,9 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "author": "Jane Doe",
-      "authorId": 2,
+      "authorId": "2",
       "date": "2020-01-01",
       "week": 3,
       "title": "What is Express?",
@@ -207,91 +406,266 @@
       "downvotes": 10,
       "answers": [
         {
-          "id": 1,
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "2",
           "content": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.",
           "date": "2020-01-02",
           "upvotes": 18,
           "downvotes": 2
+        },
+        {
+          "id": "2",
+          "author": "John Doe",
+          "authorId": "2",
+          "date": "2024-06-24T22:29:04.224Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "Resposta teste"
         }
       ]
     },
     {
-      "id": 1507082,
+      "id": "1507082",
       "author": "John Doe",
-      "authorId": 1,
+      "authorId": "2",
       "date": "2024-06-03T23:48:29.074Z",
       "upvotes": 0,
       "downvotes": 0,
       "answers": [
         {
+          "id": "1",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T00:50:07.624Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aokjwnodjkandoa",
-          "id": 1
+          "content": "aokjwnodjkandoa"
         },
         {
+          "id": "2",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T00:57:58.218Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "dawddwadwad",
-          "id": 2
+          "content": "dawddwadwad"
         },
         {
+          "id": "3",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:30:11.927Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aaaaaaaaaaaaaaaaaaa",
-          "id": 3
+          "content": "aaaaaaaaaaaaaaaaaaa"
         },
         {
+          "id": "4",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:40:15.573Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aaaaaaaaaaaaaaaaaaa",
-          "id": 4
+          "content": "aaaaaaaaaaaaaaaaaaa"
         },
         {
+          "id": "5",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:47:33.114Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "id": 5
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         {
+          "id": "6",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-04T01:48:51.139Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "awhgdiawgdwilgdalidgi",
-          "id": 6
+          "content": "awhgdiawgdwilgdalidgi"
         },
         {
+          "id": "7",
           "author": "John Doe",
-          "authorId": 1,
+          "authorId": "1",
           "date": "2024-06-09T19:55:47.911Z",
           "upvotes": 0,
           "downvotes": 0,
-          "content": "Nova resposta muito legal.",
-          "id": 7
+          "content": "Nova resposta muito legal."
         }
       ],
       "week": 4,
       "title": "My topic",
       "content": "This is a new topic"
+    },
+    {
+      "id": "4241280",
+      "author": "John Doe",
+      "authorId": "1",
+      "date": "2024-06-24T22:30:49.444Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 6,
+      "title": "Teste topic",
+      "content": "teste de criar topico"
+    },
+    {
+      "id": "4237971",
+      "author": "John Doe",
+      "authorId": "1",
+      "date": "2024-06-24T23:15:18.024Z",
+      "upvotes": 0,
+      "downvotes": 0,
+      "answers": [],
+      "week": 20,
+      "title": "New Build topic",
+      "content": "New build topic"
+    },
+    {
+      "id": "0374c805-b9b8-4448-8d68-9de8a498062a",
+      "author": "John Doe",
+      "authorId": "1",
+      "date": "2024-06-25T00:34:06.641Z",
+      "upvotes": 3,
+      "downvotes": 1,
+      "answers": [
+        {
+          "author": "John Doe",
+          "authorId": "1",
+          "date": "2024-06-25T00:42:35.887Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "Resposta teste.",
+          "id": "1423432432"
+        },
+        {
+          "author": "John Doe",
+          "authorId": "1",
+          "date": "2024-06-25T00:42:53.707Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "testestestesee",
+          "id": "221313123213"
+        },
+        {
+          "id": "f4ca5353-0f0c-47ac-9e61-6a7a02763e30",
+          "author": "John Doe",
+          "authorId": "1",
+          "date": "2024-07-02T19:22:32.928Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "week": 9,
+      "title": "teste de UUID",
+      "content": "teste de UUID",
+      "action": "downvote"
+    },
+    {
+      "id": "29a3616c-d797-4176-9e1a-d585dd1fc177",
+      "author": "Vitor Hugo",
+      "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "date": "2024-07-12T17:51:56.671Z",
+      "upvotes": 9,
+      "downvotes": 0,
+      "answers": [],
+      "week": 20,
+      "title": "novo teste de votes",
+      "content": "novo teste de votes"
+    },
+    {
+      "id": "9466f02d-3892-4647-a7e4-5cffcc49d131",
+      "author": "Vitor Hugo",
+      "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "date": "2024-07-12T18:16:36.676Z",
+      "upvotes": 2,
+      "downvotes": 2,
+      "answers": [
+        {
+          "id": "73f9c23c-d099-4c07-bdda-02f0cb63d676",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:59:06.449Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "2d378746-5d71-4985-b891-e3ded8395784",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:59:32.461Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "aaaaaaaaaa"
+        }
+      ],
+      "week": 20,
+      "title": "aaaaaaaaaaaaaaaaaaaaaaaa",
+      "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "6684f7b9-b8aa-4f2e-8c5f-9e5a61c61d91",
+      "author": "Vitor Hugo",
+      "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+      "date": "2024-07-12T18:35:49.205Z",
+      "upvotes": 4,
+      "downvotes": 0,
+      "answers": [
+        {
+          "id": "3dae9de5-fe50-480c-8cf6-695e5671a1a2",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-12T20:23:57.212Z",
+          "upvotes": 1,
+          "downvotes": 0,
+          "content": "comentario teste"
+        },
+        {
+          "id": "07e16bbd-0e33-4080-942c-ebd218ccbe2c",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:00:41.827Z",
+          "upvotes": 0,
+          "downvotes": 1,
+          "content": "novo comentario teste"
+        },
+        {
+          "id": "a4561334-e2e0-4615-a2b6-d6662e0899ec",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:21:57.427Z",
+          "upvotes": 0,
+          "downvotes": 1,
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "92965241-6242-466b-9429-4bb286e3b0ef",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:23:59.540Z",
+          "upvotes": 1,
+          "downvotes": 0,
+          "content": "bbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        {
+          "id": "dc150647-5293-4b2b-8009-52d7ec890c86",
+          "author": "Vitor Hugo",
+          "authorId": "neqciNUBtdhshzDUC3NHgwtqCH63",
+          "date": "2024-07-15T20:24:20.259Z",
+          "upvotes": 0,
+          "downvotes": 0,
+          "content": "cccccccccccccccccccccccccccc"
+        }
+      ],
+      "week": 10,
+      "title": "hhhhhhhhhhhhhhhhhhhhhhhhh",
+      "content": "hhhhhhhhhhhhhhhhhhhhhhhhh"
     }
   ]
 }
