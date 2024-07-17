@@ -20,6 +20,8 @@ function SearchPage() {
     post.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const sortedPosts = filteredPosts.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -52,9 +54,9 @@ function SearchPage() {
         <SkeletonPost quantity={1} />
       ) : searchTerm !== '' ? (
         <>
-          <p>Results: {filteredPosts.length}</p>
-          {filteredPosts.length > 0 ? (
-            filteredPosts.map(post => (
+          <p>Results: {sortedPosts.length}</p>
+          {sortedPosts.length > 0 ? (
+            sortedPosts.map(post => (
               <Link key={post.id} to={`/topics/topic/${post.id}`}>
                 <Post
                   id={post.id}

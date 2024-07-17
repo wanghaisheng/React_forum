@@ -56,6 +56,8 @@ function ProfilePage() {
     return <NotFoundPage />;
   }
 
+  const sortedPosts = userPosts.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <Container>
       <ProfileHeader>
@@ -86,7 +88,7 @@ function ProfilePage() {
         </UserInfo>
       </ProfileHeader>
 
-      {userPosts.map(post => (
+      {sortedPosts.map(post => (
         <Link key={post.id} to={`/topics/topic/${post.id}`}>
           <Post
             id={post.id}

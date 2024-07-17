@@ -38,10 +38,13 @@ const Home: React.FC = () => {
     );
   }
 
+  // Ordenar os posts por data
+  const sortedPosts = posts.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <Container>
-      {posts.length > 0 ? (
-        posts.map(post => (
+      {sortedPosts.length > 0 ? (
+        sortedPosts.map(post => (
           <Link key={post.id} to={`/topics/topic/${post.id}`}>
             <Post
               id={post.id}

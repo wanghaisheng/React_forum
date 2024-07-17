@@ -46,11 +46,13 @@ function UserTopics() {
     );
   }
 
+  const sortedPosts = userPosts.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <Container>
       {
-        userPosts.length > 0 ? (
-          userPosts.map(post => (
+        sortedPosts.length > 0 ? (
+          sortedPosts.map(post => (
             <Link to={`/topics/topic/${post.id}`} key={post.id}>
               <Post
                 id={post.id}
