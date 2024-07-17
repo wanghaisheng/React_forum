@@ -62,6 +62,11 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
   const [userVote, setUserVote] = useState<string>(''); // Estado para controlar o voto do usuário
 
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
+    if (!currentUser) {
+      navigate('/signin');
+      return;
+    }
+
     try {
       const validatedData = answerSchema.parse(data);
 
@@ -175,6 +180,19 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
     }
   };
 
+  const handleAnsweringStatus = (status: string) => {
+    if (!currentUser) {
+      navigate('/signin');
+      return
+    }
+
+    if (status === 'open') {
+      setIsAnswering(true);
+    } else {
+      setIsAnswering(false);
+    }
+  }
+
   useEffect(() => {
     const fetchCurrentUser = async () => {
       if (currentUser) {
@@ -232,7 +250,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
           <div className={post.actions ? '' : 'no-actions'}>
             {post.actions && (
               <PostActions>
-                <Button variant="transparent" onClick={() => setIsAnswering(true)}>
+                <Button variant="transparent" onClick={() => handleAnsweringStatus('open')}>
                   <FaPlus size={14} />
                   Add answer
                 </Button>
@@ -262,7 +280,7 @@ function Post({ id, author, authorId, date, week, title, content, upvotes, downv
               {formErrors.content && <span className='error-message'>{formErrors.content}</span>}
               <div className="answer-actions">
                 <Button variant="confirm" type="submit">Submit</Button>
-                <Button variant="transparent" onClick={() => setIsAnswering(false)}>Cancel</Button>
+                <Button variant="transparent" onClick={() => handleAnsweringStatus('close')}>Cancel</Button>
               </div>
             </AnswerContainer>
           )}
